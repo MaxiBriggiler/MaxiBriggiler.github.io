@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maximiliano Briggiler — CV Dashboard</title>
+  <meta name="description" content="CV en formato dashboard de Maximiliano Briggiler. Contabilidad, Controlling, SAP, BI y Automatización." />
+  <meta name="author" content="Maximiliano Briggiler" />
+  <meta name="robots" content="index,follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Maximiliano Briggiler — CV Dashboard" />
+  <meta property="og:description" content="Coordinador de Contabilidad y Control de Gestión | Key User SAP | BI & Automatización" />
+  <meta property="og:type" content="website" />
+
+  <!-- ATS/SEO structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Maximiliano Briggiler",
+    "jobTitle": "Coordinador de contabilidad y control de gestión | Key User SAP | Especialista en BI y Automatización",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "AR",
+      "addressRegion": "Santa Fe",
+      "addressLocality": "Rafaela"
+    },
+    "email": "mailto:mcbriggiler@gmail.com",
+    "sameAs": ["https://www.linkedin.com/in/maximiliano-briggiler"],
+    "knowsAbout": [
+      "SAP (GL, AA, CO-PA, CO)",
+      "S/4HANA",
+      "SAP Analytics Cloud",
+      "Controlling",
+      "Data & BI",
+      "Automatización (Make, n8n)"
+    ]
+  }
+  </script>
+
+  <style>
+    :root{
+      --bg:#07080b;
+      --bg-soft:#0d0f14;
+      --panel:#11131a;
+      --panel-2:#0b0d12;
+      --text:#e9edf1;
+      --muted:#97a1ac;
+      --accent:#7dd3fc;
+      --accent-2:#a78bfa;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --line:rgba(255,255,255,.08);
+      --radius:18px;
+      --radius-sm:12px;
+      --maxw:1280px;
+      --shadow:0 10px 40px rgba(0,0,0,.45);
+      --shadow-soft:0 6px 22px rgba(0,0,0,.28);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .light{
+      --bg:#f5f7fb;
+      --bg-soft:#ffffff;
+      --panel:#ffffff;
+      --panel-2:#f7f9fc;
+      --text:#0c1116;
+      --muted:#4b5563;
+      --accent:#0284c7;
+      --accent-2:#6d28d9;
+      --line:rgba(0,0,0,.08);
+      --shadow:0 8px 30px rgba(2,6,23,.08);
+      --shadow-soft:0 6px 20px rgba(2,6,23,.06);
+    }
+
+    /* Idiomas */
+    .lang-en{display:none;}
+    html[lang="en"] .lang-es{display:none !important;}
+    html[lang="en"] .lang-en{display:initial !important;}
+
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+      background:radial-gradient(1200px 600px at 100% -20%, color-mix(in oklab, var(--accent) 10%, transparent), transparent),
+                 radial-gradient(1200px 600px at -10% 0%, color-mix(in oklab, var(--accent-2) 10%, transparent), transparent),
+                 var(--bg);
+      color:var(--text); line-height:1.58;
+    }
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    .app{display:grid; grid-template-columns:260px 1fr; min-height:100vh;}
+    @media (max-width:980px){.app{grid-template-columns:1fr}}
+
+    /* Sidebar */
+    aside.sidebar{
+      position:sticky; top:0; height:100vh; padding:16px;
+      background: color-mix(in oklab, var(--panel) 92%, transparent);
+      border-right:1px solid var(--line);
+    }
+    @media (max-width:980px){
+      aside.sidebar{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}
+    }
+
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.4px; padding:8px 8px 14px;}
+    .dot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+
+    .profile-mini{background:var(--panel-2); border:1px solid var(--line); border-radius:var(--radius); padding:12px; box-shadow:var(--shadow-soft)}
+    .name{font-size:18px;font-weight:800;line-height:1.2}
+    .role{font-size:13px;color:var(--muted);margin-top:2px}
+    .mini-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+    .mini-chip{font-size:11px;padding:5px 7px;border-radius:999px;background:var(--panel);border:1px solid var(--line)}
+
+    .side-actions{display:flex;gap:8px;margin-top:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;
+      border:1px solid var(--line);background:var(--panel);color:var(--text);cursor:pointer;font-size:13px;font-weight:650;
+    }
+    .btn.secondary{background:var(--panel-2);font-weight:550}
+
+    .nav{margin-top:12px;display:grid;gap:6px}
+    .nav button{
+      width:100%;text-align:left;padding:9px 10px;border-radius:10px;border:1px solid transparent;background:transparent;color:var(--muted);
+      display:flex;align-items:center;gap:8px;cursor:pointer;font-size:14px
+    }
+    .nav button.active,
+    .nav button:hover{background:var(--panel-2);border-color:var(--line);color:var(--text)}
+
+    .contact-mini{margin-top:12px;display:grid;gap:6px;font-size:13px}
+    .contact-mini .row{display:flex;justify-content:space-between;gap:8px;padding:8px;border-radius:10px;background:var(--panel-2);border:1px dashed var(--line)}
+    .contact-mini .row span{color:var(--muted)}
+
+    /* Main */
+    main{padding:18px; max-width:var(--maxw)}
+    @media (max-width:980px){main{padding:14px}}
+
+    header.top{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;
+      padding:6px 4px 12px; border-bottom:1px solid var(--line); margin-bottom:12px;
+    }
+    .top-left{display:flex;flex-direction:column;gap:2px}
+    .top-left h1{margin:0;font-size:26px;line-height:1.2}
+    .top-left .subtitle{color:var(--muted);font-size:14px}
+
+    .top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .iconbtn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:10px;padding:7px 10px;font-size:13px;cursor:pointer;box-shadow:var(--shadow-soft);display:inline-flex;align-items:center;gap:4px}
+
+    .grid{display:grid;gap:12px}
+
+    .cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    @media (max-width:1100px){.cards-3{grid-template-columns:1fr 1fr}}
+    @media (max-width:620px){.cards-3{grid-template-columns:1fr}}
+
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px}
+    .card h2{margin:0 0 8px;font-size:18px}
+
+    /* KPI cards */
+    .kpi{display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg,var(--panel-2),transparent)}
+    .kpi .label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+    .kpi .value{font-size:26px;font-weight:800;letter-spacing:.3px}
+    .kpi .note{font-size:13px;color:var(--muted)}
+
+    /* Charts */
+    .chart-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+    @media (max-width:980px){.chart-wrap{grid-template-columns:1fr}}
+
+    .chart{
+      background:var(--panel-2);border:1px dashed var(--line);border-radius:14px;padding:12px;min-height:220px
+    }
+    .chart-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .chart-title .t{font-weight:750}
+    .chart-title .s{font-size:12px;color:var(--muted)}
+
+    .bars{display:grid;gap:8px;margin-top:6px}
+    .bar-row{display:grid;grid-template-columns:140px 1fr 46px;align-items:center;gap:8px;font-size:13px}
+    .bar-name{color:var(--muted)}
+    .bar-track{height:10px;border-radius:999px;background:color-mix(in oklab, var(--panel) 60%, transparent);overflow:hidden;border:1px solid var(--line)}
+    .bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%}
+    .bar-val{font-weight:700;text-align:right}
+
+    .donut{display:grid;place-items:center;min-height:200px;position:relative}
+    .donut svg{width:170px;height:170px;transform:rotate(-90deg)}
+    .donut .center{position:absolute;text-align:center}
+    .donut .center .big{font-size:22px;font-weight:800}
+    .donut .center .small{font-size:12px;color:var(--muted)}
+
+    /* Tabs content */
+    .tab{display:none}
+    .tab.active{display:block}
+
+    /* Experience accordion */
+    .exp-item{border:1px solid var(--line); background:var(--panel-2); border-radius:14px; overflow:hidden; margin-bottom:10px}
+    .exp-toggle{display:flex; justify-content:space-between; align-items:center; gap:10px; width:100%; text-align:left; background:transparent; border:0; color:inherit; cursor:pointer; padding:14px 14px}
+    .exp-left{display:flex; flex-direction:column; gap:2px}
+    .exp-title{font-weight:800}
+    .exp-meta{color:var(--muted); font-size:13px}
+    .exp-roles{padding:0 14px 12px; display:none}
+    .exp-item.open .exp-roles{display:block}
+    .role-block{padding:10px 0; border-top:1px dashed var(--line)}
+    .role-block:first-child{border-top:0}
+    .role-block h3{margin:0;font-size:14px}
+    .role-block .when{font-size:12px;color:var(--muted);margin-top:2px}
+    .role-block ul{margin:6px 0 0 18px}
+
+    /* Projects */
+    .projects{display:grid;gap:10px}
+    .proj{padding:12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line)}
+    .proj-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+    .proj-title{font-weight:750}
+    .proj-stack{font-size:12px;color:var(--muted);font-family:var(--mono)}
+
+    /* Skills */
+    .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+    .filter{padding:6px 9px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+    .filter.active{color:var(--text);border-color:color-mix(in oklab, var(--accent) 65%, var(--line));background:color-mix(in oklab, var(--accent) 14%, var(--panel))}
+    .skills{display:flex;flex-wrap:wrap;gap:7px}
+    .skill{font-size:12px;padding:6px 9px;border-radius:999px;background:var(--panel);border:1px solid var(--line)}
+    .skill[data-cat]{display:none}
+    .skill.show{display:inline-flex}
+
+    /* Education */
+    .timeline{display:grid;gap:8px}
+    .edu{padding:12px;border-radius:12px;background:var(--panel-2);border:1px solid var(--line)}
+
+    .muted{color:var(--muted)}
+
+    footer{margin:14px 0 6px;color:var(--muted);font-size:12px;text-align:center}
+
+    /* Print */
+    @media print{
+      body{background:white;color:black}
+      aside.sidebar, header.top, .filters, .nav, .btn, .iconbtn {display:none !important}
+      main{max-width:none}
+      .tab{display:block !important}
+      .exp-roles{display:block !important}
+      .skill{display:inline-flex !important}
+      .card{box-shadow:none;border:1px solid #ddd}
+      a{color:black;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="Panel lateral">
+      <div class="brand"><span class="dot"></span><span>MB · Dashboard CV</span></div>
+
+      <section class="profile-mini" aria-label="Perfil breve">
+        <div class="name">Maximiliano Briggiler</div>
+        <div class="role">
+          <span class="lang-es">Contabilidad & Controlling · SAP Key User · BI & Automatización</span>
+          <span class="lang-en">Accounting & Controlling · SAP Key User · BI & Automation</span>
+        </div>
+        <div class="mini-chips">
+          <span class="mini-chip">
+            <span class="lang-es">15+ años</span>
+            <span class="lang-en">15+ years</span>
+          </span>
+          <span class="mini-chip">SAP S/4HANA</span>
+          <span class="mini-chip">SAC</span>
+          <span class="mini-chip">CO-PA</span>
+        </div>
+        <div class="side-actions">
+          <button class="btn" id="copyMail">
+            <span class="lang-es">📋 Copiar email</span>
+            <span class="lang-en">📋 Copy email</span>
+          </button>
+          <button class="btn secondary" onclick="window.print()">
+            <span class="lang-es">🖨️ PDF</span>
+            <span class="lang-en">🖨️ PDF</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="nav" role="tablist" aria-label="Secciones">
+        <button class="navbtn active" data-tab="overview" role="tab" aria-selected="true">
+          📊 <span class="lang-es">Resumen</span><span class="lang-en">Overview</span>
+        </button>
+        <button class="navbtn" data-tab="experience" role="tab">
+          🧭 <span class="lang-es">Experiencia</span><span class="lang-en">Experience</span>
+        </button>
+        <button class="navbtn" data-tab="projects" role="tab">
+          🛠️ <span class="lang-es">Proyectos</span><span class="lang-en">Projects</span>
+        </button>
+        <button class="navbtn" data-tab="skills" role="tab">
+          🧩 <span class="lang-es">Habilidades</span><span class="lang-en">Skills</span>
+        </button>
+        <button class="navbtn" data-tab="education" role="tab">
+          🎓 <span class="lang-es">Educación</span><span class="lang-en">Education</span>
+        </button>
+      </div>
+
+      <section class="contact-mini" aria-label="Contacto">
+        <div class="row">
+          <strong>
+            <span class="lang-es">Email</span>
+            <span class="lang-en">Email</span>
+          </strong>
+          <span><a href="mailto:mcbriggiler@gmail.com">mcbriggiler@gmail.com</a></span>
+        </div>
+        <div class="row">
+          <strong>LinkedIn</strong>
+          <span><a href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noreferrer">/in/maximiliano-briggiler</a></span>
+        </div>
+        <div class="row">
+          <strong>
+            <span class="lang-es">Ubicación</span>
+            <span class="lang-en">Location</span>
+          </strong>
+          <span>
+            <span class="lang-es">Rafaela, Santa Fe, AR</span>
+            <span class="lang-en">Rafaela, Santa Fe, Argentina</span>
+          </span>
+        </div>
+        <div class="row">
+          <strong>
+            <span class="lang-es">Idiomas</span>
+            <span class="lang-en">Languages</span>
+          </strong>
+          <span>
+            <span class="lang-es">Español · Inglés (B2–C1)</span>
+            <span class="lang-en">Spanish · English (B2–C1)</span>
+          </span>
+        </div>
+      </section>
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+      <header class="top" aria-label="Encabezado principal">
+        <div class="top-left">
+          <h1>CV Dashboard</h1>
+          <div class="subtitle">
+            <span class="lang-es">Una vista ejecutiva de mi perfil profesional (no LinkedIn, sino resultados y capacidades).</span>
+            <span class="lang-en">An executive overview of my professional profile (focused on results and capabilities, not a copy of LinkedIn).</span>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="iconbtn" id="langBtn">🌐 EN</button>
+          <button class="iconbtn" id="themeBtn">
+            <span class="lang-es">🌓 Tema</span>
+            <span class="lang-en">🌓 Theme</span>
+          </button>
+          <a class="iconbtn" href="mailto:mcbriggiler@gmail.com">
+            <span class="lang-es">✉️ Contactar</span>
+            <span class="lang-en">✉️ Get in touch</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- OVERVIEW TAB -->
+      <section class="tab active" id="tab-overview" role="tabpanel" aria-label="Overview">
+        <div class="cards-3">
+          <div class="card kpi">
+            <div class="label">
+              <span class="lang-es">Experiencia total</span>
+              <span class="lang-en">Total experience</span>
+            </div>
+            <div class="value" data-count="15">0</div>
+            <div class="note">
+              <span class="lang-es">Años en contabilidad, controlling y BI</span>
+              <span class="lang-en">Years in accounting, controlling and BI</span>
+            </div>
+          </div>
+          <div class="card kpi">
+            <div class="label">
+              <span class="lang-es">Implementaciones</span>
+              <span class="lang-en">Implementations</span>
+            </div>
+            <div class="value" data-count="3">0</div>
+            <div class="note">
+              <span class="lang-es">SAP S/4HANA (GL/AA) + SAC</span>
+              <span class="lang-en">SAP S/4HANA (GL/AA) + SAC</span>
+            </div>
+          </div>
+          <div class="card kpi">
+            <div class="label">
+              <span class="lang-es">Foco actual</span>
+              <span class="lang-en">Current focus</span>
+            </div>
+            <div class="value">SAP + Data</div>
+            <div class="note">
+              <span class="lang-es">Automatización de procesos y reporting</span>
+              <span class="lang-en">Process and reporting automation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-wrap" style="margin-top:12px">
+          <!-- Bar chart: experiencia por compañía -->
+          <div class="card">
+            <div class="chart-title">
+              <div class="t">
+                <span class="lang-es">Experiencia por compañía</span>
+                <span class="lang-en">Experience by company</span>
+              </div>
+              <div class="s">
+                <span class="lang-es">años aproximados</span>
+                <span class="lang-en">approximate years</span>
+              </div>
+            </div>
+            <div class="chart" aria-label="Gráfico de barras de experiencia por compañía">
+              <div class="bars" id="companyBars">
+                <div class="bar-row" data-value="8">
+                  <div class="bar-name">Williner (Lácteo)</div>
+                  <div class="bar-track"><div class="bar-fill"></div></div>
+                  <div class="bar-val">8</div>
+                </div>
+                <div class="bar-row" data-value="9">
+                  <div class="bar-name">MAHLE</div>
+                  <div class="bar-track"><div class="bar-fill"></div></div>
+                  <div class="bar-val">9</div>
+                </div>
+                <div class="bar-row" data-value="5">
+                  <div class="bar-name">Megatone</div>
+                  <div class="bar-track"><div class="bar-fill"></div></div>
+                  <div class="bar-val">5</div>
+                </div>
+              </div>
+              <p class="muted" style="font-size:12px;margin-top:10px">
+                <span class="lang-es">Valores estimados según trayectoria total. Ajusto con números exactos si querés.</span>
+                <span class="lang-en">Estimated values based on total career. Can be adjusted with exact figures on request.</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Donut: mix de skills -->
+          <div class="card">
+            <div class="chart-title">
+              <div class="t">
+                <span class="lang-es">Mix de competencias</span>
+                <span class="lang-en">Skills mix</span>
+              </div>
+              <div class="s">
+                <span class="lang-es">enfoque profesional</span>
+                <span class="lang-en">professional focus</span>
+              </div>
+            </div>
+            <div class="chart donut" aria-label="Gráfico donut de mix de competencias">
+              <svg viewBox="0 0 42 42" aria-hidden="true">
+                <!-- background -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="color-mix(in oklab, var(--panel) 70%, transparent)" stroke-width="6"></circle>
+                <!-- SAP 50% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--accent)" stroke-width="6" stroke-dasharray="50 50" stroke-dashoffset="0" stroke-linecap="round"></circle>
+                <!-- BI 30% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--accent-2)" stroke-width="6" stroke-dasharray="30 70" stroke-dashoffset="-50" stroke-linecap="round"></circle>
+                <!-- IA 20% -->
+                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--good)" stroke-width="6" stroke-dasharray="20 80" stroke-dashoffset="-80" stroke-linecap="round"></circle>
+              </svg>
+              <div class="center">
+                <div class="big">SAP 50%</div>
+                <div class="small">
+                  <span class="lang-es">BI 30% · IA 20%</span>
+                  <span class="lang-en">BI 30% · AI 20%</span>
+                </div>
+              </div>
+              <div style="position:absolute;bottom:10px;left:10px;font-size:12px" class="muted">
+                <span class="lang-es">Leyenda: SAP / BI-Data / Inteligencia Artificial</span>
+                <span class="lang-en">Legend: SAP / BI-Data / Artificial Intelligence</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h2>
+            <span class="lang-es">Resumen ejecutivo</span>
+            <span class="lang-en">Executive summary</span>
+          </h2>
+          <p>
+            <span class="lang-es">
+              Profesional con más de 15 años en contabilidad, controlling, reporting y análisis de datos. Especialista en SAP ERP/S4, cierres contables y analítica de negocio, con fuerte orientación a mejora de procesos y automatización.
+            </span>
+            <span class="lang-en">
+              Professional with 15+ years of experience in accounting, controlling, reporting and data analysis. Specialist in SAP ERP/S4, financial closing and business analytics, strongly focused on process improvement and automation.
+            </span>
+          </p>
+          <ul style="margin:8px 0 0 18px">
+            <li>
+              <span class="lang-es">
+                Key User en implementación SAP S/4HANA (GL y AA), coordinando configuración y alineación con negocio.
+              </span>
+              <span class="lang-en">
+                Key user in SAP S/4HANA implementation (GL and AA), coordinating configuration and alignment with business stakeholders.
+              </span>
+            </li>
+            <li>
+              <span class="lang-es">
+                Key User y SAC Developer en SAP Analytics Cloud, desarrollando tableros para controlling (márgenes, resultados y KPIs de gestión).
+              </span>
+              <span class="lang-en">
+                SAP Analytics Cloud key user and SAC developer, building dashboards for controlling (margins, results and management KPIs).
+              </span>
+            </li>
+            <li>
+              <span class="lang-es">
+                Automatización de tareas de controlling/reporting para reducir tiempos y errores operativos.
+              </span>
+              <span class="lang-en">
+                Automation of controlling and reporting tasks to reduce cycle times and operational errors.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE TAB -->
+      <section class="tab" id="tab-experience" role="tabpanel" aria-label="Experiencia">
+        <div class="card">
+          <h2>
+            <span class="lang-es">Experiencia (expandible)</span>
+            <span class="lang-en">Experience (expandable)</span>
+          </h2>
+
+          <article class="exp-item open">
+            <button class="exp-toggle" aria-expanded="true">
+              <div class="exp-left">
+                <div class="exp-title">Sucesores de Alfredo Williner S.A. (Lácteo)</div>
+                <div class="exp-meta">
+                  <span class="lang-es">Rafaela, Santa Fe · 2017 — Actualidad</span>
+                  <span class="lang-en">Rafaela, Santa Fe · 2017 — Present</span>
+                </div>
+              </div>
+              <div class="exp-meta">▼</div>
+            </button>
+            <div class="exp-roles">
+              <div class="role-block">
+                <h3>
+                  <span class="lang-es">Key User SAP / Especialista en Reporting y Análisis de Datos</span>
+                  <span class="lang-en">SAP Key User / Reporting & Data Analysis Specialist</span>
+                </h3>
+                <div class="when">
+                  <span class="lang-es">Feb 2019 — Actualidad</span>
+                  <span class="lang-en">Feb 2019 — Present</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Responsable de implementación SAP GL–AA (Feb–Nov 2019) y participación transversal con otros módulos.</span>
+                    <span class="lang-en">Owner of SAP GL–AA implementation (Feb–Nov 2019) and cross-module collaboration with other teams.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Parametrización de datos maestros y soporte a mejoras de procesos en QA.</span>
+                    <span class="lang-en">Master data configuration and support to process improvements in QA environment.</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="role-block">
+                <h3>
+                  <span class="lang-es">Analista de Contabilidad y Controlling</span>
+                  <span class="lang-en">Accounting & Controlling Analyst</span>
+                </h3>
+                <div class="when">
+                  <span class="lang-es">Jul 2017 — Actualidad</span>
+                  <span class="lang-en">Jul 2017 — Present</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Procesos de cierre GL–CO–AA.</span>
+                    <span class="lang-en">End-to-end GL–CO–AA closing processes.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Elaboración de P&L total y por CeBe, clientes, vendedores y oficinas de venta.</span>
+                    <span class="lang-en">Preparation of total P&amp;L and P&amp;L by profit center, customer, sales rep and sales office.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Cálculo de KPIs mensuales: plazo de pago/cobro, aging clientes, rotación de inventario, entre otros.</span>
+                    <span class="lang-en">Monthly KPI calculation: payment/collection terms, customer aging, inventory turnover, among others.</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="role-block">
+                <h3>
+                  <span class="lang-es">Key User SAP Analytics Cloud (SAC)</span>
+                  <span class="lang-en">SAP Analytics Cloud (SAC) Key User</span>
+                </h3>
+                <div class="when">
+                  <span class="lang-es">Nov 2021 — Feb 2022</span>
+                  <span class="lang-en">Nov 2021 — Feb 2022</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Diseño y desarrollo de tableros de ventas, contribución marginal, resultados por cliente/OV/vendedor y tableros específicos para controlling.</span>
+                    <span class="lang-en">Design and development of dashboards for sales, contribution margin, results per customer/order/sales rep and specific dashboards for controlling.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="exp-item">
+            <button class="exp-toggle" aria-expanded="false">
+              <div class="exp-left">
+                <div class="exp-title">MAHLE</div>
+                <div class="exp-meta">
+                  <span class="lang-es">Rafaela, Santa Fe · 2008 — 2017</span>
+                  <span class="lang-en">Rafaela, Santa Fe · 2008 — 2017</span>
+                </div>
+              </div>
+              <div class="exp-meta">▼</div>
+            </button>
+            <div class="exp-roles">
+              <div class="role-block">
+                <h3>Controlling Analyst</h3>
+                <div class="when">
+                  <span class="lang-es">Ago 2009 — Jul 2017</span>
+                  <span class="lang-en">Aug 2009 — Jul 2017</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Cálculo de tasas estándar por centro de costo para cotizar y valuar piezas en SAP.</span>
+                    <span class="lang-en">Calculation of standard rates by cost center to quote and valuate parts in SAP.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Comparativas de costos entre países; cotizaciones mercado OEM y reposición.</span>
+                    <span class="lang-en">Cost comparisons between countries; OEM and aftermarket pricing quotations.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Ajustes de precios por variación de materias primas; mantenimiento de maestro de precios.</span>
+                    <span class="lang-en">Price adjustments based on raw material variation; price master data maintenance.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Book gerencial mensual de KPIs económicos/financieros y reportes regionales.</span>
+                    <span class="lang-en">Monthly management reporting of economic/financial KPIs and regional reports.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Implementación/cierre CO-PA a valores históricos y reposición; análisis de desvíos vs Budget.</span>
+                    <span class="lang-en">CO-PA implementation/closing at historical and replacement values; variance analysis vs. budget.</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Control de Capex, conciliaciones intercompany, inventarios y bienes de uso.</span>
+                    <span class="lang-en">Capex control, intercompany reconciliations, inventories and fixed assets.</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="role-block">
+                <h3>Accounting Analyst</h3>
+                <div class="when">
+                  <span class="lang-es">Dic 2008 — Ago 2009 · Rosario</span>
+                  <span class="lang-en">Dec 2008 — Aug 2009 · Rosario</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Contabilidad integral de MAHLE Argentina S.A.</span>
+                    <span class="lang-en">Full accounting for MAHLE Argentina S.A.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="exp-item" style="margin-bottom:0">
+            <button class="exp-toggle" aria-expanded="false">
+              <div class="exp-left">
+                <div class="exp-title">Megatone (Bazar Avenida S.A.)</div>
+                <div class="exp-meta">
+                  <span class="lang-es">Rafaela, Santa Fe · 2003 — 2008</span>
+                  <span class="lang-en">Rafaela, Santa Fe · 2003 — 2008</span>
+                </div>
+              </div>
+              <div class="exp-meta">▼</div>
+            </button>
+            <div class="exp-roles">
+              <div class="role-block">
+                <h3>Accounting Analyst</h3>
+                <div class="when">
+                  <span class="lang-es">Nov 2003 — Dic 2008</span>
+                  <span class="lang-en">Nov 2003 — Dec 2008</span>
+                </div>
+                <ul>
+                  <li>
+                    <span class="lang-es">Contabilidad de empresas del grupo (Tinsa S.A. y Avenida A.C.E.).</span>
+                    <span class="lang-en">Accounting for group companies (Tinsa S.A. and Avenida A.C.E.).</span>
+                  </li>
+                  <li>
+                    <span class="lang-es">Seguimiento de cuenta corriente de proveedores y conciliaciones.</span>
+                    <span class="lang-en">Monitoring suppliers’ accounts and account reconciliations.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- PROJECTS TAB -->
+      <section class="tab" id="tab-projects" role="tabpanel" aria-label="Proyectos">
+        <div class="card">
+          <h2>
+            <span class="lang-es">Proyectos seleccionados</span>
+            <span class="lang-en">Selected projects</span>
+          </h2>
+          <div class="projects">
+            <div class="proj">
+              <div class="proj-head">
+                <div class="proj-title">
+                  <span class="lang-es">SAP S/4HANA — GL & AA (Key User)</span>
+                  <span class="lang-en">SAP S/4HANA — GL & AA (Key User)</span>
+                </div>
+                <div class="proj-stack">SAP S/4HANA · GL · AA</div>
+              </div>
+              <ul style="margin:8px 0 0 18px">
+                <li>
+                  <span class="lang-es">Coordinación funcional, pruebas integrales y soporte post go-live.</span>
+                  <span class="lang-en">Functional coordination, end-to-end testing and post go-live support.</span>
+                </li>
+                <li>
+                  <span class="lang-es">Alineación datos maestros y procesos de cierre con negocio.</span>
+                  <span class="lang-en">Alignment of master data and closing processes with business requirements.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="proj">
+              <div class="proj-head">
+                <div class="proj-title">
+                  <span class="lang-es">Tableros SAC para dirección comercial</span>
+                  <span class="lang-en">SAC dashboards for commercial management</span>
+                </div>
+                <div class="proj-stack">SAP Analytics Cloud · Modeling · Story</div>
+              </div>
+              <ul style="margin:8px 0 0 18px">
+                <li>
+                  <span class="lang-es">Historias interactivas de ventas, márgenes y resultados por cliente y canal, incluyendo vistas específicas para controlling.</span>
+                  <span class="lang-en">Interactive stories for sales, margins and results by customer and channel, including specific views for controlling.</span>
+                </li>
+                <li>
+                  <span class="lang-es">Autonomía del usuario final con filtros y drill-down.</span>
+                  <span class="lang-en">Self-service capabilities with filters and drill-down for end users.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="proj">
+              <div class="proj-head">
+                <div class="proj-title">
+                  <span class="lang-es">Automatización de reporting recurrente</span>
+                  <span class="lang-en">Automation of recurring reporting</span>
+                </div>
+                <div class="proj-stack">Make · n8n · Excel/Sheets</div>
+              </div>
+              <ul style="margin:8px 0 0 18px">
+                <li>
+                  <span class="lang-es">Flujos para capturar, limpiar y distribuir reportes sin intervención manual.</span>
+                  <span class="lang-en">Workflows to capture, clean and distribute reports with no manual intervention.</span>
+                </li>
+                <li>
+                  <span class="lang-es">Menos errores y más foco del equipo en análisis de valor.</span>
+                  <span class="lang-en">Fewer errors and more team focus on value-added analysis.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <p class="muted" style="font-size:12px;margin-top:8px">
+            <span class="lang-es">Puedo sumar más casos con métricas reales si me las pasás.</span>
+            <span class="lang-en">More projects with concrete metrics can be added on request.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- SKILLS TAB -->
+      <section class="tab" id="tab-skills" role="tabpanel" aria-label="Habilidades">
+        <div class="card">
+          <h2>
+            <span class="lang-es">Habilidades (filtrables)</span>
+            <span class="lang-en">Skills (filterable)</span>
+          </h2>
+          <div class="filters" role="tablist" aria-label="Filtros de habilidades">
+            <button class="filter active" data-filter="all" role="tab">
+              <span class="lang-es">Todo</span>
+              <span class="lang-en">All</span>
+            </button>
+            <button class="filter" data-filter="sap" role="tab">SAP</button>
+            <button class="filter" data-filter="bi" role="tab">
+              <span class="lang-es">BI/Data</span>
+              <span class="lang-en">BI/Data</span>
+            </button>
+            <button class="filter" data-filter="auto" role="tab">
+              <span class="lang-es">Automatización</span>
+              <span class="lang-en">Automation</span>
+            </button>
+            <button class="filter" data-filter="fin" role="tab">
+              <span class="lang-es">Finanzas</span>
+              <span class="lang-en">Finance</span>
+            </button>
+          </div>
+
+          <div class="skills" aria-label="Listado de habilidades">
+            <span class="skill show" data-cat="sap">
+              <span class="lang-es">SAP ERP (GL, AA, CO-PA, CO)</span>
+              <span class="lang-en">SAP ERP (GL, AA, CO-PA, CO)</span>
+            </span>
+            <span class="skill show" data-cat="sap">
+              <span class="lang-es">SAP S/4HANA · Implementación</span>
+              <span class="lang-en">SAP S/4HANA · Implementation</span>
+            </span>
+            <span class="skill show" data-cat="sap">
+              <span class="lang-es">Material Ledger & cierres</span>
+              <span class="lang-en">Material Ledger & closing</span>
+            </span>
+            <span class="skill show" data-cat="sap">
+              <span class="lang-es">Customizing funcional</span>
+              <span class="lang-en">Functional customizing</span>
+            </span>
+
+            <span class="skill show" data-cat="bi">
+              <span class="lang-es">SAP Analytics Cloud</span>
+              <span class="lang-en">SAP Analytics Cloud</span>
+            </span>
+            <span class="skill show" data-cat="bi">Power BI</span>
+            <span class="skill show" data-cat="bi">Looker Studio</span>
+            <span class="skill show" data-cat="bi">
+              <span class="lang-es">Excel avanzado</span>
+              <span class="lang-en">Advanced Excel</span>
+            </span>
+            <span class="skill show" data-cat="bi">
+              <span class="lang-es">Modelado · KPIs · Storytelling</span>
+              <span class="lang-en">Modeling · KPIs · Data storytelling</span>
+            </span>
+
+            <span class="skill show" data-cat="auto">Make</span>
+            <span class="skill show" data-cat="auto">n8n</span>
+            <span class="skill show" data-cat="auto">Power Automate Desktop</span>
+
+            <span class="skill show" data-cat="fin">
+              <span class="lang-es">Controlling</span>
+              <span class="lang-en">Controlling</span>
+            </span>
+            <span class="skill show" data-cat="fin">
+              <span class="lang-es">Costos estándar / pricing</span>
+              <span class="lang-en">Standard costing / pricing</span>
+            </span>
+            <span class="skill show" data-cat="fin">
+              <span class="lang-es">CO-PA (histórico y reposición)</span>
+              <span class="lang-en">CO-PA (historical and replacement)</span>
+            </span>
+            <span class="skill show" data-cat="fin">
+              <span class="lang-es">Capex & intercompany</span>
+              <span class="lang-en">Capex & intercompany</span>
+            </span>
+          </div>
+
+          <h3 style="font-size:14px;margin:12px 0 6px">
+            <span class="lang-es">Soft skills</span>
+            <span class="lang-en">Soft skills</span>
+          </h3>
+          <div class="skills">
+            <span class="skill show" data-cat="all">
+              <span class="lang-es">Resolución de problemas</span>
+              <span class="lang-en">Problem solving</span>
+            </span>
+            <span class="skill show" data-cat="all">
+              <span class="lang-es">Liderazgo transversal</span>
+              <span class="lang-en">Cross-functional leadership</span>
+            </span>
+            <span class="skill show" data-cat="all">
+              <span class="lang-es">Comunicación con negocio</span>
+              <span class="lang-en">Business communication</span>
+            </span>
+            <span class="skill show" data-cat="all">
+              <span class="lang-es">Pensamiento analítico</span>
+              <span class="lang-en">Analytical thinking</span>
+            </span>
+            <span class="skill show" data-cat="all">
+              <span class="lang-es">Mejora continua</span>
+              <span class="lang-en">Continuous improvement</span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION TAB -->
+      <section class="tab" id="tab-education" role="tabpanel" aria-label="Educación">
+        <div class="card">
+          <h2>
+            <span class="lang-es">Educación</span>
+            <span class="lang-en">Education</span>
+          </h2>
+          <div class="timeline">
+            <div class="edu">
+              <div class="exp-title">Universidad Católica de Santiago del Estero</div>
+              <div class="exp-meta">
+                <span class="lang-es">Contador Público · 1998 — 2005</span>
+                <span class="lang-en">Public Accountant (Bachelor´s degree) · 1998 — 2005</span>
+              </div>
+            </div>
+            <div class="edu">
+              <div class="exp-title">Udemy</div>
+              <div class="exp-meta">Data Science &amp; Machine Learning · Oct 2022</div>
+            </div>
+            <div class="edu">
+              <div class="exp-title">Udemy</div>
+              <div class="exp-meta">Ciencia de datos con Python · Oct 2022</div>
+            </div>
+            <div class="edu">
+              <div class="exp-title">Udemy</div>
+              <div class="exp-meta">Data Manipulation in Python (Numpy &amp; Pandas) · Oct 2022</div>
+            </div>
+            <div class="edu">
+              <div class="exp-title">UPV</div>
+              <div class="exp-meta">
+                <span class="lang-es">Excel Avanzado: Importación y análisis de datos · 2021</span>
+                <span class="lang-en">Advanced Excel: Data import and analysis · 2021</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span class="lang-es">Última actualización: 2025 · CV Dashboard para GitHub Pages.</span>
+        <span class="lang-en">Last update: 2025 · CV Dashboard for GitHub Pages.</span>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Idioma (persistido)
+    const langBtn = document.getElementById('langBtn');
+    let currentLang = localStorage.getItem('lang') || 'es';
+
+    function applyLang(lang){
+      document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'es');
+      if(langBtn){
+        langBtn.textContent = (lang === 'es') ? '🌐 EN' : '🌐 ES';
+      }
+    }
+
+    applyLang(currentLang);
+
+    if(langBtn){
+      langBtn.addEventListener('click', () => {
+        currentLang = (currentLang === 'es') ? 'en' : 'es';
+        localStorage.setItem('lang', currentLang);
+        applyLang(currentLang);
+      });
+    }
+
+    // Theme toggle (persisted)
+    const themeBtn = document.getElementById('themeBtn');
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'light') document.body.classList.add('light');
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Copy email
+    document.getElementById('copyMail').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText('mcbriggiler@gmail.com');
+        const htmlLang = document.documentElement.getAttribute('lang') || 'es';
+        alert(htmlLang === 'en'
+          ? 'Email copied to clipboard.'
+          : 'Email copiado al portapapeles.');
+      } catch(e){
+        alert('mcbriggiler@gmail.com');
+      }
+    });
+
+    // Tabs navigation
+    const navBtns = document.querySelectorAll('.navbtn');
+    const tabs = {
+      overview: document.getElementById('tab-overview'),
+      experience: document.getElementById('tab-experience'),
+      projects: document.getElementById('tab-projects'),
+      skills: document.getElementById('tab-skills'),
+      education: document.getElementById('tab-education')
+    };
+    navBtns.forEach(b => b.addEventListener('click', () => {
+      navBtns.forEach(x=>{x.classList.remove('active'); x.setAttribute('aria-selected','false');});
+      b.classList.add('active'); b.setAttribute('aria-selected','true');
+      const key = b.dataset.tab;
+      Object.values(tabs).forEach(t=>t.classList.remove('active'));
+      tabs[key]?.classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }));
+
+    // Accordion experience
+    document.querySelectorAll('.exp-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.exp-item');
+        const isOpen = item.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+
+    // Skill filters
+    const filters = document.querySelectorAll('.filter');
+    const skills = document.querySelectorAll('.skill');
+    filters.forEach(f => {
+      f.addEventListener('click', () => {
+        filters.forEach(x=>x.classList.remove('active'));
+        f.classList.add('active');
+        const cat = f.dataset.filter;
+        skills.forEach(s => {
+          const sc = s.dataset.cat || 'all';
+          const show = (cat==='all') || sc===cat || sc==='all';
+          s.classList.toggle('show', show);
+        });
+      });
+    });
+
+    // Counters animation
+    function animateCounter(el){
+      const target = Number(el.dataset.count||0);
+      let cur = 0;
+      const step = Math.max(1, Math.round(target/40));
+      const tick = () => {
+        cur += step;
+        if(cur >= target){
+          el.textContent = target + (target>=10?'+':'');
+          return;
+        }
+        el.textContent = cur;
+        requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+    document.querySelectorAll('[data-count]').forEach(animateCounter);
+
+    // Bar fills
+    const rows = document.querySelectorAll('#companyBars .bar-row');
+    const maxVal = Math.max(...Array.from(rows).map(r=>Number(r.dataset.value||0)));
+    rows.forEach(r => {
+      const v = Number(r.dataset.value||0);
+      const pct = maxVal ? (v/maxVal)*100 : 0;
+      r.querySelector('.bar-fill').style.width = pct.toFixed(1)+'%';
+    });
+  </script>
+</body>
+</html>
