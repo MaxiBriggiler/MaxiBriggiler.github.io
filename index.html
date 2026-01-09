@@ -260,9 +260,102 @@
       .exp-body { display: block !important; }
       body { background: white; color: black; }
     }
+  
+    /* --- Entrada animada al cargar --- */
+    .app-container {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 480ms ease, transform 480ms ease;
+      will-change: opacity, transform;
+    }
+    body.loaded .app-container {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .card.enter {
+      animation: fadeIn 520ms ease-out both;
+    }
+
+  
+    /* --- Intro BI / AI Overlay --- */
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(56,189,248,0.15), transparent 40%),
+                  radial-gradient(900px 500px at 80% 80%, rgba(129,140,248,0.18), transparent 45%),
+                  linear-gradient(180deg, var(--bg-app), var(--bg-panel));
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      animation: overlayFadeOut 1.2s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    .intro-content {
+      text-align: center;
+      animation: introScale 1.2s ease forwards;
+    }
+
+    .intro-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .intro-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .data-stream {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .data-dot {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      animation: floatData linear infinite;
+    }
+
+    @keyframes floatData {
+      from { transform: translateY(110vh); opacity: 0; }
+      10% { opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    @keyframes introScale {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes overlayFadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
   </style>
 </head>
 <body>
+
+  <div class="intro-overlay">
+    <div class="data-stream" id="dataStream"></div>
+    <div class="intro-content">
+      <div class="intro-title">SAP CONTROLLING</div>
+      <div class="intro-sub">BI · AI · ANALYTICS</div>
+    </div>
+  </div>
+
 
   <div class="app-container">
     <aside>
@@ -746,5 +839,43 @@
       alert('Email copiado');
     });
   </script>
+
+  <script>
+    // Animación sutil de entrada (acorde a un CV dashboard)
+    window.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+
+      // Stagger suave para las cards visibles en el tab activo
+      const activeTab = document.querySelector('.tab-content.active');
+      if (activeTab) {
+        const cards = activeTab.querySelectorAll('.card');
+        cards.forEach((card, i) => {
+          card.classList.add('enter');
+          card.style.animationDelay = (i * 60) + 'ms';
+        });
+      }
+    });
+  </script>
+
+
+  <script>
+    // Intro BI / AI animation
+    (function () {
+      const stream = document.getElementById('dataStream');
+      if (!stream) return;
+
+      const dots = 80;
+      for (let i = 0; i < dots; i++) {
+        const d = document.createElement('div');
+        d.className = 'data-dot';
+        d.style.left = Math.random() * 100 + '%';
+        d.style.animationDuration = (4 + Math.random() * 6) + 's';
+        d.style.animationDelay = (Math.random() * 2) + 's';
+        d.style.opacity = Math.random();
+        stream.appendChild(d);
+      }
+    })();
+  </script>
+
 </body>
 </html>
