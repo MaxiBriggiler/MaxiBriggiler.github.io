@@ -1,1371 +1,1057 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maximiliano Briggiler — Finance & Controlling | SAP · BI · AI Automation</title>
-  <meta name="description" content="Finance and Controlling professional combining SAP ERP, Business Intelligence, and AI-driven automation to accelerate closing, reporting, and decision-making." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-
+  <title>Maximiliano Briggiler — SAP Analytics Cloud Developer</title>
+  <meta name="description" content="SAP Analytics Cloud Developer con 15+ años en Reporting y Controlling. SAP S/4HANA · BI · IA · Automatización. Rafaela, Argentina." />
+  <meta property="og:title" content="Maximiliano Briggiler — SAP Analytics Cloud Developer" />
+  <meta property="og:description" content="15+ años transformando datos en decisiones estratégicas." />
+  <meta property="og:image" content="./Foto.jpeg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232d6cf0'/><text x='50%25' y='22' font-family='Arial' font-size='14' font-weight='bold' fill='white' text-anchor='middle'>MB</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --ink:         #0b0f19;
-      --ink-2:       #1a2035;
-      --surface:     #f5f4f0;
-      --surface-2:   #ebe9e3;
-      --wire:        rgba(11,15,25,0.09);
-      --lime:        #c8f03c;
-      --lime-dark:   #a8cc20;
-      --sky:         #3cc8f0;
-      --amber:       #f0a83c;
-      --text-1:      #0b0f19;
-      --text-2:      #4a5168;
-      --text-3:      #8890a6;
-      --mono:        'DM Mono', monospace;
-      --sans:        'DM Sans', sans-serif;
-      --display:     'Syne', sans-serif;
-      --r-sm: 6px;
-      --r-md: 12px;
-      --r-lg: 20px;
-      --r-xl: 32px;
-      --shadow-card: 0 2px 0 0 var(--wire), 0 8px 32px -8px rgba(11,15,25,0.12);
-    }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; scroll-behavior: smooth; }
-    body {
-      font-family: var(--sans);
-      background: var(--surface);
-      color: var(--text-1);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .mono   { font-family: var(--mono); }
-    .caps   { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.72rem; }
-    .muted  { color: var(--text-3); }
-    .pill   {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 100px;
-      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
-      border: 1px solid var(--wire); background: white;
-      color: var(--text-2); white-space: nowrap;
-    }
-    .pill--lime   { background: var(--lime); border-color: transparent; color: var(--ink); }
-    .pill--dark   { background: var(--ink); border-color: transparent; color: #fff; }
-    a { color: inherit; text-decoration: none; }
+:root {
+  --bg:          #080e1a;
+  --surface:     #0d1526;
+  --surface-2:   #111f35;
+  --accent:      #2d6cf0;
+  --accent-dim:  rgba(45, 108, 240, 0.14);
+  --accent-glow: rgba(45, 108, 240, 0.32);
+  --text:        #e8edf5;
+  --muted:       #556a82;
+  --border:      #1a2a40;
+  --f-d: 'Space Grotesk', sans-serif;
+  --f-b: 'DM Sans', sans-serif;
+}
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 999; pointer-events: none;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-    }
+html { scroll-behavior: smooth; }
 
-    /* ============================
-       LANGUAGE SWITCHER
-    ============================ */
-    .lang-switcher {
-      display: flex; align-items: center; gap: 4px;
-    }
-    .lang-btn {
-      padding: 5px 10px;
-      border-radius: var(--r-sm);
-      font-family: var(--mono); font-size: 0.7rem; font-weight: 500;
-      border: 1px solid var(--wire);
-      background: transparent; color: var(--text-3);
-      cursor: pointer; transition: all 0.18s;
-      letter-spacing: 0.05em;
-    }
-    .lang-btn:hover { color: var(--ink); border-color: var(--ink); }
-    .lang-btn.active {
-      background: var(--ink); color: #fff; border-color: var(--ink);
-    }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-b);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    /* ============================
-       NAVIGATION
-    ============================ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 40px;
-      background: rgba(245,244,240,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--wire);
-    }
-    .nav-logo {
-      font-family: var(--display); font-weight: 800; font-size: 1rem;
-      letter-spacing: -0.01em; color: var(--ink);
-    }
-    .nav-logo span { color: var(--text-3); font-weight: 400; }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-links {
-      display: flex; align-items: center; gap: 32px; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.82rem; font-weight: 500; color: var(--text-2);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-cta {
-      padding: 9px 20px; border-radius: var(--r-sm);
-      background: var(--ink); color: #fff;
-      font-size: 0.82rem; font-weight: 600;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: var(--ink-2); transform: translateY(-1px); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+::selection { background: var(--accent); color: #fff; }
 
-    /* ============================
-       HERO
-    ============================ */
-    .hero {
-      min-height: 100vh;
-      padding: 160px 40px 100px;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(var(--wire) 1px, transparent 1px),
-        linear-gradient(90deg, var(--wire) 1px, transparent 1px);
-      background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
-    }
-    .hero-blob {
-      position: absolute; z-index: 0;
-      width: 520px; height: 520px; border-radius: 50%;
-      background: radial-gradient(circle, var(--lime) 0%, transparent 70%);
-      opacity: 0.28; top: -80px; right: -80px;
-      pointer-events: none;
-      animation: blobPulse 8s ease-in-out infinite;
-    }
-    @keyframes blobPulse {
-      0%, 100% { transform: scale(1) translate(0,0); }
-      33% { transform: scale(1.08) translate(-20px, 20px); }
-      66% { transform: scale(0.94) translate(20px, -10px); }
-    }
-    .hero-inner {
-      position: relative; z-index: 1;
-      max-width: 1200px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 380px;
-      gap: 64px; align-items: center;
-    }
-    .hero-title {
-      font-family: var(--display);
-      font-size: clamp(2.8rem, 5.5vw, 5rem);
-      font-weight: 800; line-height: 1.02;
-      letter-spacing: -0.03em; color: var(--ink); margin-bottom: 24px;
-    }
-    .hero-title em {
-      font-style: normal;
-      background: linear-gradient(135deg, var(--lime-dark) 0%, #5dde3c 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: 1.05rem; font-weight: 300; line-height: 1.65;
-      color: var(--text-2); max-width: 520px; margin-bottom: 36px;
-    }
-    .hero-actions {
-      display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
-      margin-bottom: 48px;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 26px; border-radius: var(--r-sm);
-      background: var(--ink); color: #fff;
-      font-weight: 600; font-size: 0.9rem;
-      transition: all 0.2s; border: 1.5px solid var(--ink);
-    }
-    .btn-primary:hover { background: transparent; color: var(--ink); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 13px 26px; border-radius: var(--r-sm);
-      background: transparent; color: var(--text-2);
-      font-weight: 500; font-size: 0.9rem;
-      border: 1.5px solid var(--wire); transition: all 0.2s;
-    }
-    .btn-secondary:hover { border-color: var(--ink); color: var(--ink); }
-    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+h1, h2, h3, h4 { font-family: var(--f-d); line-height: 1.15; letter-spacing: -0.02em; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
 
-    /* Hero card */
-    .hero-card {
-      background: white; border: 1px solid var(--wire);
-      border-radius: var(--r-xl); padding: 32px;
-      box-shadow: var(--shadow-card);
-    }
-    .hero-card-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 28px;
-    }
-    .stat-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 16px; margin-bottom: 20px;
-    }
-    .stat-box {
-      background: var(--surface); border-radius: var(--r-md); padding: 16px;
-    }
-    .stat-box .val {
-      font-family: var(--display); font-weight: 800; font-size: 2rem;
-      color: var(--ink); line-height: 1;
-    }
-    .stat-box .label {
-      font-size: 0.72rem; color: var(--text-3); margin-top: 4px;
-      font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.06em;
-    }
-    .mini-chart {
-      height: 56px; background: var(--surface); border-radius: var(--r-md);
-      overflow: hidden; position: relative; margin-bottom: 16px;
-    }
-    .mini-chart svg { width: 100%; height: 100%; }
-    .stack-list { display: flex; flex-direction: column; gap: 8px; }
-    .stack-item { display: flex; align-items: center; gap: 10px; }
-    .stack-bar-wrap {
-      flex: 1; height: 4px; background: var(--surface-2);
-      border-radius: 2px; overflow: hidden;
-    }
-    .stack-bar {
-      height: 100%; border-radius: 2px; background: var(--ink);
-      transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
-    }
-    .stack-item .name {
-      font-size: 0.75rem; font-family: var(--mono); color: var(--text-2); width: 80px; flex-shrink: 0;
-    }
-    .stack-item .pct {
-      font-size: 0.72rem; font-family: var(--mono); color: var(--text-3);
-      width: 32px; text-align: right;
-    }
+/* ── Layout ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
-    /* ============================
-       SECTION WRAPPER
-    ============================ */
-    .section { padding: 100px 40px; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-label {
-      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-    }
-    .section-label::before {
-      content: ''; display: block; width: 24px; height: 2px; background: var(--lime-dark);
-    }
-    .section-title {
-      font-family: var(--display);
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      color: var(--ink); line-height: 1.1; margin-bottom: 16px;
-    }
-    .section-sub {
-      font-size: 1rem; font-weight: 300; color: var(--text-2);
-      line-height: 1.6; max-width: 540px;
-    }
+/* ── Labels ── */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--f-d);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.sec-label::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--border);
+}
+.sec-title {
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
 
-    /* ============================
-       VALUE PROPS
-    ============================ */
-    .value-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px; margin-top: 56px;
-    }
-    .value-card {
-      background: white; border: 1px solid var(--wire);
-      border-radius: var(--r-lg); padding: 28px;
-      box-shadow: var(--shadow-card);
-      transition: transform 0.25s, box-shadow 0.25s;
-      position: relative; overflow: hidden;
-    }
-    .value-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 2px 0 0 var(--wire), 0 20px 48px -12px rgba(11,15,25,0.18);
-    }
-    .value-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--lime); opacity: 0; transition: opacity 0.25s;
-    }
-    .value-card:hover::before { opacity: 1; }
-    .value-icon {
-      width: 44px; height: 44px; background: var(--surface);
-      border-radius: var(--r-sm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; margin-bottom: 18px;
-    }
-    .value-card h3 {
-      font-family: var(--display); font-weight: 700; font-size: 1rem;
-      margin-bottom: 10px; color: var(--ink);
-    }
-    .value-card p {
-      font-size: 0.875rem; line-height: 1.65; color: var(--text-2); font-weight: 300;
-    }
+/* ── Reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
 
-    /* ============================
-       EXPERIENCE TIMELINE
-    ============================ */
-    #experience { background: var(--ink); }
-    #experience .section-title,
-    #experience .section-label { color: #fff; }
-    #experience .section-label::before { background: var(--lime); }
-    #experience .section-sub { color: rgba(255,255,255,0.5); }
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 8px;
+  font-family: var(--f-b);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform .2s, box-shadow .2s, opacity .2s, border-color .2s, color .2s;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn svg { flex-shrink: 0; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { box-shadow: 0 8px 28px var(--accent-glow); opacity: .92; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .timeline {
-      display: grid; grid-template-columns: 240px 1fr;
-      gap: 0; margin-top: 64px; position: relative;
-    }
-    .timeline-nav {
-      display: flex; flex-direction: column; gap: 8px;
-      position: sticky; top: 100px; align-self: start;
-      background: transparent;
-      padding-right: 24px;
-    }
-    .tl-btn {
-      text-align: left; cursor: pointer;
-      padding: 14px 16px; border-radius: var(--r-sm);
-      font-family: var(--mono); font-size: 0.75rem;
-      transition: all 0.2s;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.12);
-      width: 100%;
-    }
-    .tl-btn:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.25);
-    }
-    .tl-btn.active {
-      background: rgba(200,240,60,0.08);
-      border-color: var(--lime);
-    }
-    .tl-btn .tl-year {
-      font-weight: 700; display: block; margin-bottom: 4px;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.78rem;
-    }
-    .tl-btn:hover .tl-year { color: rgba(255,255,255,0.85); }
-    .tl-btn.active .tl-year { color: var(--lime); }
-    .tl-btn .tl-co {
-      font-size: 0.69rem; display: block;
-      color: rgba(255,255,255,0.3);
-    }
-    .tl-btn:hover .tl-co { color: rgba(255,255,255,0.6); }
-    .tl-btn.active .tl-co { color: rgba(255,255,255,0.75); }
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid transparent;
+  transition: background .3s, border-color .3s, backdrop-filter .3s;
+}
+nav.scrolled {
+  background: rgba(8, 14, 26, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: var(--border);
+}
+.nav-inner { display: flex; align-items: center; gap: 1.5rem; }
+.nav-logo { font-family: var(--f-d); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.04em; flex-shrink: 0; }
+.nav-logo span { color: var(--accent); }
 
-    .timeline-entries { display: flex; flex-direction: column; gap: 0; }
-    .tl-entry {
-      padding: 40px 0 40px 48px;
-      border-left: 1px solid rgba(255,255,255,0.1);
-      position: relative; display: none;
-    }
-    .tl-entry.active { display: block; }
-    .tl-entry::before {
-      content: ''; position: absolute; left: -5px; top: 44px;
-      width: 9px; height: 9px; border-radius: 50%;
-      background: var(--lime);
-      box-shadow: 0 0 0 4px rgba(200,240,60,0.15);
-    }
-    .tl-role {
-      font-family: var(--display); font-weight: 700; font-size: 1.25rem;
-      color: #fff; margin-bottom: 4px;
-    }
-    .tl-company {
-      font-family: var(--mono); font-size: 0.78rem;
-      color: rgba(255,255,255,0.4); margin-bottom: 6px;
-    }
-    .tl-period {
-      display: inline-flex; padding: 3px 10px; border-radius: 4px;
-      background: rgba(200,240,60,0.1); color: var(--lime);
-      font-family: var(--mono); font-size: 0.7rem; margin-bottom: 24px;
-    }
-    .tl-body { display: flex; flex-direction: column; gap: 12px; }
-    .tl-item {
-      display: flex; gap: 12px;
-      font-size: 0.875rem; font-weight: 300; line-height: 1.6;
-      color: rgba(255,255,255,0.6);
-    }
-    .tl-item::before {
-      content: '→'; color: var(--lime); flex-shrink: 0;
-      font-family: var(--mono); font-size: 0.8rem; margin-top: 2px;
-    }
-    .tl-item b { color: rgba(255,255,255,0.9); font-weight: 500; }
-    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
-    .tl-tag {
-      padding: 4px 10px; border-radius: 4px;
-      background: rgba(255,255,255,0.06);
-      font-family: var(--mono); font-size: 0.67rem; color: rgba(255,255,255,0.4);
-    }
+.nav-links { display: flex; gap: 2rem; list-style: none; margin-left: auto; }
+.nav-links a { font-size: 0.85rem; color: var(--muted); font-weight: 400; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
 
-    /* ============================
-       SKILLS MATRIX
-    ============================ */
-    .skills-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 40px; flex-wrap: wrap; gap: 20px;
-    }
-    .skills-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    }
-    .skill-group {
-      background: white; border: 1px solid var(--wire);
-      border-radius: var(--r-lg); padding: 24px;
-      box-shadow: var(--shadow-card);
-    }
-    .skill-group-title {
-      font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: var(--text-3); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .skill-group-title::after {
-      content: ''; flex: 1; height: 1px; background: var(--wire);
-    }
-    .skill-chip-list { display: flex; flex-direction: column; gap: 10px; }
-    .skill-chip { display: flex; align-items: center; justify-content: space-between; }
-    .skill-name { font-size: 0.82rem; font-weight: 500; color: var(--text-1); }
-    .skill-level { display: flex; gap: 3px; }
-    .skill-dot {
-      width: 6px; height: 6px; border-radius: 50%; background: var(--surface-2);
-    }
-    .skill-dot.filled { background: var(--ink); }
+/* Language switcher */
+.lang-sw { display: flex; align-items: center; gap: 0.3rem; }
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--f-d);
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.15rem;
+  transition: color .2s;
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn.active { color: var(--accent); }
+.lang-sep { color: var(--border); font-size: 0.65rem; user-select: none; }
 
-    /* ============================
-       EDUCATION
-    ============================ */
-    .edu-certs {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 20px; margin-top: 56px;
-    }
-    .edu-card, .cert-card {
-      background: white; border: 1px solid var(--wire);
-      border-radius: var(--r-lg); padding: 28px;
-      box-shadow: var(--shadow-card);
-    }
-    .edu-degree {
-      font-family: var(--display); font-weight: 700; font-size: 1.1rem;
-      color: var(--ink); margin-bottom: 6px;
-    }
-    .edu-institution { font-family: var(--mono); font-size: 0.75rem; color: var(--text-3); margin-bottom: 4px; }
-    .edu-year { font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); }
-    .cert-list { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
-    .cert-item {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 12px; border-radius: var(--r-sm);
-      background: var(--surface); border: 1px solid var(--wire);
-    }
-    .cert-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .cert-name { font-size: 0.8rem; font-weight: 500; color: var(--text-1); }
-    .cert-issuer { font-size: 0.7rem; font-family: var(--mono); color: var(--text-3); margin-top: 2px; }
+.nav-cta {
+  padding: 0.5rem 1.2rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: opacity .2s, transform .2s;
+  flex-shrink: 0;
+}
+.nav-cta:hover { opacity: .85; transform: translateY(-1px); }
 
-    /* ============================
-       CONTACT SECTION
-    ============================ */
-    #contact { background: var(--ink); }
-    .contact-inner {
-      display: grid; grid-template-columns: 1fr 420px;
-      gap: 80px; align-items: center;
-    }
-    #contact .section-title { color: #fff; }
-    #contact .section-label { color: #fff; }
-    #contact .section-label::before { background: var(--lime); }
-    #contact .section-sub { color: rgba(255,255,255,0.45); }
-    .contact-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--r-xl); padding: 32px;
-    }
-    .contact-row {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .contact-row:last-child { border-bottom: none; }
-    .contact-icon {
-      width: 38px; height: 38px; background: rgba(255,255,255,0.06);
-      border-radius: var(--r-sm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .contact-label {
-      font-size: 0.7rem; font-family: var(--mono); color: rgba(255,255,255,0.3);
-      display: block; margin-bottom: 2px;
-    }
-    .contact-value { font-size: 0.88rem; color: rgba(255,255,255,0.85); font-weight: 400; }
-    .contact-value a:hover { color: var(--lime); transition: color 0.2s; }
-    .open-to { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 36px; }
-    .open-chip {
-      padding: 6px 14px; border-radius: 100px;
-      font-family: var(--mono); font-size: 0.7rem;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.5);
-    }
-    .open-chip.highlight {
-      background: rgba(200,240,60,0.12); border-color: rgba(200,240,60,0.3);
-      color: var(--lime);
-    }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; margin-left: auto; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
 
-    /* ============================
-       FOOTER
-    ============================ */
-    footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 24px 40px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .footer-copy {
-      font-family: var(--mono); font-size: 0.7rem; color: rgba(255,255,255,0.2);
-    }
-    .footer-copy b { color: rgba(255,255,255,0.4); }
+/* Mobile overlay */
+.mob-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 99;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.mob-nav.open { display: flex; }
+.mob-nav a { font-family: var(--f-d); font-size: 1.6rem; font-weight: 600; color: var(--text); transition: color .2s; }
+.mob-nav a:hover { color: var(--accent); }
+.mob-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--muted); font-size: 2rem; line-height: 1; cursor: pointer; transition: color .2s; }
+.mob-close:hover { color: var(--text); }
+.mob-lang { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
+.mob-lang .lang-btn { font-size: 0.85rem; padding: 0.4rem 0.3rem; }
+.mob-lang .lang-sep { font-size: 0.8rem; }
 
-    /* ============================
-       SCROLL REVEAL
-    ============================ */
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.08s; }
-    .reveal-d2 { transition-delay: 0.16s; }
-    .reveal-d3 { transition-delay: 0.24s; }
-    .reveal-d4 { transition-delay: 0.32s; }
+/* ── Hero ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 7rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 65% 50%, black 15%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 70% at 65% 50%, black 15%, transparent 100%);
+  opacity: 0.3;
+  pointer-events: none;
+}
+.hero-glow {
+  position: absolute; top: 10%; right: 3%;
+  width: 55vw; height: 55vw;
+  background: radial-gradient(circle, rgba(45,108,240,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 5rem;
+  align-items: center;
+  width: 100%;
+}
+.hero-kicker {
+  display: flex; align-items: center; gap: 0.65rem;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+}
+.hero-kicker-line { width: 36px; height: 1px; background: var(--accent); }
+.hero-name {
+  font-size: clamp(2.8rem, 5.5vw, 4.75rem);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 1.02; margin-bottom: 0.85rem;
+}
+.hero-name .accent { color: var(--accent); }
+.hero-role { font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--muted); margin-bottom: 1.75rem; line-height: 1.65; }
+.hero-role strong { color: var(--text); font-weight: 500; }
+.hero-desc { max-width: 490px; color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-location {
+  margin-top: 2.25rem; display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; color: var(--muted);
+}
+.hero-location svg { width: 13px; height: 13px; flex-shrink: 0; }
 
-    /* ============================
-       RESPONSIVE
-    ============================ */
-    @media (max-width: 1024px) {
-      .skills-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero-inner  { grid-template-columns: 1fr; }
-      .hero-card   { display: none; }
-      .timeline    { grid-template-columns: 1fr; }
-      .timeline-nav { flex-direction: row; flex-wrap: wrap; position: static; margin-bottom: 24px; padding-right: 0; background: transparent; }
-    }
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hero { padding: 120px 20px 80px; }
-      .section { padding: 72px 20px; }
-      .value-grid { grid-template-columns: 1fr; }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
-      .edu-certs { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
-    }
-    @media (max-width: 480px) {
-      .skills-grid { grid-template-columns: 1fr; }
-      .stat-row { grid-template-columns: 1fr 1fr; }
-    }
-    @media print {
-      nav, .hero-blob, .hero-card, footer { display: none !important; }
-      body { background: white; }
-      .section { padding: 32px 0; }
-      #experience { background: white; }
-      #experience .section-title, #experience .tl-role { color: black; }
-      #contact { background: white; }
-      #contact .section-title { color: black; }
-      .contact-value { color: black; }
-    }
+/* Photo */
+.hero-photo-col { flex-shrink: 0; position: relative; }
+.photo-frame { position: relative; width: 315px; height: 385px; }
+.photo-frame::before {
+  content: '';
+  position: absolute; inset: -2px; border-radius: 20px;
+  background: linear-gradient(145deg, var(--accent) 0%, transparent 55%);
+  z-index: 0;
+}
+.photo-frame img {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  border-radius: 18px;
+}
+.photo-deco {
+  position: absolute; bottom: -18px; right: -18px;
+  width: 90px; height: 90px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px; z-index: -1;
+}
+
+/* ── Sobre mí ── */
+#sobre-mi { padding: 6rem 0; border-top: 1px solid var(--border); }
+.sobre-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  gap: 5rem; align-items: start; margin-top: 3rem;
+}
+.sobre-text p { color: var(--muted); line-height: 1.9; font-size: 0.93rem; margin-bottom: 1rem; }
+.sobre-text p:last-child { margin-bottom: 0; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.25rem;
+  transition: border-color .22s, transform .22s;
+}
+.stat:hover { border-color: var(--accent); transform: translateY(-3px); }
+.stat-n { font-family: var(--f-d); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+.stat-l { font-size: 0.77rem; color: var(--muted); line-height: 1.45; }
+
+/* ── Expertise ── */
+#expertise {
+  padding: 6rem 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 3rem; }
+.exp-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.6rem 1.4rem;
+  transition: border-color .25s, transform .25s;
+}
+.exp-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+.exp-icon {
+  width: 42px; height: 42px; background: var(--accent-dim);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--accent); margin-bottom: 1.2rem;
+}
+.exp-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.exp-card h3 { font-size: 0.94rem; font-weight: 600; margin-bottom: 0.5rem; }
+.exp-card p { font-size: 0.815rem; color: var(--muted); line-height: 1.65; }
+
+/* ── Experiencia ── */
+#experiencia { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+.timeline { margin-top: 3rem; position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.tl-item { position: relative; padding-bottom: 3rem; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -1.94rem; top: 6px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+}
+.tl-header { margin-bottom: 0.9rem; }
+.tl-meta h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+.tl-role { font-size: 0.84rem; color: var(--accent); font-weight: 500; margin-bottom: 0.15rem; }
+.tl-period { font-size: 0.77rem; color: var(--muted); }
+.tl-body { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.4rem; }
+.tl-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.tl-body li { font-size: 0.85rem; color: var(--muted); padding-left: 1rem; position: relative; line-height: 1.6; }
+.tl-body li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.15rem; }
+
+/* ── Herramientas ── */
+#herramientas { padding: 6rem 0; background: var(--surface); border-bottom: 1px solid var(--border); }
+.tools-wrap { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
+.tool-group-label { font-family: var(--f-d); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.tag {
+  display: inline-block; padding: 0.3rem 0.8rem;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 100px; font-size: 0.8rem; color: var(--text);
+  transition: border-color .2s, color .2s, transform .2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+/* ── Educación & Certs ── */
+#educacion { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+.edu-certs-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 4.5rem; margin-top: 3rem; }
+.block-title { font-family: var(--f-d); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+.edu-item { padding-bottom: 1.4rem; margin-bottom: 1.4rem; border-bottom: 1px solid var(--border); }
+.edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.edu-item h3 { font-size: 0.94rem; font-weight: 600; margin-bottom: 0.2rem; }
+.edu-item .inst { font-size: 0.83rem; color: var(--muted); }
+.edu-item .yr { font-size: 0.74rem; color: var(--accent); margin-top: 0.25rem; font-weight: 500; font-family: var(--f-d); }
+.cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.65rem; transition: border-color .2s; }
+.cert-card:last-child { margin-bottom: 0; }
+.cert-card:hover { border-color: var(--accent); }
+.cert-card h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.4; }
+.cert-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 0.2rem; }
+.cert-issuer { font-size: 0.75rem; color: var(--muted); }
+.cert-date { font-size: 0.72rem; color: var(--accent); font-weight: 500; font-family: var(--f-d); }
+.cert-id { font-size: 0.67rem; color: var(--border); font-family: monospace; margin-top: 0.25rem; letter-spacing: 0.04em; }
+
+/* ── CTA ── */
+#cta { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
+.cta-glow {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 700px; height: 350px;
+  background: radial-gradient(ellipse, rgba(45,108,240,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-kicker { font-family: var(--f-d); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+.cta-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; max-width: 680px; margin: 0 auto 1.25rem; line-height: 1.1; }
+.cta-sub { color: var(--muted); max-width: 440px; margin: 0 auto 3rem; font-size: 0.93rem; line-height: 1.8; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── Footer ── */
+footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.77rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.77rem; color: var(--muted); transition: color .2s; }
+.footer-links a:hover { color: var(--text); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-inner { gap: 3rem; }
+  .photo-frame { width: 270px; height: 330px; }
+  .exp-grid { grid-template-columns: repeat(2, 1fr); }
+  .sobre-grid { gap: 3rem; }
+}
+
+@media (max-width: 768px) {
+  /* Nav */
+  .nav-links, .nav-cta, .lang-sw { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero */
+  #hero { padding: 5.5rem 0 3.5rem; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+  .hero-kicker { justify-content: center; }
+  .hero-desc { margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-location { justify-content: center; }
+  .hero-photo-col { order: -1; display: flex; justify-content: center; }
+  .photo-frame { width: 200px; height: 245px; }
+  .photo-deco { display: none; }
+
+  /* Section padding */
+  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 4rem 0; }
+  #cta { padding: 5rem 0; }
+
+  /* Grid margin-top */
+  .sobre-grid, .exp-grid, .timeline, .tools-wrap, .edu-certs-grid { margin-top: 2rem; }
+
+  /* Grids */
+  .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .edu-certs-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .exp-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+  /* Sec titles */
+  .sec-title { margin-bottom: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  #hero { padding: 5rem 0 3rem; }
+  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 3rem 0; }
+  #cta { padding: 4rem 0; }
+  .photo-frame { width: 170px; height: 208px; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .tl-body { padding: 0.9rem 1rem; }
+  .hero-name { font-size: 2.5rem; }
+}
+
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">Maximiliano <span>Briggiler</span></div>
-    <div class="nav-right">
-      <ul class="nav-links">
-        <li><a href="#about" data-i18n="nav_about">About</a></li>
-        <li><a href="#experience" data-i18n="nav_experience">Experience</a></li>
-        <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-        <li><a href="#education" data-i18n="nav_education">Education</a></li>
-        <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+<!-- Mobile overlay -->
+<div class="mob-nav" id="mobNav" role="dialog" aria-label="Menú">
+  <button class="mob-close" id="mobClose" aria-label="Cerrar">×</button>
+  <a href="#sobre-mi" data-i18n="mob.about">Sobre mí</a>
+  <a href="#expertise" data-i18n="mob.expertise">Expertise</a>
+  <a href="#experiencia" data-i18n="mob.experience">Experiencia</a>
+  <a href="#herramientas" data-i18n="mob.tools">Herramientas</a>
+  <a href="#cta" data-i18n="mob.contact">Contacto</a>
+  <div class="mob-lang">
+    <button class="lang-btn active" data-lang="es">ES</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="en">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" data-lang="fr">FR</button>
+  </div>
+</div>
+
+<!-- Nav -->
+<nav id="mainNav">
+  <div class="container">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">M<span>.</span>Briggiler</a>
+      <ul class="nav-links" role="list">
+        <li><a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
+        <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
+        <li><a href="#experiencia" data-i18n="nav.experience">Experiencia</a></li>
+        <li><a href="#herramientas" data-i18n="nav.tools">Herramientas</a></li>
       </ul>
-      <div class="lang-switcher">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('es')">ES</button>
-        <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <div class="lang-sw" aria-label="Idioma">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-btn" data-lang="fr">FR</button>
       </div>
-      <a href="mailto:mcbriggiler@gmail.com" class="nav-cta" data-i18n="nav_cta">Get in touch →</a>
+      <a class="nav-cta" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener" data-i18n="nav.cta">LinkedIn →</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero" id="about">
-    <div class="hero-blob"></div>
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
     <div class="hero-inner">
-      <div class="hero-left">
-        <h1 class="hero-title reveal">
-          Finance &amp; Controlling.<br>
-          <em>SAP · BI · AI.</em><br>
-          <span data-i18n="hero_title_line3">Decisions that matter.</span>
+
+      <div class="hero-content reveal">
+        <div class="hero-kicker">
+          <span class="hero-kicker-line" aria-hidden="true"></span>
+          <span data-i18n="hero.kicker">SAP Analytics Cloud Developer</span>
+        </div>
+        <h1 class="hero-name">
+          Maximiliano<br>
+          <span class="accent">Briggiler</span>
         </h1>
-
-        <p class="hero-sub reveal reveal-d1" data-i18n="hero_sub">
-          I combine <strong>15+ years of SAP ERP expertise</strong> with modern Business Intelligence
-          and AI-driven automation — turning complex financial data into faster closings,
-          cleaner reporting, and strategic insights for leadership.
+        <p class="hero-role" data-i18n-html="hero.role">
+          <strong>15+ años</strong> en Reporting, Controlling y análisis financiero.<br>
+          Hoy, potenciando ese expertise con <strong>IA y automatización</strong>.
         </p>
-
-        <div class="hero-actions reveal reveal-d2">
-          <a href="#contact" class="btn-primary" data-i18n="hero_cta_primary">Let's connect →</a>
-          <a href="#experience" class="btn-secondary" data-i18n="hero_cta_secondary">View experience</a>
-        </div>
-
-        <div class="hero-tags reveal reveal-d3">
-          <span class="pill pill--dark">SAP S/4HANA</span>
-          <span class="pill pill--lime">Material Ledger</span>
-          <span class="pill">Controlling</span>
-          <span class="pill">Finance Data Analysis</span>
-          <span class="pill">SAP Analytics Cloud</span>
-          <span class="pill">AI Process Automation</span>
-          <span class="pill">BI &amp; Reporting</span>
-          <span class="pill">Remote · International</span>
-        </div>
-      </div>
-
-      <!-- Stat card (desktop only) -->
-      <div class="hero-card reveal reveal-d2">
-        <div class="hero-card-header">
-          <span class="caps muted" data-i18n="card_profile">Profile at a glance</span>
-          <span class="pill">CPN · SAP Key User</span>
-        </div>
-        <div class="stat-row">
-          <div class="stat-box">
-            <div class="val" id="counter-years">0</div>
-            <div class="label" data-i18n="card_yrs">Yrs experience</div>
-          </div>
-          <div class="stat-box">
-            <div class="val">3</div>
-            <div class="label" data-i18n="card_industries">Industries</div>
-          </div>
-        </div>
-        <div class="mini-chart">
-          <svg viewBox="0 0 320 56" preserveAspectRatio="none">
-            <polyline points="0,45 40,38 80,32 120,28 160,22 200,18 240,14 280,10 320,8" fill="none" stroke="var(--lime)" stroke-width="2"/>
-            <polyline points="0,56 0,45 40,38 80,32 120,28 160,22 200,18 240,14 280,10 320,8 320,56" fill="url(#grad)" stroke="none"/>
-            <defs>
-              <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="var(--lime)" stop-opacity="0.3"/>
-                <stop offset="100%" stop-color="var(--lime)" stop-opacity="0"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-        <div class="stack-list" id="stackBars">
-          <div class="stack-item">
-            <span class="name">SAP ERP</span>
-            <div class="stack-bar-wrap"><div class="stack-bar" data-w="92" style="width:0%"></div></div>
-            <span class="pct">92%</span>
-          </div>
-          <div class="stack-item">
-            <span class="name">BI / SAC</span>
-            <div class="stack-bar-wrap"><div class="stack-bar" data-w="82" style="width:0%"></div></div>
-            <span class="pct">82%</span>
-          </div>
-          <div class="stack-item">
-            <span class="name">Automation</span>
-            <div class="stack-bar-wrap"><div class="stack-bar" data-w="72" style="width:0%"></div></div>
-            <span class="pct">72%</span>
-          </div>
-          <div class="stack-item">
-            <span class="name" data-i18n="stack_ai">AI</span>
-            <div class="stack-bar-wrap"><div class="stack-bar" data-w="55" style="width:0%"></div></div>
-            <span class="pct">55%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VALUE PROPS -->
-  <section class="section" style="padding-top: 72px; padding-bottom: 100px;">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="caps muted" data-i18n="value_label">What I deliver</span>
-      </div>
-      <h2 class="section-title reveal" data-i18n="value_title">Three core strengths,<br>one integrated profile.</h2>
-      <p class="section-sub reveal reveal-d1" data-i18n="value_sub">
-        Not a pure accountant. Not a programmer. A finance professional who builds
-        the systems that eliminate manual work and sharpen decisions.
-      </p>
-
-      <div class="value-grid">
-        <div class="value-card reveal reveal-d1">
-          <div class="value-icon">📊</div>
-          <h3 data-i18n="v1_title">SAP Controlling & Closing</h3>
-          <p data-i18n="v1_desc">
-            GL, AA, CO-PA, Material Ledger, S/4HANA — from monthly close execution
-            to Key User ownership of full implementation cycles. Cost center rates,
-            variance analysis, and management reporting that leadership can trust.
-          </p>
-        </div>
-        <div class="value-card reveal reveal-d2">
-          <div class="value-icon">🔎</div>
-          <h3 data-i18n="v2_title">Business Intelligence & Reporting</h3>
-          <p data-i18n="v2_desc">
-            End-to-end dashboard development in SAP Analytics Cloud, Power BI, and
-            Looker Studio. P&L, margins, aging, KPIs — translated from raw SAP data
-            into self-service insights that cut report production time in half.
-          </p>
-        </div>
-        <div class="value-card reveal reveal-d3">
-          <div class="value-icon">⚡</div>
-          <h3 data-i18n="v3_title">Artificial Intelligence Applied to Business Processes</h3>
-          <p data-i18n="v3_desc">
-            Ability to implement AI solutions in companies by automating repetitive tasks,
-            optimizing administrative workflows, and improving data analysis, reconciliation,
-            data extraction, and reporting processes. Focused on operational efficiency,
-            time savings, and measurable business ROI.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE TIMELINE -->
-  <section class="section" id="experience">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="caps" style="color:rgba(255,255,255,0.35)" data-i18n="exp_label">Professional track</span>
-      </div>
-      <h2 class="section-title reveal" data-i18n="exp_title">15 years. Three industries.<br>One constant thread.</h2>
-      <p class="section-sub reveal reveal-d1" data-i18n="exp_sub">
-        Dairy · Automotive manufacturing · Retail. SAP at every step.
-      </p>
-
-      <div class="timeline">
-        <nav class="timeline-nav" aria-label="Experience navigation">
-          <button class="tl-btn active" onclick="showEntry('williner')">
-            <span class="tl-year">2017 – Present</span>
-            <span class="tl-co">Williner / Milkaut</span>
-          </button>
-          <button class="tl-btn" onclick="showEntry('mahle')">
-            <span class="tl-year">2008 – 2017</span>
-            <span class="tl-co">MAHLE</span>
-          </button>
-          <button class="tl-btn" onclick="showEntry('megatone')">
-            <span class="tl-year">2003 – 2008</span>
-            <span class="tl-co">Megatone</span>
-          </button>
-        </nav>
-
-        <div class="timeline-entries">
-          <!-- Williner -->
-          <div class="tl-entry active" id="entry-williner">
-            <div class="tl-role" data-i18n="w_role">SAP Key User · BI Specialist · Senior Controller</div>
-            <div class="tl-company" data-i18n="w_company">Sucesores de Alfredo Williner S.A. — Dairy · Acquired by Milkaut</div>
-            <div class="tl-period">2017 — Present · Rafaela, Argentina</div>
-            <div class="tl-body">
-              <div class="tl-item"><span data-i18n="w1">Led <b>SAP S/4HANA (GL/AA) implementation</b> as Key User — configuration, business alignment, QA testing, and post go-live support from 2019 onward.</span></div>
-              <div class="tl-item"><span data-i18n="w2">Built end-to-end <b>dashboards in SAP Analytics Cloud</b>: Sales, Margins, P&amp;L by Profit Center/Customer. Reduced reporting cycle from days to hours.</span></div>
-              <div class="tl-item"><span data-i18n="w3">Full ownership of monthly <b>GL-CO-AA close</b> including KPI calculation (Aging, Turnover, Profitability) and intercompany reconciliation.</span></div>
-              <div class="tl-item"><span data-i18n="w4">Master data governance: MM-SD material setup, GL accounts, OBYC rules, fixed asset registration, and ongoing process improvement QA.</span></div>
-              <div class="tl-item"><span data-i18n="w5">Led <b>AI-enabled process improvement initiatives</b> that streamlined finance workflows, reduced manual effort, and delivered measurable business impact.</span></div>
-            </div>
-            <div class="tl-tags">
-              <span class="tl-tag">SAP S/4HANA</span><span class="tl-tag">Material Ledger</span>
-              <span class="tl-tag">SAP Analytics Cloud</span><span class="tl-tag">CO-PA</span>
-              <span class="tl-tag">Make</span><span class="tl-tag">n8n</span>
-              <span class="tl-tag">Power BI</span><span class="tl-tag">Looker Studio</span>
-            </div>
-          </div>
-
-          <!-- MAHLE -->
-          <div class="tl-entry" id="entry-mahle">
-            <div class="tl-role" data-i18n="m_role">Controlling & Accounting Analyst</div>
-            <div class="tl-company" data-i18n="m_company">MAHLE — Automotive Parts Manufacturing · Multinational</div>
-            <div class="tl-period">2008 — 2017 · Argentina</div>
-            <div class="tl-body">
-              <div class="tl-item"><span data-i18n="m1">Calculated <b>Standard Rates per cost center</b> in SAP for OEM and aftermarket part quotations — direct input to product costing decisions.</span></div>
-              <div class="tl-item"><span data-i18n="m2">Implemented and closed <b>CO-PA monthly</b> (historical and replacement values) with regional reporting vs Budget and Forecast.</span></div>
-              <div class="tl-item"><span data-i18n="m3">Capex control for fixed asset investments, internal inflation adjustments, and monthly <b>Management Book</b> for regional leadership.</span></div>
-              <div class="tl-item"><span data-i18n="m4">Expense tracking, allocation review, intercompany balance reconciliation across MAHLE's regional structure.</span></div>
-            </div>
-            <div class="tl-tags">
-              <span class="tl-tag">SAP CO-PA</span><span class="tl-tag">CO-PC</span>
-              <span class="tl-tag">Standard Costing</span><span class="tl-tag">Capex</span>
-              <span class="tl-tag">Budget vs Actual</span><span class="tl-tag">Intercompany</span>
-              <span class="tl-tag">Management Reporting</span>
-            </div>
-          </div>
-
-          <!-- Megatone -->
-          <div class="tl-entry" id="entry-megatone">
-            <div class="tl-role" data-i18n="mg_role">Accounting Analyst</div>
-            <div class="tl-company" data-i18n="mg_company">Megatone — Retail Chain</div>
-            <div class="tl-period">2003 — 2008 · Argentina</div>
-            <div class="tl-body">
-              <div class="tl-item"><span data-i18n="mg1">Full accounting ownership for two group companies: <b>Tinsa S.A. (Cobro Express)</b> and Avenida A.C.E.</span></div>
-              <div class="tl-item"><span data-i18n="mg2">Accounts payable monitoring, bank reconciliations, and bank debt reconciliation across a multi-entity retail operation.</span></div>
-            </div>
-            <div class="tl-tags">
-              <span class="tl-tag">Full-cycle Accounting</span><span class="tl-tag">AP/AR</span>
-              <span class="tl-tag">Bank Reconciliation</span><span class="tl-tag">Multi-entity</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section class="section" id="skills">
-    <div class="section-inner">
-      <div class="skills-header">
-        <div>
-          <div class="section-label reveal"><span class="caps muted" data-i18n="skills_label">Technical depth</span></div>
-          <h2 class="section-title reveal" data-i18n="skills_title">The full stack.</h2>
-        </div>
-        <p class="section-sub reveal" style="max-width: 360px; margin: 0;" data-i18n="skills_sub">
-          Finance at the core. Technology as the multiplier.
+        <p class="hero-desc" data-i18n="hero.desc">
+          Diseño dashboards en SAP Analytics Cloud, implemento soluciones SAP S/4HANA y automatizo procesos con Make, N8N y Claude. De los datos a las decisiones.
         </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span data-i18n="hero.btn1">Ver perfil en LinkedIn</span>
+          </a>
+          <a class="btn btn-outline" href="mailto:mcbriggiler@gmail.com">
+            <span data-i18n="hero.btn2">Contactame</span>
+          </a>
+        </div>
+        <div class="hero-location">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/></svg>
+          Rafaela, Santa Fe, Argentina
+        </div>
       </div>
 
-      <div class="skills-grid">
-        <div class="skill-group reveal reveal-d1">
-          <div class="skill-group-title" data-i18n="sg_sap">SAP Ecosystem</div>
-          <div class="skill-chip-list">
-            <div class="skill-chip"><span class="skill-name">SAP S/4HANA</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">SAP FI (GL/AA)</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">CO-PA / CO-PC</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">Material Ledger</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="skill_keyuser">Key User / Impl.</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          </div>
+      <div class="hero-photo-col reveal" style="transition-delay:.15s">
+        <div class="photo-frame">
+          <img src="./Foto.jpeg" alt="Maximiliano Briggiler" loading="eager" width="315" height="385" />
+          <div class="photo-deco" aria-hidden="true"></div>
         </div>
+      </div>
 
-        <div class="skill-group reveal reveal-d2">
-          <div class="skill-group-title" data-i18n="sg_bi">BI & Analytics</div>
-          <div class="skill-chip-list">
-            <div class="skill-chip"><span class="skill-name">SAP Analytics Cloud</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">Power BI</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">Looker Studio</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="skill_excel">Excel Advanced</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="skill_datamodel">Data Modeling</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Sobre mí ── -->
+<section id="sobre-mi">
+  <div class="container">
+    <div class="sec-label reveal" data-i18n="about.label">Sobre mí</div>
+    <h2 class="sec-title reveal" data-i18n="about.title">Datos → Decisiones estratégicas</h2>
+    <div class="sobre-grid">
+      <div class="sobre-text reveal" style="transition-delay:.05s">
+        <p data-i18n="about.p1">Con más de 15 años de experiencia, consolidé una sólida trayectoria en el diseño, implementación y optimización de soluciones de reporting y análisis de datos en sectores como Retail, Metalúrgico y Lácteo.</p>
+        <p data-i18n="about.p2">Mi expertise abarca el manejo de SAP (GL, AA, CO-PA) y el desarrollo de dashboards personalizados en SAP Analytics Cloud, Excel y Data Studio. Como Key User SAP S/4HANA, lideré la configuración y adaptaciones necesarias para alinear el sistema con los objetivos de negocio.</p>
+        <p data-i18n="about.p3">Hoy exploro las posibilidades que ofrece la IA para revolucionar la automatización de procesos y la toma de decisiones estratégicas, usando Make, N8N, ChatGPT y Claude.</p>
+      </div>
+      <div class="stats">
+        <div class="stat reveal" style="transition-delay:.1s">
+          <div class="stat-n" data-i18n="stat1.n">15+</div>
+          <div class="stat-l" data-i18n="stat1.l">Años en Reporting y Controlling</div>
         </div>
-
-        <div class="skill-group reveal reveal-d3">
-          <div class="skill-group-title" data-i18n="sg_ai">AI & Business Process Automation</div>
-          <div class="skill-chip-list">
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai1">AI implementation for business</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai2">Workflow automation</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai3">Finance process improvement</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai4">Data extraction & reporting</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai5">Prompt Engineering</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_ai6">ROI-driven automation</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-          </div>
+        <div class="stat reveal" style="transition-delay:.15s">
+          <div class="stat-n" data-i18n="stat2.n">3</div>
+          <div class="stat-l" data-i18n="stat2.l">Sectores: Retail, Metalúrgico y Lácteo</div>
         </div>
-
-        <div class="skill-group reveal reveal-d4">
-          <div class="skill-group-title" data-i18n="sg_fin">Finance & Controlling</div>
-          <div class="skill-chip-list">
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_fin1">Month-End Close</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_fin2">P&L / Margin Analysis</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_fin3">Budget vs Actual</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name" data-i18n="sk_fin4">Capex Control</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div></div></div>
-            <div class="skill-chip"><span class="skill-name">Python (Pandas)</span><div class="skill-level"><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot filled"></div><div class="skill-dot"></div><div class="skill-dot"></div></div></div>
-          </div>
+        <div class="stat reveal" style="transition-delay:.2s">
+          <div class="stat-n" data-i18n="stat3.n">SAP</div>
+          <div class="stat-l" data-i18n="stat3.l">Key User S/4HANA — GL, AA, CO-PA</div>
+        </div>
+        <div class="stat reveal" style="transition-delay:.25s">
+          <div class="stat-n" data-i18n="stat4.n">IA</div>
+          <div class="stat-l" data-i18n="stat4.l">Automatización con Make, N8N y Claude</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- EDUCATION -->
-  <section class="section" id="education">
-    <div class="section-inner">
-      <div class="section-label reveal">
-        <span class="caps muted" data-i18n="edu_label">Formation</span>
-      </div>
-      <h2 class="section-title reveal" data-i18n="edu_title">Academic &amp; continuous learning.</h2>
-
-      <div class="edu-certs">
-        <div class="edu-card reveal reveal-d1">
-          <div style="font-family:var(--mono); font-size:0.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.08em; margin-bottom:20px;" data-i18n="edu_degree_label">Degree</div>
-          <div class="edu-degree" data-i18n="edu_degree_title">Public Accountant Bachelor's Degree</div>
-          <div class="edu-institution" style="margin-top:8px;">Universidad Católica de Santiago del Estero</div>
-          <div class="edu-year">1998 – 2005</div>
+<!-- ── Expertise ── -->
+<section id="expertise">
+  <div class="container">
+    <div class="sec-label reveal" data-i18n="exp.label">Qué hago</div>
+    <h2 class="sec-title reveal" data-i18n="exp.title">Áreas de especialización</h2>
+    <div class="exp-grid">
+      <article class="exp-card reveal" style="transition-delay:.05s">
+        <div class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </div>
+        <h3 data-i18n="exp.c1.title">SAP Analytics Cloud</h3>
+        <p data-i18n="exp.c1.desc">Dashboards interactivos, modelado de datos, integración de fuentes, KPIs y reportes para toma de decisiones estratégicas.</p>
+      </article>
+      <article class="exp-card reveal" style="transition-delay:.1s">
+        <div class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        </div>
+        <h3 data-i18n="exp.c2.title">Controlling &amp; Finanzas</h3>
+        <p data-i18n="exp.c2.desc">P&amp;L por segmento, cierre GL-CO-AA, análisis de desvíos vs. Budget, KPIs financieros mensuales y reportes a gerencia.</p>
+      </article>
+      <article class="exp-card reveal" style="transition-delay:.15s">
+        <div class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h3 data-i18n="exp.c3.title">Automatización e IA</h3>
+        <p data-i18n="exp.c3.desc">Automatización de procesos con Make y N8N. Integración de IA (ChatGPT, Claude) para análisis inteligente y decisiones asistidas.</p>
+      </article>
+      <article class="exp-card reveal" style="transition-delay:.2s">
+        <div class="exp-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3 data-i18n="exp.c4.title">Reporting Estratégico</h3>
+        <p data-i18n="exp.c4.desc">Diseño e implementación end-to-end de soluciones de reporting en sectores retail, metalúrgico y lácteo.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-        <div class="cert-card reveal reveal-d2">
-          <div style="font-family:var(--mono); font-size:0.68rem; color:var(--text-3); text-transform:uppercase; letter-spacing:.08em; margin-bottom:20px;" data-i18n="certs_label">Certifications & Courses</div>
-          <div class="cert-list">
-            <div class="cert-item">
-              <div class="cert-icon">🐍</div>
-              <div>
-                <div class="cert-name" data-i18n="cert1_name">Data Science & Machine Learning with Python</div>
-                <div class="cert-issuer">Udemy · 2022</div>
-              </div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-icon">📐</div>
-              <div>
-                <div class="cert-name" data-i18n="cert2_name">Data Manipulation: Python, Numpy & Pandas</div>
-                <div class="cert-issuer">Udemy · 2022</div>
-              </div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-icon">📊</div>
-              <div>
-                <div class="cert-name">Excel Avanzado: Importación y Análisis de Datos</div>
-                <div class="cert-issuer">UPV · 2021</div>
-              </div>
-            </div>
-            <div class="cert-item">
-              <div class="cert-icon">🤖</div>
-              <div>
-                <div class="cert-name" data-i18n="cert4_name">AI & Business Process Automation</div>
-                <div class="cert-issuer" data-i18n="cert4_issuer">Ongoing · AI Implementation · Workflow Design · Business Efficiency</div>
-              </div>
-            </div>
+<!-- ── Experiencia ── -->
+<section id="experiencia">
+  <div class="container">
+    <div class="sec-label reveal" data-i18n="traj.label">Trayectoria</div>
+    <h2 class="sec-title reveal" data-i18n="traj.title">Experiencia profesional</h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-header">
+          <div class="tl-meta">
+            <h3>Sucesores de Alfredo Williner S.A. (ilolay)</h3>
+            <div class="tl-role" data-i18n="job1.role">Key User SAP · Analista de Contabilidad y Controlling</div>
+            <div class="tl-period" data-i18n="job1.period">Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido</div>
           </div>
+        </div>
+        <div class="tl-body">
+          <ul>
+            <li data-i18n="job1.li1">Implementación SAP GL-AA (feb. 2019 – nov. 2019). Participación en todos los módulos vinculados con GL.</li>
+            <li data-i18n="job1.li2">Desarrollo e implementación end-to-end de dashboards en SAP Analytics Cloud: modelado, integración de fuentes, KPIs y tableros interactivos.</li>
+            <li data-i18n="job1.li3">Procesos de cierre GL-CO-AA. P&amp;L Total empresa, CeBe, Clientes, Vendedores y Oficina de venta.</li>
+            <li data-i18n="job1.li4">Cálculo de KPIs mensuales: plazo de pago/cobro, Aging de clientes, rotación de inventario.</li>
+            <li data-i18n="job1.li5">Parametrización de datos maestros: MM-SD, cuentas GL, OBYC, activos fijos, pruebas en QA.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal" style="transition-delay:.1s">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-header">
+          <div class="tl-meta">
+            <h3>MAHLE</h3>
+            <div class="tl-role" data-i18n="job2.role">Controlling Analyst</div>
+            <div class="tl-period" data-i18n="job2.period">Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe</div>
+          </div>
+        </div>
+        <div class="tl-body">
+          <ul>
+            <li data-i18n="job2.li1">Cálculo de tasas estándar por centro de costo para cotización y valuación de piezas en SAP.</li>
+            <li data-i18n="job2.li2">Cotizaciones mercado original y reposición. Break down de costos, comparativa entre países.</li>
+            <li data-i18n="job2.li3">Book Gerencial mensual con principales KPIs económicos y financieros.</li>
+            <li data-i18n="job2.li4">Reportes de Ventas y Resultados por mercado/segmento a Controlling Regional. Implementación CO-PA.</li>
+            <li data-i18n="job2.li5">Control de Capex vs. Forecast/Budget. Análisis Intercompany. Índice de inflación interna.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal" style="transition-delay:.2s">
+        <div class="tl-dot" aria-hidden="true"></div>
+        <div class="tl-header">
+          <div class="tl-meta">
+            <h3>Megatone — Bazar Avenida S.A.</h3>
+            <div class="tl-role" data-i18n="job3.role">Accounting Analyst</div>
+            <div class="tl-period" data-i18n="job3.period">Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe</div>
+          </div>
+        </div>
+        <div class="tl-body">
+          <ul>
+            <li data-i18n="job3.li1">Contabilidad de dos empresas del grupo: Tinsa S.A. (Cobro Express) y Avenida A.C.E.</li>
+            <li data-i18n="job3.li2">Seguimiento de cuenta corriente de proveedores. Conciliación de deuda bancaria.</li>
+            <li data-i18n="job3.li3">Conciliaciones bancarias y cierre contable mensual.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Herramientas ── -->
+<section id="herramientas">
+  <div class="container">
+    <div class="sec-label reveal" data-i18n="tools.label">Stack</div>
+    <h2 class="sec-title reveal" data-i18n="tools.title">Herramientas &amp; Tecnologías</h2>
+    <div class="tools-wrap reveal" style="transition-delay:.1s">
+      <div class="tool-group">
+        <div class="tool-group-label" data-i18n="tools.g1">SAP / ERP</div>
+        <div class="tags">
+          <span class="tag">SAP S/4HANA</span>
+          <span class="tag">SAP GL</span>
+          <span class="tag">SAP AA</span>
+          <span class="tag">SAP CO-PA</span>
+          <span class="tag">SAP MM</span>
+          <span class="tag">SAP SD</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label" data-i18n="tools.g2">BI / Analytics</div>
+        <div class="tags">
+          <span class="tag">SAP Analytics Cloud (SAC)</span>
+          <span class="tag">Google Data Studio</span>
+          <span class="tag">Microsoft Excel (avanzado)</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label" data-i18n="tools.g3">Automatización e IA</div>
+        <div class="tags">
+          <span class="tag">Make (Integromat)</span>
+          <span class="tag">N8N</span>
+          <span class="tag">ChatGPT</span>
+          <span class="tag">Claude (Anthropic)</span>
+        </div>
+      </div>
+      <div class="tool-group">
+        <div class="tool-group-label" data-i18n="tools.g4">Idiomas</div>
+        <div class="tags">
+          <span class="tag" data-i18n="tools.lang1">Español (Nativo)</span>
+          <span class="tag" data-i18n="tools.lang2">Inglés (Competencia profesional)</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section class="section" id="contact">
-    <div class="section-inner">
-      <div class="contact-inner">
-        <div>
-          <div class="section-label reveal">
-            <span class="caps" style="color:rgba(255,255,255,0.3)" data-i18n="contact_label">Let's connect</span>
-          </div>
-          <h2 class="section-title reveal" data-i18n="contact_title">Interested in conversations<br>that create value.</h2>
-          <p class="section-sub reveal reveal-d1" data-i18n="contact_sub">
-            Interested in conversations around Controlling, Finance Data Analysis, SAP projects,
-            BI, and AI-driven process improvement. I enjoy collaborating on initiatives that
-            improve reporting, automate repetitive work, and turn financial data into better
-            business decisions.
-          </p>
-
-          <div class="open-to reveal reveal-d2">
-            <span class="open-chip highlight" data-i18n="chip_remote1">Remote</span>
-            <span class="open-chip highlight" data-i18n="chip_remote2">International Collaboration</span>
-            <span class="open-chip highlight" data-i18n="chip_sap">SAP Projects</span>
-            <span class="open-chip" data-i18n="chip_fin">Finance Process Improvement</span>
-            <span class="open-chip" data-i18n="chip_bi">BI / Reporting</span>
-            <span class="open-chip" data-i18n="chip_ai">AI & Business Automation</span>
-          </div>
+<!-- ── Educación & Certificaciones ── -->
+<section id="educacion">
+  <div class="container">
+    <div class="sec-label reveal" data-i18n="edu.label">Formación</div>
+    <h2 class="sec-title reveal" data-i18n="edu.title">Educación &amp; Certificaciones</h2>
+    <div class="edu-certs-grid">
+      <div>
+        <div class="block-title reveal" data-i18n="edu.block1">Educación</div>
+        <div class="edu-item reveal" style="transition-delay:.05s">
+          <h3 data-i18n="edu.deg1">Contador Público</h3>
+          <div class="inst">Universidad Católica de Santiago del Estero</div>
+          <div class="yr">1998 – 2005</div>
         </div>
-
-        <div class="contact-card reveal reveal-d2">
-          <div class="contact-row">
-            <div class="contact-icon">✉️</div>
-            <div>
-              <span class="contact-label">Email</span>
-              <span class="contact-value"><a href="mailto:mcbriggiler@gmail.com">mcbriggiler@gmail.com</a></span>
-            </div>
+        <div class="edu-item reveal" style="transition-delay:.1s">
+          <h3 data-i18n="edu.deg2">Especialización en Costos y Gestión Empresarial</h3>
+          <div class="inst">Universidad Nacional del Litoral</div>
+          <div class="yr">2018</div>
+        </div>
+      </div>
+      <div>
+        <div class="block-title reveal" data-i18n="edu.block2">Certificaciones Anthropic</div>
+        <div class="cert-card reveal" style="transition-delay:.05s">
+          <h3>Claude 101</h3>
+          <div class="cert-foot">
+            <span class="cert-issuer">Anthropic</span>
+            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
           </div>
-          <div class="contact-row">
-            <div class="contact-icon">💼</div>
-            <div>
-              <span class="contact-label">LinkedIn</span>
-              <span class="contact-value">
-                <a href="https://linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">/in/maximiliano-briggiler →</a>
-              </span>
-            </div>
+          <div class="cert-id">ID: 9vn44b28ipy7</div>
+        </div>
+        <div class="cert-card reveal" style="transition-delay:.1s">
+          <h3>Introduction to Subagents</h3>
+          <div class="cert-foot">
+            <span class="cert-issuer">Anthropic</span>
+            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
           </div>
-          <div class="contact-row">
-            <div class="contact-icon">📍</div>
-            <div>
-              <span class="contact-label" data-i18n="contact_loc_label">Location</span>
-              <span class="contact-value">Rafaela, Santa Fe, Argentina 🇦🇷</span>
-            </div>
+          <div class="cert-id">ID: axanesehgvmj</div>
+        </div>
+        <div class="cert-card reveal" style="transition-delay:.15s">
+          <h3>Introduction to Agent Skills</h3>
+          <div class="cert-foot">
+            <span class="cert-issuer">Anthropic</span>
+            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
           </div>
-          <div class="contact-row">
-            <div class="contact-icon">🌐</div>
-            <div>
-              <span class="contact-label" data-i18n="contact_lang_label">Languages</span>
-              <span class="contact-value" data-i18n="contact_lang_val">Spanish (native) · English (B2 / working proficiency)</span>
-            </div>
+          <div class="cert-id">ID: p39cbwosk4h9</div>
+        </div>
+        <div class="cert-card reveal" style="transition-delay:.2s">
+          <h3>Introduction to Claude Cowork</h3>
+          <div class="cert-foot">
+            <span class="cert-issuer">Anthropic</span>
+            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
           </div>
-          <div style="margin-top: 20px;">
-            <a href="mailto:mcbriggiler@gmail.com" class="btn-primary" style="width:100%; justify-content:center;" data-i18n="contact_btn">
-              Send a message →
-            </a>
-          </div>
+          <div class="cert-id">ID: tivmauuokr4m</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-copy">
-      <b>Maximiliano Briggiler</b> — Finance &amp; Controlling · SAP · BI · AI
-    </span>
-    <span class="footer-copy">
-      Rafaela, Argentina · 2025
-    </span>
-  </footer>
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-kicker reveal" data-i18n="cta.kicker">Conectemos</div>
+      <h2 class="cta-title reveal" data-i18n="cta.title">¿Tenés un proyecto donde estos skills hacen diferencia?</h2>
+      <p class="cta-sub reveal" style="transition-delay:.1s" data-i18n="cta.sub">Reporting, SAP Analytics Cloud, automatización o IA aplicada a finanzas y controlling. Hablemos.</p>
+      <div class="cta-btns reveal" style="transition-delay:.15s">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <span data-i18n="cta.btn1">Ver LinkedIn</span>
+        </a>
+        <a class="btn btn-outline" href="mailto:mcbriggiler@gmail.com">
+          <span data-i18n="cta.btn2">mcbriggiler@gmail.com</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    /* ============================
-       TRANSLATIONS
-    ============================ */
-    const i18n = {
-      en: {
-        nav_about: "About",
-        nav_experience: "Experience",
-        nav_skills: "Skills",
-        nav_education: "Education",
-        nav_contact: "Contact",
-        nav_cta: "Get in touch →",
-        hero_title_line3: "Decisions that matter.",
-        hero_sub: `I combine <strong>15+ years of SAP ERP expertise</strong> with modern Business Intelligence and AI-driven automation — turning complex financial data into faster closings, cleaner reporting, and strategic insights for leadership.`,
-        hero_cta_primary: "Let's connect →",
-        hero_cta_secondary: "View experience",
-        card_profile: "Profile at a glance",
-        card_yrs: "Yrs experience",
-        card_industries: "Industries",
-        value_label: "What I deliver",
-        value_title: "Three core strengths,<br>one integrated profile.",
-        value_sub: "Not a pure accountant. Not a programmer. A finance professional who builds the systems that eliminate manual work and sharpen decisions.",
-        v1_title: "SAP Controlling & Closing",
-        v1_desc: "GL, AA, CO-PA, Material Ledger, S/4HANA — from monthly close execution to Key User ownership of full implementation cycles. Cost center rates, variance analysis, and management reporting that leadership can trust.",
-        v2_title: "Business Intelligence & Reporting",
-        v2_desc: "End-to-end dashboard development in SAP Analytics Cloud, Power BI, and Looker Studio. P&L, margins, aging, KPIs — translated from raw SAP data into self-service insights that cut report production time in half.",
-        v3_title: "Artificial Intelligence Applied to Business Processes",
-        v3_desc: "Ability to implement AI solutions in companies by automating repetitive tasks, optimizing administrative workflows, and improving data analysis, reconciliation, data extraction, and reporting processes. Focused on operational efficiency, time savings, and measurable business ROI.",
-        exp_label: "Professional track",
-        exp_title: "15 years. Three industries.<br>One constant thread.",
-        exp_sub: "Dairy · Automotive manufacturing · Retail. SAP at every step.",
-        w_role: "SAP Key User · BI Specialist · Senior Controller",
-        w_company: "Sucesores de Alfredo Williner S.A. — Dairy · Acquired by Milkaut",
-        w1: "Led <b>SAP S/4HANA (GL/AA) implementation</b> as Key User — configuration, business alignment, QA testing, and post go-live support from 2019 onward.",
-        w2: "Built end-to-end <b>dashboards in SAP Analytics Cloud</b>: Sales, Margins, P&L by Profit Center/Customer. Reduced reporting cycle from days to hours.",
-        w3: "Full ownership of monthly <b>GL-CO-AA close</b> including KPI calculation (Aging, Turnover, Profitability) and intercompany reconciliation.",
-        w4: "Master data governance: MM-SD material setup, GL accounts, OBYC rules, fixed asset registration, and ongoing process improvement QA.",
-        w5: "Led <b>AI-enabled process improvement initiatives</b> that streamlined finance workflows, reduced manual effort, and delivered measurable business impact.",
-        m_role: "Controlling & Accounting Analyst",
-        m_company: "MAHLE — Automotive Parts Manufacturing · Multinational",
-        m1: "Calculated <b>Standard Rates per cost center</b> in SAP for OEM and aftermarket part quotations — direct input to product costing decisions.",
-        m2: "Implemented and closed <b>CO-PA monthly</b> (historical and replacement values) with regional reporting vs Budget and Forecast.",
-        m3: "Capex control for fixed asset investments, internal inflation adjustments, and monthly <b>Management Book</b> for regional leadership.",
-        m4: "Expense tracking, allocation review, intercompany balance reconciliation across MAHLE's regional structure.",
-        mg_role: "Accounting Analyst",
-        mg_company: "Megatone — Retail Chain",
-        mg1: "Full accounting ownership for two group companies: <b>Tinsa S.A. (Cobro Express)</b> and Avenida A.C.E.",
-        mg2: "Accounts payable monitoring, bank reconciliations, and bank debt reconciliation across a multi-entity retail operation.",
-        skills_label: "Technical depth",
-        skills_title: "The full stack.",
-        skills_sub: "Finance at the core. Technology as the multiplier.",
-        sg_sap: "SAP Ecosystem",
-        sg_bi: "BI & Analytics",
-        sg_ai: "AI & Business Process Automation",
-        sg_fin: "Finance & Controlling",
-        skill_keyuser: "Key User / Impl.",
-        skill_excel: "Excel Advanced",
-        skill_datamodel: "Data Modeling",
-        sk_ai1: "AI implementation for business",
-        sk_ai2: "Workflow automation",
-        sk_ai3: "Finance process improvement",
-        sk_ai4: "Data extraction & reporting",
-        sk_ai5: "Prompt Engineering",
-        sk_ai6: "ROI-driven automation",
-        sk_fin1: "Month-End Close",
-        sk_fin2: "P&L / Margin Analysis",
-        sk_fin3: "Budget vs Actual",
-        sk_fin4: "Capex Control",
-        edu_label: "Formation",
-        edu_title: "Academic & continuous learning.",
-        edu_degree_label: "Degree",
-        edu_degree_title: "Public Accountant Bachelor's Degree",
-        certs_label: "Certifications & Courses",
-        cert1_name: "Data Science & Machine Learning with Python",
-        cert2_name: "Data Manipulation: Python, Numpy & Pandas",
-        cert4_name: "AI & Business Process Automation",
-        cert4_issuer: "Ongoing · AI Implementation · Workflow Design · Business Efficiency",
-        stack_ai: "AI",
-        contact_title: "Interested in conversations<br>that create value.",
-        contact_sub: "Interested in conversations around Controlling, Finance Data Analysis, SAP projects, BI, and AI-driven process improvement. I enjoy collaborating on initiatives that improve reporting, automate repetitive work, and turn financial data into better business decisions.",
-        chip_remote1: "Remote",
-        chip_remote2: "International Collaboration",
-        chip_sap: "SAP Projects",
-        chip_fin: "Finance Process Improvement",
-        chip_bi: "BI / Reporting",
-        chip_ai: "AI & Business Automation",
-        contact_loc_label: "Location",
-        contact_lang_label: "Languages",
-        contact_lang_val: "Spanish (native) · English (B2 / working proficiency)",
-        contact_btn: "Send a message →"
-      },
-      es: {
-        nav_about: "Perfil",
-        nav_experience: "Experiencia",
-        nav_skills: "Habilidades",
-        nav_education: "Formación",
-        nav_contact: "Contacto",
-        nav_cta: "Contactar →",
-        hero_title_line3: "Decisiones que importan.",
-        hero_sub: `Combino <strong>más de 15 años de experiencia en SAP ERP</strong> con Business Intelligence moderno y automatización impulsada por IA — convirtiendo datos financieros complejos en cierres más rápidos, reportes más claros e insights estratégicos para la dirección.`,
-        hero_cta_primary: "Conectemos →",
-        hero_cta_secondary: "Ver experiencia",
-        card_profile: "Perfil de un vistazo",
-        card_yrs: "Años de experiencia",
-        card_industries: "Industrias",
-        value_label: "Qué aporto",
-        value_title: "Tres fortalezas clave,<br>un perfil integrado.",
-        value_sub: "No soy un contador puro. Ni un programador. Soy un profesional financiero que construye los sistemas que eliminan el trabajo manual y agilizan las decisiones.",
-        v1_title: "SAP Controlling & Cierre",
-        v1_desc: "GL, AA, CO-PA, Material Ledger, S/4HANA — desde la ejecución del cierre mensual hasta la responsabilidad como Key User en ciclos completos de implementación. Tasas por centro de costos, análisis de varianzas y reporting gerencial en el que la dirección puede confiar.",
-        v2_title: "Business Intelligence & Reporting",
-        v2_desc: "Desarrollo end-to-end de dashboards en SAP Analytics Cloud, Power BI y Looker Studio. P&L, márgenes, aging, KPIs — traducidos desde datos SAP en bruto a insights de autoservicio que reducen el tiempo de producción de reportes a la mitad.",
-        v3_title: "Inteligencia Artificial Aplicada a Procesos de Negocio",
-        v3_desc: "Capacidad para implementar soluciones de IA en empresas automatizando tareas repetitivas, optimizando flujos de trabajo administrativos y mejorando procesos de análisis de datos, conciliación, extracción y reporting. Enfocado en eficiencia operativa, ahorro de tiempo y ROI de negocio medible.",
-        exp_label: "Trayectoria profesional",
-        exp_title: "15 años. Tres industrias.<br>Un hilo constante.",
-        exp_sub: "Lácteos · Manufactura automotriz · Retail. SAP en cada etapa.",
-        w_role: "SAP Key User · Especialista BI · Controller Senior",
-        w_company: "Sucesores de Alfredo Williner S.A. — Lácteos · Adquirida por Milkaut",
-        w1: "Lideré la <b>implementación SAP S/4HANA (GL/AA)</b> como Key User — configuración, alineación de negocio, testing QA y soporte post go-live desde 2019.",
-        w2: "Construí <b>dashboards end-to-end en SAP Analytics Cloud</b>: Ventas, Márgenes, P&L por Centro de Beneficio/Cliente. Reduje el ciclo de reporting de días a horas.",
-        w3: "Responsabilidad total del cierre mensual <b>GL-CO-AA</b> incluyendo cálculo de KPIs (Aging, Rotación, Rentabilidad) y conciliación intercompany.",
-        w4: "Gobierno de datos maestros: configuración de materiales MM-SD, cuentas GL, reglas OBYC, registro de activos fijos y mejora continua de procesos.",
-        w5: "Lideré <b>iniciativas de mejora de procesos habilitadas por IA</b> que optimizaron los flujos de trabajo financieros, redujeron el esfuerzo manual y generaron un impacto de negocio medible.",
-        m_role: "Analista de Controlling y Contabilidad",
-        m_company: "MAHLE — Fabricación de Autopartes · Multinacional",
-        m1: "Calculé <b>tasas estándar por centro de costos</b> en SAP para cotizaciones OEM y aftermarket — input directo a decisiones de costeo de productos.",
-        m2: "Implementé y cerré el <b>CO-PA mensual</b> (valores históricos y de reposición) con reporting regional vs Presupuesto y Forecast.",
-        m3: "Control de Capex para inversiones en activos fijos, ajustes por inflación interna y <b>Management Book</b> mensual para la dirección regional.",
-        m4: "Seguimiento de gastos, revisión de asignaciones y conciliación de saldos intercompany en la estructura regional de MAHLE.",
-        mg_role: "Analista Contable",
-        mg_company: "Megatone — Cadena de Retail",
-        mg1: "Responsabilidad contable total de dos empresas del grupo: <b>Tinsa S.A. (Cobro Express)</b> y Avenida A.C.E.",
-        mg2: "Seguimiento de cuentas a pagar, conciliaciones bancarias y conciliación de deuda bancaria en una operación retail multi-entidad.",
-        skills_label: "Profundidad técnica",
-        skills_title: "El stack completo.",
-        skills_sub: "Finanzas en el núcleo. Tecnología como multiplicador.",
-        sg_sap: "Ecosistema SAP",
-        sg_bi: "BI & Analítica",
-        sg_ai: "IA & Automatización de Procesos",
-        sg_fin: "Finanzas & Controlling",
-        skill_keyuser: "Key User / Impl.",
-        skill_excel: "Excel Avanzado",
-        skill_datamodel: "Modelado de Datos",
-        sk_ai1: "Implementación de IA en empresas",
-        sk_ai2: "Automatización de flujos de trabajo",
-        sk_ai3: "Mejora de procesos financieros",
-        sk_ai4: "Extracción de datos y reporting",
-        sk_ai5: "Ingeniería de Prompts",
-        sk_ai6: "Automatización orientada al ROI",
-        sk_fin1: "Cierre Mensual",
-        sk_fin2: "P&L / Análisis de Márgenes",
-        sk_fin3: "Real vs Presupuesto",
-        sk_fin4: "Control de Capex",
-        edu_label: "Formación",
-        edu_title: "Académica y aprendizaje continuo.",
-        edu_degree_label: "Título",
-        edu_degree_title: "Contador Público Nacional",
-        certs_label: "Certificaciones y Cursos",
-        cert1_name: "Ciencia de Datos & Machine Learning con Python",
-        cert2_name: "Manipulación de Datos: Python, Numpy & Pandas",
-        cert4_name: "IA & Automatización de Procesos de Negocio",
-        cert4_issuer: "En curso · Implementación IA · Diseño de Flujos · Eficiencia Empresarial",
-        stack_ai: "IA",
-        contact_title: "Interesado en conversaciones<br>que generen valor.",
-        contact_sub: "Abierto a conversaciones sobre Controlling, Análisis de Datos Financieros, proyectos SAP, BI y mejora de procesos con IA. Me gusta colaborar en iniciativas que mejoren el reporting, automaticen trabajo repetitivo y conviertan datos financieros en mejores decisiones de negocio.",
-        chip_remote1: "Remoto",
-        chip_remote2: "Colaboración Internacional",
-        chip_sap: "Proyectos SAP",
-        chip_fin: "Mejora de Procesos Financieros",
-        chip_bi: "BI / Reporting",
-        chip_ai: "IA & Automatización de Negocio",
-        contact_loc_label: "Ubicación",
-        contact_lang_label: "Idiomas",
-        contact_lang_val: "Español (nativo) · Inglés (B2 / nivel profesional)",
-        contact_btn: "Enviar un mensaje →"
-      },
-      fr: {
-        nav_about: "Profil",
-        nav_experience: "Expérience",
-        nav_skills: "Compétences",
-        nav_education: "Formation",
-        nav_contact: "Contact",
-        nav_cta: "Me contacter →",
-        hero_title_line3: "Des décisions qui comptent.",
-        hero_sub: `Je combine <strong>plus de 15 ans d'expertise SAP ERP</strong> avec la Business Intelligence moderne et l'automatisation par IA — transformant des données financières complexes en clôtures plus rapides, des reportings plus clairs et des insights stratégiques pour la direction.`,
-        hero_cta_primary: "Connectons-nous →",
-        hero_cta_secondary: "Voir l'expérience",
-        card_profile: "Profil en un coup d'œil",
-        card_yrs: "Ans d'expérience",
-        card_industries: "Secteurs",
-        value_label: "Ce que j'apporte",
-        value_title: "Trois forces clés,<br>un profil intégré.",
-        value_sub: "Ni comptable pur. Ni développeur. Un professionnel financier qui construit les systèmes qui éliminent le travail manuel et affûtent les décisions.",
-        v1_title: "SAP Controlling & Clôture",
-        v1_desc: "GL, AA, CO-PA, Material Ledger, S/4HANA — de l'exécution de la clôture mensuelle à la responsabilité Key User dans les cycles d'implémentation complets. Taux par centre de coûts, analyse des écarts et reporting de gestion fiable pour la direction.",
-        v2_title: "Business Intelligence & Reporting",
-        v2_desc: "Développement end-to-end de tableaux de bord dans SAP Analytics Cloud, Power BI et Looker Studio. P&L, marges, aging, KPIs — traduits depuis les données SAP brutes en insights en libre-service qui réduisent de moitié le temps de production des rapports.",
-        v3_title: "Intelligence Artificielle Appliquée aux Processus Métier",
-        v3_desc: "Capacité à déployer des solutions d'IA en entreprise en automatisant les tâches répétitives, en optimisant les flux de travail administratifs et en améliorant les processus d'analyse de données, de rapprochement, d'extraction et de reporting. Focalisé sur l'efficacité opérationnelle, le gain de temps et le ROI mesurable.",
-        exp_label: "Parcours professionnel",
-        exp_title: "15 ans. Trois secteurs.<br>Un fil conducteur.",
-        exp_sub: "Laitier · Industrie automobile · Distribution. SAP à chaque étape.",
-        w_role: "SAP Key User · Spécialiste BI · Contrôleur Senior",
-        w_company: "Sucesores de Alfredo Williner S.A. — Laitier · Acquis par Milkaut",
-        w1: "Piloté l'<b>implémentation SAP S/4HANA (GL/AA)</b> en tant que Key User — configuration, alignement métier, tests QA et support post go-live depuis 2019.",
-        w2: "Construit des <b>tableaux de bord end-to-end dans SAP Analytics Cloud</b> : Ventes, Marges, P&L par Centre de Profit/Client. Réduit le cycle de reporting de jours à heures.",
-        w3: "Responsabilité totale de la clôture mensuelle <b>GL-CO-AA</b> incluant le calcul des KPIs (Aging, Rotation, Rentabilité) et la réconciliation intercompany.",
-        w4: "Gouvernance des données de référence : configuration matières MM-SD, comptes GL, règles OBYC, immatriculation d'actifs et amélioration continue des processus.",
-        w5: "Piloté des <b>initiatives d'amélioration des processus par l'IA</b> qui ont rationalisé les flux de travail financiers, réduit les efforts manuels et produit un impact métier mesurable.",
-        m_role: "Analyste Contrôle de Gestion & Comptabilité",
-        m_company: "MAHLE — Fabrication de Pièces Automobiles · Multinationale",
-        m1: "Calculé les <b>taux standards par centre de coûts</b> dans SAP pour les devis OEM et aftermarket — contribution directe aux décisions de coûts de produits.",
-        m2: "Mis en œuvre et clôturé le <b>CO-PA mensuel</b> (valeurs historiques et de remplacement) avec reporting régional vs Budget et Forecast.",
-        m3: "Contrôle Capex pour les investissements en actifs, ajustements d'inflation interne et <b>Management Book</b> mensuel pour la direction régionale.",
-        m4: "Suivi des dépenses, révision des allocations et réconciliation des soldes intercompany au sein de la structure régionale MAHLE.",
-        mg_role: "Analyste Comptable",
-        mg_company: "Megatone — Chaîne de Distribution",
-        mg1: "Responsabilité comptable complète de deux entreprises du groupe : <b>Tinsa S.A. (Cobro Express)</b> et Avenida A.C.E.",
-        mg2: "Suivi des comptes fournisseurs, rapprochements bancaires et réconciliation de la dette bancaire dans une opération multi-entités.",
-        skills_label: "Profondeur technique",
-        skills_title: "Le stack complet.",
-        skills_sub: "La finance au cœur. La technologie comme multiplicateur.",
-        sg_sap: "Écosystème SAP",
-        sg_bi: "BI & Analytique",
-        sg_ai: "IA & Automatisation des Processus",
-        sg_fin: "Finance & Contrôle de Gestion",
-        skill_keyuser: "Key User / Impl.",
-        skill_excel: "Excel Avancé",
-        skill_datamodel: "Modélisation de Données",
-        sk_ai1: "Implémentation IA en entreprise",
-        sk_ai2: "Automatisation des flux de travail",
-        sk_ai3: "Amélioration des processus financiers",
-        sk_ai4: "Extraction de données & reporting",
-        sk_ai5: "Ingénierie de Prompts",
-        sk_ai6: "Automatisation orientée ROI",
-        sk_fin1: "Clôture Mensuelle",
-        sk_fin2: "P&L / Analyse des Marges",
-        sk_fin3: "Réel vs Budget",
-        sk_fin4: "Contrôle Capex",
-        edu_label: "Formation",
-        edu_title: "Académique & apprentissage continu.",
-        edu_degree_label: "Diplôme",
-        edu_degree_title: "Expert-Comptable — Licence",
-        certs_label: "Certifications & Cours",
-        cert1_name: "Data Science & Machine Learning avec Python",
-        cert2_name: "Manipulation de Données : Python, Numpy & Pandas",
-        cert4_name: "IA & Automatisation des Processus Métier",
-        cert4_issuer: "En cours · Implémentation IA · Conception de Flux · Efficacité Business",
-        stack_ai: "IA",
-        contact_title: "Ouvert aux échanges<br>qui créent de la valeur.",
-        contact_sub: "Ouvert aux conversations autour du Contrôle de Gestion, de l'Analyse de Données Financières, des projets SAP, de la BI et de l'amélioration des processus par IA. J'aime collaborer sur des initiatives qui améliorent le reporting, automatisent le travail répétitif et transforment les données financières en meilleures décisions.",
-        chip_remote1: "À Distance",
-        chip_remote2: "Collaboration Internationale",
-        chip_sap: "Projets SAP",
-        chip_fin: "Amélioration des Processus Finance",
-        chip_bi: "BI / Reporting",
-        chip_ai: "IA & Automatisation Métier",
-        contact_loc_label: "Localisation",
-        contact_lang_label: "Langues",
-        contact_lang_val: "Espagnol (natif) · Anglais (B2 / niveau professionnel)",
-        contact_btn: "Envoyer un message →"
-      }
-    };
+<!-- ── Footer ── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-copy" data-i18n="footer.copy">© 2026 Maximiliano Briggiler · Rafaela, Argentina</span>
+      <div class="footer-links">
+        <a href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:mcbriggiler@gmail.com">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-    let currentLang = 'en';
+<script>
+/* ── Translations ── */
+var T = {
+  es: {
+    'nav.about': 'Sobre mí', 'nav.expertise': 'Expertise', 'nav.experience': 'Experiencia',
+    'nav.tools': 'Herramientas', 'nav.cta': 'LinkedIn →',
+    'mob.about': 'Sobre mí', 'mob.expertise': 'Expertise', 'mob.experience': 'Experiencia',
+    'mob.tools': 'Herramientas', 'mob.contact': 'Contacto',
+    'hero.kicker': 'SAP Analytics Cloud Developer',
+    'hero.role': '<strong>15+ años</strong> en Reporting, Controlling y análisis financiero.<br>Hoy, potenciando ese expertise con <strong>IA y automatización</strong>.',
+    'hero.desc': 'Diseño dashboards en SAP Analytics Cloud, implemento soluciones SAP S/4HANA y automatizo procesos con Make, N8N y Claude. De los datos a las decisiones.',
+    'hero.btn1': 'Ver perfil en LinkedIn', 'hero.btn2': 'Contactame',
+    'about.label': 'Sobre mí', 'about.title': 'Datos → Decisiones estratégicas',
+    'about.p1': 'Con más de 15 años de experiencia, consolidé una sólida trayectoria en el diseño, implementación y optimización de soluciones de reporting y análisis de datos en sectores como Retail, Metalúrgico y Lácteo.',
+    'about.p2': 'Mi expertise abarca el manejo de SAP (GL, AA, CO-PA) y el desarrollo de dashboards personalizados en SAP Analytics Cloud, Excel y Data Studio. Como Key User SAP S/4HANA, lideré la configuración y adaptaciones necesarias para alinear el sistema con los objetivos de negocio.',
+    'about.p3': 'Hoy exploro las posibilidades que ofrece la IA para revolucionar la automatización de procesos y la toma de decisiones estratégicas, usando Make, N8N, ChatGPT y Claude.',
+    'stat1.n': '15+', 'stat1.l': 'Años en Reporting y Controlling',
+    'stat2.n': '3',   'stat2.l': 'Sectores: Retail, Metalúrgico y Lácteo',
+    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
+    'stat4.n': 'IA',  'stat4.l': 'Automatización con Make, N8N y Claude',
+    'exp.label': 'Qué hago', 'exp.title': 'Áreas de especialización',
+    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': 'Dashboards interactivos, modelado de datos, integración de fuentes, KPIs y reportes para toma de decisiones estratégicas.',
+    'exp.c2.title': 'Controlling & Finanzas', 'exp.c2.desc': 'P&L por segmento, cierre GL-CO-AA, análisis de desvíos vs. Budget, KPIs financieros mensuales y reportes a gerencia.',
+    'exp.c3.title': 'Automatización e IA', 'exp.c3.desc': 'Automatización de procesos con Make y N8N. Integración de IA (ChatGPT, Claude) para análisis inteligente y decisiones asistidas.',
+    'exp.c4.title': 'Reporting Estratégico', 'exp.c4.desc': 'Diseño e implementación end-to-end de soluciones de reporting en sectores retail, metalúrgico y lácteo.',
+    'traj.label': 'Trayectoria', 'traj.title': 'Experiencia profesional',
+    'job1.role': 'Key User SAP · Analista de Contabilidad y Controlling',
+    'job1.period': 'Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido',
+    'job1.li1': 'Implementación SAP GL-AA (feb. 2019 – nov. 2019). Participación en todos los módulos vinculados con GL.',
+    'job1.li2': 'Desarrollo e implementación end-to-end de dashboards en SAP Analytics Cloud: modelado, integración de fuentes, KPIs y tableros interactivos.',
+    'job1.li3': 'Procesos de cierre GL-CO-AA. P&L Total empresa, CeBe, Clientes, Vendedores y Oficina de venta.',
+    'job1.li4': 'Cálculo de KPIs mensuales: plazo de pago/cobro, Aging de clientes, rotación de inventario.',
+    'job1.li5': 'Parametrización de datos maestros: MM-SD, cuentas GL, OBYC, activos fijos, pruebas en QA.',
+    'job2.role': 'Controlling Analyst',
+    'job2.period': 'Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe',
+    'job2.li1': 'Cálculo de tasas estándar por centro de costo para cotización y valuación de piezas en SAP.',
+    'job2.li2': 'Cotizaciones mercado original y reposición. Break down de costos, comparativa entre países.',
+    'job2.li3': 'Book Gerencial mensual con principales KPIs económicos y financieros.',
+    'job2.li4': 'Reportes de Ventas y Resultados por mercado/segmento a Controlling Regional. Implementación CO-PA.',
+    'job2.li5': 'Control de Capex vs. Forecast/Budget. Análisis Intercompany. Índice de inflación interna.',
+    'job3.role': 'Accounting Analyst',
+    'job3.period': 'Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe',
+    'job3.li1': 'Contabilidad de dos empresas del grupo: Tinsa S.A. (Cobro Express) y Avenida A.C.E.',
+    'job3.li2': 'Seguimiento de cuenta corriente de proveedores. Conciliación de deuda bancaria.',
+    'job3.li3': 'Conciliaciones bancarias y cierre contable mensual.',
+    'tools.label': 'Stack', 'tools.title': 'Herramientas & Tecnologías',
+    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'Automatización e IA', 'tools.g4': 'Idiomas',
+    'tools.lang1': 'Español (Nativo)', 'tools.lang2': 'Inglés (Competencia profesional)',
+    'edu.label': 'Formación', 'edu.title': 'Educación & Certificaciones',
+    'edu.block1': 'Educación', 'edu.block2': 'Certificaciones Anthropic',
+    'edu.deg1': 'Contador Público', 'edu.deg2': 'Especialización en Costos y Gestión Empresarial',
+    'cert.date': 'Mayo 2026',
+    'cta.kicker': 'Conectemos',
+    'cta.title': '¿Tenés un proyecto donde estos skills hacen diferencia?',
+    'cta.sub': 'Reporting, SAP Analytics Cloud, automatización o IA aplicada a finanzas y controlling. Hablemos.',
+    'cta.btn1': 'Ver LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
+    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentina'
+  },
 
-    function setLang(lang) {
-      currentLang = lang;
-      const t = i18n[lang];
+  en: {
+    'nav.about': 'About', 'nav.expertise': 'Expertise', 'nav.experience': 'Experience',
+    'nav.tools': 'Tools', 'nav.cta': 'LinkedIn →',
+    'mob.about': 'About', 'mob.expertise': 'Expertise', 'mob.experience': 'Experience',
+    'mob.tools': 'Tools', 'mob.contact': 'Contact',
+    'hero.kicker': 'SAP Analytics Cloud Developer',
+    'hero.role': '<strong>15+ years</strong> in Reporting, Controlling and financial analysis.<br>Now, enhancing that expertise with <strong>AI and automation</strong>.',
+    'hero.desc': 'I design dashboards in SAP Analytics Cloud, implement SAP S/4HANA solutions and automate processes with Make, N8N and Claude. From data to decisions.',
+    'hero.btn1': 'View LinkedIn profile', 'hero.btn2': 'Contact me',
+    'about.label': 'About me', 'about.title': 'Data → Strategic Decisions',
+    'about.p1': 'With over 15 years of experience, I have built a solid career designing, implementing and optimizing reporting and data analysis solutions across Retail, Metallurgical and Dairy sectors.',
+    'about.p2': 'My expertise covers SAP (GL, AA, CO-PA) and the development of custom dashboards in SAP Analytics Cloud, Excel and Data Studio. As SAP S/4HANA Key User, I led the configuration and adaptations needed to align the system with business objectives.',
+    'about.p3': 'Today I explore the possibilities offered by AI to revolutionize process automation and strategic decision-making, using Make, N8N, ChatGPT and Claude.',
+    'stat1.n': '15+', 'stat1.l': 'Years in Reporting and Controlling',
+    'stat2.n': '3',   'stat2.l': 'Sectors: Retail, Metallurgical and Dairy',
+    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
+    'stat4.n': 'AI',  'stat4.l': 'Automation with Make, N8N and Claude',
+    'exp.label': 'What I do', 'exp.title': 'Areas of expertise',
+    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': 'Interactive dashboards, data modeling, source integration, KPIs and reports for strategic decision-making.',
+    'exp.c2.title': 'Controlling & Finance', 'exp.c2.desc': 'P&L by segment, GL-CO-AA closing, variance analysis vs. Budget, monthly financial KPIs and management reports.',
+    'exp.c3.title': 'AI & Automation', 'exp.c3.desc': 'Process automation with Make and N8N. AI integration (ChatGPT, Claude) for intelligent analysis and assisted decisions.',
+    'exp.c4.title': 'Strategic Reporting', 'exp.c4.desc': 'End-to-end design and implementation of reporting solutions in retail, metallurgical and dairy sectors.',
+    'traj.label': 'Career', 'traj.title': 'Professional experience',
+    'job1.role': 'Key User SAP · Accounting & Controlling Analyst',
+    'job1.period': 'July 2017 – Present · 8 years 11 months · Rafaela, Santa Fe · Hybrid',
+    'job1.li1': 'SAP GL-AA implementation (Feb. 2019 – Nov. 2019). Participation in all modules linked to GL.',
+    'job1.li2': 'End-to-end development and implementation of SAP Analytics Cloud dashboards: data modeling, source integration, KPIs and interactive reports.',
+    'job1.li3': 'GL-CO-AA closing processes. P&L for the company, cost centers, customers, sales reps and sales office.',
+    'job1.li4': 'Monthly KPI calculation: payment/collection terms, customer aging, inventory turnover.',
+    'job1.li5': 'Master data configuration: MM-SD, GL accounts, OBYC, fixed assets, QA testing.',
+    'job2.role': 'Controlling Analyst',
+    'job2.period': 'August 2009 – July 2017 · 8 years · Rafaela, Santa Fe',
+    'job2.li1': 'Standard cost rate calculation by cost center for SAP pricing and part valuation.',
+    'job2.li2': 'OEM and aftermarket quotations. Cost breakdown, cross-country comparison.',
+    'job2.li3': 'Monthly management report with key economic and financial KPIs.',
+    'job2.li4': 'Sales and results reports by market/segment to Regional Controlling. CO-PA implementation.',
+    'job2.li5': 'Capex control vs. Forecast/Budget. Intercompany analysis. Internal inflation index.',
+    'job3.role': 'Accounting Analyst',
+    'job3.period': 'November 2003 – December 2008 · 5 years 2 months · Rafaela, Santa Fe',
+    'job3.li1': 'Accounting for two group companies: Tinsa S.A. (Cobro Express) and Avenida A.C.E.',
+    'job3.li2': 'Supplier accounts payable monitoring. Bank debt reconciliation.',
+    'job3.li3': 'Bank reconciliations and monthly accounting close.',
+    'tools.label': 'Stack', 'tools.title': 'Tools & Technologies',
+    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'AI & Automation', 'tools.g4': 'Languages',
+    'tools.lang1': 'Spanish (Native)', 'tools.lang2': 'English (Professional proficiency)',
+    'edu.label': 'Education', 'edu.title': 'Education & Certifications',
+    'edu.block1': 'Education', 'edu.block2': 'Anthropic Certifications',
+    'edu.deg1': 'Certified Public Accountant', 'edu.deg2': 'Specialization in Cost Management & Business Administration',
+    'cert.date': 'May 2026',
+    'cta.kicker': "Let's connect",
+    'cta.title': 'Got a project where these skills make a difference?',
+    'cta.sub': 'Reporting, SAP Analytics Cloud, automation or AI applied to finance and controlling. Let\'s talk.',
+    'cta.btn1': 'View LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
+    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentina'
+  },
 
-      // Update all data-i18n elements
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) {
-          el.innerHTML = t[key];
-        }
-      });
+  fr: {
+    'nav.about': 'À propos', 'nav.expertise': 'Expertise', 'nav.experience': 'Expérience',
+    'nav.tools': 'Outils', 'nav.cta': 'LinkedIn →',
+    'mob.about': 'À propos', 'mob.expertise': 'Expertise', 'mob.experience': 'Expérience',
+    'mob.tools': 'Outils', 'mob.contact': 'Contact',
+    'hero.kicker': 'Développeur SAP Analytics Cloud',
+    'hero.role': '<strong>15+ ans</strong> en Reporting, Contrôle de gestion et analyse financière.<br>Aujourd\'hui, valorisant cette expertise avec <strong>l\'IA et l\'automatisation</strong>.',
+    'hero.desc': 'Je conçois des tableaux de bord dans SAP Analytics Cloud, implémente des solutions SAP S/4HANA et automatise les processus avec Make, N8N et Claude. Des données aux décisions.',
+    'hero.btn1': 'Voir le profil LinkedIn', 'hero.btn2': 'Me contacter',
+    'about.label': 'À propos', 'about.title': 'Données → Décisions stratégiques',
+    'about.p1': "Fort de plus de 15 ans d'expérience, j'ai bâti un solide parcours dans la conception, l'implémentation et l'optimisation de solutions de reporting et d'analyse de données dans les secteurs du Retail, de la Métallurgie et des Produits laitiers.",
+    'about.p2': "Mon expertise couvre SAP (GL, AA, CO-PA) et le développement de tableaux de bord personnalisés dans SAP Analytics Cloud, Excel et Data Studio. En tant que Key User SAP S/4HANA, j'ai piloté la configuration et les adaptations nécessaires pour aligner le système avec les objectifs métier.",
+    'about.p3': "Aujourd'hui, j'explore les possibilités offertes par l'IA pour révolutionner l'automatisation des processus et la prise de décision stratégique, en utilisant Make, N8N, ChatGPT et Claude.",
+    'stat1.n': '15+', 'stat1.l': 'Ans en Reporting et Contrôle de gestion',
+    'stat2.n': '3',   'stat2.l': 'Secteurs : Retail, Métallurgie et Produits laitiers',
+    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
+    'stat4.n': 'IA',  'stat4.l': "Automatisation avec Make, N8N et Claude",
+    'exp.label': 'Ce que je fais', 'exp.title': 'Domaines de spécialisation',
+    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': "Tableaux de bord interactifs, modélisation des données, intégration de sources, KPIs et rapports pour la prise de décision stratégique.",
+    'exp.c2.title': 'Contrôle de gestion & Finance', 'exp.c2.desc': "P&L par segment, clôture GL-CO-AA, analyse des écarts vs. Budget, KPIs financiers mensuels et rapports à la direction.",
+    'exp.c3.title': 'IA & Automatisation', 'exp.c3.desc': "Automatisation des processus avec Make et N8N. Intégration de l'IA (ChatGPT, Claude) pour l'analyse intelligente et les décisions assistées.",
+    'exp.c4.title': 'Reporting stratégique', 'exp.c4.desc': "Conception et implémentation end-to-end de solutions de reporting dans les secteurs retail, métallurgique et laitier.",
+    'traj.label': 'Parcours', 'traj.title': 'Expérience professionnelle',
+    'job1.role': 'Key User SAP · Analyste Comptabilité et Contrôle de gestion',
+    'job1.period': 'Juillet 2017 – Présent · 8 ans 11 mois · Rafaela, Santa Fe · Hybride',
+    'job1.li1': 'Implémentation SAP GL-AA (fév. 2019 – nov. 2019). Participation à tous les modules liés au GL.',
+    'job1.li2': "Développement et implémentation end-to-end de tableaux de bord SAP Analytics Cloud : modélisation, intégration de sources, KPIs et rapports interactifs.",
+    'job1.li3': "Processus de clôture GL-CO-AA. P&L entreprise, centres de coûts, clients, commerciaux et bureau de vente.",
+    'job1.li4': "Calcul mensuel des KPIs : délais de paiement/encaissement, aging clients, rotation des stocks.",
+    'job1.li5': "Paramétrage des données de base : MM-SD, comptes GL, OBYC, immobilisations, tests QA.",
+    'job2.role': 'Analyste Contrôle de gestion',
+    'job2.period': 'Août 2009 – Juillet 2017 · 8 ans · Rafaela, Santa Fe',
+    'job2.li1': "Calcul des taux standard par centre de coûts pour la cotation et l'évaluation des pièces dans SAP.",
+    'job2.li2': "Cotations marché OEM et rechange. Décomposition des coûts, comparatif entre pays.",
+    'job2.li3': "Rapport de gestion mensuel avec les principaux KPIs économiques et financiers.",
+    'job2.li4': "Rapports de ventes et résultats par marché/segment au Controlling Régional. Implémentation CO-PA.",
+    'job2.li5': "Contrôle du Capex vs. Prévisions/Budget. Analyse Intercompany. Indice d'inflation interne.",
+    'job3.role': 'Analyste Comptable',
+    'job3.period': 'Novembre 2003 – Décembre 2008 · 5 ans 2 mois · Rafaela, Santa Fe',
+    'job3.li1': 'Comptabilité de deux sociétés du groupe : Tinsa S.A. (Cobro Express) et Avenida A.C.E.',
+    'job3.li2': 'Suivi des comptes fournisseurs. Rapprochement de la dette bancaire.',
+    'job3.li3': 'Rapprochements bancaires et clôture comptable mensuelle.',
+    'tools.label': 'Stack', 'tools.title': 'Outils & Technologies',
+    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'IA & Automatisation', 'tools.g4': 'Langues',
+    'tools.lang1': 'Espagnol (Natif)', 'tools.lang2': 'Anglais (Maîtrise professionnelle)',
+    'edu.label': 'Formation', 'edu.title': 'Formation & Certifications',
+    'edu.block1': 'Formation', 'edu.block2': 'Certifications Anthropic',
+    'edu.deg1': 'Expert-Comptable', 'edu.deg2': "Spécialisation en Gestion des Coûts et Administration des Entreprises",
+    'cert.date': 'Mai 2026',
+    'cta.kicker': 'Connectons-nous',
+    'cta.title': 'Vous avez un projet où ces compétences font la différence ?',
+    'cta.sub': "Reporting, SAP Analytics Cloud, automatisation ou IA appliquée aux finances et au contrôle de gestion. Parlons-en.",
+    'cta.btn1': 'Voir LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
+    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentine'
+  }
+};
 
-      // Update lang buttons
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-      });
+/* ── i18n engine ── */
+var currentLang = localStorage.getItem('lang') || 'es';
 
-      // Update html lang attribute
-      document.documentElement.lang = lang;
-    }
+function applyLang(lang) {
+  var dict = T[lang];
+  if (!dict) return;
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
 
-    /* ============================
-       SCROLL REVEAL
-    ============================ */
-    const revealEls = document.querySelectorAll('.reveal');
-    const observer  = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el => observer.observe(el));
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
 
-    /* ============================
-       COUNTER ANIMATION
-    ============================ */
-    function animateCounter(el, target, suffix = '') {
-      let start = 0;
-      const duration = 1400;
-      const step = timestamp => {
-        if (!start) start = timestamp;
-        const progress = Math.min((timestamp - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(ease * target) + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }
-    const counterYears = document.getElementById('counter-years');
-    if (counterYears) {
-      const heroObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          animateCounter(counterYears, 15, '+');
-          heroObserver.disconnect();
-        }
-      });
-      heroObserver.observe(counterYears);
-    }
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-html');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
 
-    /* ============================
-       STACK BARS
-    ============================ */
-    const stackBars = document.getElementById('stackBars');
-    if (stackBars) {
-      const barObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          stackBars.querySelectorAll('.stack-bar').forEach(bar => {
-            const w = bar.getAttribute('data-w');
-            setTimeout(() => { bar.style.width = w + '%'; }, 300);
-          });
-          barObserver.disconnect();
-        }
-      });
-      barObserver.observe(stackBars);
-    }
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
 
-    /* ============================
-       TIMELINE TABS
-    ============================ */
-    function showEntry(id) {
-      document.querySelectorAll('.tl-entry').forEach(e => e.classList.remove('active'));
-      document.querySelectorAll('.tl-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('entry-' + id).classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
+/* Delegate all lang-btn clicks (nav + mobile) */
+document.addEventListener('click', function(e) {
+  var btn = e.target.closest('.lang-btn');
+  if (btn && btn.dataset.lang) applyLang(btn.dataset.lang);
+});
 
-    /* ============================
-       NAV ACTIVE STATE
-    ============================ */
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
-      });
-      navLinks.forEach(link => {
-        link.style.color = link.getAttribute('href') === '#' + current ? 'var(--ink)' : '';
-      });
-    }, { passive: true });
-  </script>
+/* Init on load */
+applyLang(currentLang);
+
+/* ── Nav scroll ── */
+var nav = document.getElementById('mainNav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ── Mobile nav ── */
+var hamburger = document.getElementById('hamburger');
+var mobNav    = document.getElementById('mobNav');
+var mobClose  = document.getElementById('mobClose');
+
+hamburger.addEventListener('click', function() {
+  mobNav.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+});
+function closeMob() {
+  mobNav.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+mobClose.addEventListener('click', closeMob);
+mobNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMob); });
+
+/* ── Scroll reveal ── */
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+</script>
+
 </body>
 </html>
