@@ -10,27 +10,38 @@
   <meta property="og:image" content="./Foto.jpeg" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232d6cf0'/><text x='50%25' y='22' font-family='Arial' font-size='14' font-weight='bold' fill='white' text-anchor='middle'>MB</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%232563eb'/><text x='50%25' y='22' font-family='Arial' font-size='14' font-weight='bold' fill='white' text-anchor='middle'>MB</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
 
-/* ── Reset ── */
+/* ══════════════════════════════════════════
+   RESET & ROOT
+══════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:          #080e1a;
-  --surface:     #0d1526;
-  --surface-2:   #111f35;
-  --accent:      #2d6cf0;
-  --accent-dim:  rgba(45, 108, 240, 0.14);
-  --accent-glow: rgba(45, 108, 240, 0.32);
-  --text:        #e8edf5;
-  --muted:       #556a82;
-  --border:      #1a2a40;
-  --f-d: 'Space Grotesk', sans-serif;
-  --f-b: 'DM Sans', sans-serif;
+  --bg:           #060b14;
+  --surface:      #0c1627;
+  --surface-2:    #0f1e35;
+  --surface-glass: rgba(12, 22, 39, 0.65);
+  --accent:       #2563eb;
+  --accent-2:     #06b6d4;
+  --accent-dim:   rgba(37, 99, 235, 0.15);
+  --accent-glow:  rgba(37, 99, 235, 0.4);
+  --accent-2-dim: rgba(6, 182, 212, 0.12);
+  --text:         #e8edf5;
+  --text-2:       #cbd5e1;
+  --muted:        #4f6a8a;
+  --border:       #1a2d47;
+  --border-light: #243d5c;
+  --f-d: 'Outfit', sans-serif;
+  --f-b: 'Work Sans', sans-serif;
+  --z-cursor: 9999;
+  --z-nav: 100;
+  --z-mob: 99;
+  --z-progress: 200;
 }
 
 html { scroll-behavior: smooth; }
@@ -43,408 +54,652 @@ body {
   line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  cursor: none;
 }
 
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent), var(--accent-2)); border-radius: 2px; }
 ::selection { background: var(--accent); color: #fff; }
 
-h1, h2, h3, h4 { font-family: var(--f-d); line-height: 1.15; letter-spacing: -0.02em; }
-a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--f-d); line-height: 1.1; letter-spacing: -0.025em; }
+a { color: inherit; text-decoration: none; cursor: none; }
 img { max-width: 100%; display: block; }
+button { cursor: none; }
 
-/* ── Layout ── */
-.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
-
-/* ── Labels ── */
-.sec-label {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--f-d);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.75rem;
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════ */
+#cursor-dot {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--accent-2);
+  border-radius: 50%; pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: width .15s, height .15s, background .15s;
+  mix-blend-mode: screen;
 }
-.sec-label::after {
-  content: '';
-  display: block;
-  width: 48px;
-  height: 1px;
-  background: var(--border);
+#cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1.5px solid rgba(37, 99, 235, 0.6);
+  border-radius: 50%; pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: width .25s cubic-bezier(.22,1,.36,1), height .25s cubic-bezier(.22,1,.36,1), border-color .25s, opacity .25s;
+}
+body.cursor-hover #cursor-dot { width: 12px; height: 12px; background: var(--accent); }
+body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: rgba(37,99,235,0.9); }
+
+/* ══════════════════════════════════════════
+   SCROLL PROGRESS BAR
+══════════════════════════════════════════ */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index: var(--z-progress);
+  transition: width .05s linear;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════════ */
+.container { max-width: 1120px; margin: 0 auto; padding: 0 1.75rem; }
+
+/* ══════════════════════════════════════════
+   FOCUS & REDUCED MOTION
+══════════════════════════════════════════ */
+*:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+*:focus:not(:focus-visible) { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  #cursor-dot, #cursor-ring { display: none; }
+  body { cursor: auto; }
+  a, button { cursor: auto; }
+}
+
+/* ══════════════════════════════════════════
+   SECTION LABELS
+══════════════════════════════════════════ */
+.sec-label {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--f-d); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent-2); margin-bottom: 0.9rem;
+  padding: 0.3rem 0.8rem; border: 1px solid rgba(6,182,212,0.25);
+  border-radius: 100px; background: rgba(6,182,212,0.06);
 }
 .sec-title {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1rem;
+  font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+  font-weight: 800; color: var(--text); margin-bottom: 1rem;
+  line-height: 1.08;
+}
+.sec-title .gr {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* ── Reveal ── */
+/* ══════════════════════════════════════════
+   REVEAL ANIMATIONS
+══════════════════════════════════════════ */
 .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(.22,1,.36,1), transform 0.7s cubic-bezier(.22,1,.36,1);
+  opacity: 0; transform: translateY(32px);
+  transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1);
 }
 .reveal.visible { opacity: 1; transform: none; }
+.reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1); }
+.reveal-left.visible { opacity: 1; transform: none; }
+.reveal-right { opacity: 0; transform: translateX(32px); transition: opacity 0.75s cubic-bezier(.22,1,.36,1), transform 0.75s cubic-bezier(.22,1,.36,1); }
+.reveal-right.visible { opacity: 1; transform: none; }
 
-/* ── Buttons ── */
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.6rem;
-  border-radius: 8px;
-  font-family: var(--f-b);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform .2s, box-shadow .2s, opacity .2s, border-color .2s, color .2s;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.9rem 1.75rem; border-radius: 10px;
+  font-family: var(--f-b); font-size: 0.92rem; font-weight: 600;
+  cursor: none; border: none; white-space: nowrap; position: relative; overflow: hidden;
+  transition: transform .2s cubic-bezier(.22,1,.36,1), box-shadow .2s;
 }
-.btn:hover { transform: translateY(-2px); }
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: white; opacity: 0;
+  transition: opacity .2s;
+  border-radius: inherit;
+}
+.btn:hover::after { opacity: 0.07; }
+.btn:active { transform: scale(0.97) !important; }
 .btn svg { flex-shrink: 0; }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { box-shadow: 0 8px 28px var(--accent-glow); opacity: .92; }
-.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ── Nav ── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 1.2rem 0;
-  border-bottom: 1px solid transparent;
-  transition: background .3s, border-color .3s, backdrop-filter .3s;
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #1d4ed8 100%);
+  color: #fff; box-shadow: 0 4px 20px rgba(37,99,235,0.35);
 }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(37,99,235,0.55); }
+
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover { transform: translateY(-3px); border-color: var(--accent-2); color: var(--accent-2); box-shadow: 0 4px 20px rgba(6,182,212,0.15); }
+
+.btn-magnetic { display: inline-flex; }
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: var(--z-nav); padding: 1.1rem 0;
+  border-bottom: 1px solid transparent;
+  transition: background .35s, border-color .35s, backdrop-filter .35s;
+  isolation: isolate;
+}
+section, footer { position: relative; z-index: 1; }
 nav.scrolled {
-  background: rgba(8, 14, 26, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 11, 20, 0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-color: var(--border);
 }
 .nav-inner { display: flex; align-items: center; gap: 1.5rem; }
-.nav-logo { font-family: var(--f-d); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.04em; flex-shrink: 0; }
-.nav-logo span { color: var(--accent); }
-
+.nav-logo {
+  font-family: var(--f-d); font-weight: 800; font-size: 1.1rem;
+  letter-spacing: -0.05em; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--text), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 .nav-links { display: flex; gap: 2rem; list-style: none; margin-left: auto; }
-.nav-links a { font-size: 0.85rem; color: var(--muted); font-weight: 400; transition: color .2s; }
+.nav-links a {
+  font-size: 0.83rem; color: var(--muted); font-weight: 500;
+  transition: color .2s; position: relative; letter-spacing: 0.01em;
+}
 .nav-links a:hover { color: var(--text); }
-
-/* Language switcher */
+.nav-links a.active { color: var(--text); }
+.nav-links a.active::after {
+  content: ''; position: absolute; bottom: -5px; left: 0; right: 0;
+  height: 1px; background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 1px;
+}
 .lang-sw { display: flex; align-items: center; gap: 0.3rem; }
 .lang-btn {
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: var(--f-d);
-  letter-spacing: 0.08em;
-  padding: 0.25rem 0.15rem;
-  transition: color .2s;
+  background: none; border: none; color: var(--muted);
+  font-size: 0.68rem; font-weight: 700; cursor: none;
+  font-family: var(--f-d); letter-spacing: 0.1em;
+  padding: 0.25rem 0.2rem; transition: color .2s;
 }
 .lang-btn:hover { color: var(--text); }
-.lang-btn.active { color: var(--accent); }
-.lang-sep { color: var(--border); font-size: 0.65rem; user-select: none; }
-
+.lang-btn.active { color: var(--accent-2); }
+.lang-sep { color: var(--border); font-size: 0.6rem; user-select: none; }
 .nav-cta {
-  padding: 0.5rem 1.2rem;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: opacity .2s, transform .2s;
-  flex-shrink: 0;
+  padding: 0.48rem 1.15rem;
+  background: linear-gradient(135deg, var(--accent), #1d4ed8);
+  color: #fff; border-radius: 7px; font-size: 0.82rem; font-weight: 600;
+  transition: opacity .2s, transform .2s, box-shadow .2s; flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.3);
 }
-.nav-cta:hover { opacity: .85; transform: translateY(-1px); }
-
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; margin-left: auto; }
+.nav-cta:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(37,99,235,0.5); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; background: none; border: none; padding: 4px; margin-left: auto; }
 .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
-
-/* Mobile overlay */
 .mob-nav {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: var(--bg);
-  z-index: 99;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  display: none; position: fixed; inset: 0;
+  background: rgba(6,11,20,0.97); backdrop-filter: blur(20px);
+  z-index: var(--z-mob); flex-direction: column;
+  align-items: center; justify-content: center; gap: 2.25rem;
 }
 .mob-nav.open { display: flex; }
-.mob-nav a { font-family: var(--f-d); font-size: 1.6rem; font-weight: 600; color: var(--text); transition: color .2s; }
-.mob-nav a:hover { color: var(--accent); }
-.mob-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--muted); font-size: 2rem; line-height: 1; cursor: pointer; transition: color .2s; }
+.mob-nav a { font-family: var(--f-d); font-size: 1.7rem; font-weight: 700; color: var(--text); transition: color .2s; }
+.mob-nav a:hover { color: var(--accent-2); }
+.mob-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; color: var(--muted); font-size: 2rem; line-height: 1; cursor: none; transition: color .2s; }
 .mob-close:hover { color: var(--text); }
 .mob-lang { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
-.mob-lang .lang-btn { font-size: 0.85rem; padding: 0.4rem 0.3rem; }
+.mob-lang .lang-btn { font-size: 0.9rem; padding: 0.4rem 0.3rem; }
 .mob-lang .lang-sep { font-size: 0.8rem; }
 
-/* ── Hero ── */
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
 #hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 7rem 0 5rem;
-  position: relative;
-  overflow: hidden;
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 7rem 0 5rem; position: relative; overflow: hidden;
+}
+#particles-canvas {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+.aurora-blob {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  pointer-events: none; animation: aurora-float 12s ease-in-out infinite;
+}
+.aurora-1 {
+  width: 60vw; height: 60vw; top: -15%; right: -10%;
+  background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 65%);
+  animation-delay: 0s;
+}
+.aurora-2 {
+  width: 40vw; height: 40vw; bottom: -10%; left: -5%;
+  background: radial-gradient(circle, rgba(6,182,212,0.12) 0%, transparent 65%);
+  animation-delay: -5s;
+}
+.aurora-3 {
+  width: 30vw; height: 30vw; top: 30%; left: 30%;
+  background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 65%);
+  animation-delay: -8s;
+}
+@keyframes aurora-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  33% { transform: translateY(-4%) scale(1.04); }
+  66% { transform: translateY(3%) scale(0.97); }
 }
 .hero-grid-bg {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 0;
   background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 65% 50%, black 15%, transparent 100%);
-  mask-image: radial-gradient(ellipse 80% 70% at 65% 50%, black 15%, transparent 100%);
-  opacity: 0.3;
-  pointer-events: none;
-}
-.hero-glow {
-  position: absolute; top: 10%; right: 3%;
-  width: 55vw; height: 55vw;
-  background: radial-gradient(circle, rgba(45,108,240,0.09) 0%, transparent 65%);
+    linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 75% at 60% 50%, black 10%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 75% at 60% 50%, black 10%, transparent 100%);
   pointer-events: none;
 }
 .hero-inner {
   position: relative; z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 5rem;
-  align-items: center;
-  width: 100%;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 5rem; align-items: center; width: 100%;
 }
-.hero-kicker {
-  display: flex; align-items: center; gap: 0.65rem;
-  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem;
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent-2); margin-bottom: 1.5rem;
+  padding: 0.35rem 0.9rem; border: 1px solid rgba(6,182,212,0.3);
+  border-radius: 100px; background: rgba(6,182,212,0.07);
+  backdrop-filter: blur(8px);
 }
-.hero-kicker-line { width: 36px; height: 1px; background: var(--accent); }
+.hero-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 6px var(--accent-2);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
 .hero-name {
-  font-size: clamp(2.8rem, 5.5vw, 4.75rem);
-  font-weight: 700; letter-spacing: -0.04em; line-height: 1.02; margin-bottom: 0.85rem;
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  font-weight: 800; letter-spacing: -0.045em;
+  line-height: 1; margin-bottom: 1rem;
 }
-.hero-name .accent { color: var(--accent); }
-.hero-role { font-size: clamp(0.95rem, 1.8vw, 1.15rem); color: var(--muted); margin-bottom: 1.75rem; line-height: 1.65; }
-.hero-role strong { color: var(--text); font-weight: 500; }
-.hero-desc { max-width: 490px; color: var(--muted); font-size: 0.93rem; line-height: 1.85; margin-bottom: 2.5rem; }
-.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-name-line1 { display: block; color: var(--text); }
+.hero-name-line2 {
+  display: block;
+  background: linear-gradient(135deg, var(--accent) 20%, var(--accent-2) 80%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+#typewriter-cursor {
+  display: inline-block; width: 3px; height: 0.85em;
+  background: var(--accent-2); margin-left: 2px;
+  vertical-align: middle; animation: blink-cursor 0.9s step-end infinite;
+}
+@keyframes blink-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.hero-role {
+  font-size: clamp(1rem, 1.8vw, 1.18rem); color: var(--text-2);
+  margin-bottom: 1.85rem; line-height: 1.7;
+}
+.hero-role strong { color: var(--text); font-weight: 600; }
+.hero-desc {
+  max-width: 500px; color: var(--muted); font-size: 0.95rem;
+  line-height: 1.9; margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
 .hero-location {
-  margin-top: 2.25rem; display: flex; align-items: center; gap: 0.4rem;
+  margin-top: 2.5rem; display: flex; align-items: center; gap: 0.45rem;
   font-size: 0.8rem; color: var(--muted);
 }
-.hero-location svg { width: 13px; height: 13px; flex-shrink: 0; }
+.hero-location svg { width: 13px; height: 13px; flex-shrink: 0; color: var(--accent-2); }
 
 /* Photo */
 .hero-photo-col { flex-shrink: 0; position: relative; }
-.photo-frame { position: relative; width: 315px; height: 385px; }
+.photo-wrap { position: relative; width: 320px; height: 390px; }
+.photo-glow {
+  position: absolute; inset: -20px; border-radius: 24px;
+  background: linear-gradient(145deg, rgba(37,99,235,0.3), rgba(6,182,212,0.15), transparent 60%);
+  filter: blur(20px); z-index: 0;
+  animation: photo-glow-pulse 4s ease-in-out infinite;
+}
+@keyframes photo-glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.photo-frame {
+  position: relative; width: 100%; height: 100%; z-index: 1;
+  border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(37,99,235,0.3);
+}
 .photo-frame::before {
-  content: '';
-  position: absolute; inset: -2px; border-radius: 20px;
-  background: linear-gradient(145deg, var(--accent) 0%, transparent 55%);
-  z-index: 0;
+  content: ''; position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(160deg, rgba(37,99,235,0.12) 0%, transparent 50%);
+  pointer-events: none;
 }
 .photo-frame img {
-  position: relative; z-index: 1;
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
-  border-radius: 18px;
+  display: block;
 }
-.photo-deco {
-  position: absolute; bottom: -18px; right: -18px;
-  width: 90px; height: 90px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px; z-index: -1;
+.photo-badge {
+  position: absolute; bottom: -14px; right: -14px; z-index: 3;
+  background: var(--surface-glass); backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light); border-radius: 12px;
+  padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.1rem;
 }
+.photo-badge-n {
+  font-family: var(--f-d); font-size: 1.3rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1;
+}
+.photo-badge-l { font-size: 0.62rem; color: var(--muted); font-weight: 500; line-height: 1.3; }
 
-/* ── Sobre mí ── */
-#sobre-mi { padding: 6rem 0; border-top: 1px solid var(--border); }
+/* ══════════════════════════════════════════
+   SOBRE MÍ
+══════════════════════════════════════════ */
+#sobre-mi { padding: 7rem 0; border-top: 1px solid var(--border); }
 .sobre-grid {
-  display: grid; grid-template-columns: 1.1fr 0.9fr;
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
   gap: 5rem; align-items: start; margin-top: 3rem;
 }
-.sobre-text p { color: var(--muted); line-height: 1.9; font-size: 0.93rem; margin-bottom: 1rem; }
+.sobre-text p { color: var(--text-2); line-height: 1.95; font-size: 0.95rem; margin-bottom: 1.1rem; }
 .sobre-text p:last-child { margin-bottom: 0; }
 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .stat {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 1.25rem;
-  transition: border-color .22s, transform .22s;
+  background: var(--surface-glass); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.4rem 1.2rem;
+  backdrop-filter: blur(12px); cursor: none;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+  position: relative; overflow: hidden;
 }
-.stat:hover { border-color: var(--accent); transform: translateY(-3px); }
-.stat-n { font-family: var(--f-d); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
-.stat-l { font-size: 0.77rem; color: var(--muted); line-height: 1.45; }
+.stat::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(37,99,235,0.04), transparent);
+  opacity: 0; transition: opacity .25s; border-radius: inherit;
+}
+.stat:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 8px 28px rgba(37,99,235,0.12); }
+.stat:hover::before { opacity: 1; }
+.stat-n {
+  font-family: var(--f-d); font-size: 2.1rem; font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; line-height: 1; margin-bottom: 0.4rem;
+}
+.stat-l { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
 
-/* ── Expertise ── */
+/* ══════════════════════════════════════════
+   EXPERTISE
+══════════════════════════════════════════ */
 #expertise {
-  padding: 6rem 0;
-  background: var(--surface);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  padding: 7rem 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 30%, var(--surface) 70%, var(--bg) 100%);
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
 }
 .exp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 3rem; }
 .exp-card {
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 14px; padding: 1.6rem 1.4rem;
-  transition: border-color .25s, transform .25s;
+  background: var(--surface-glass); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.75rem 1.5rem;
+  backdrop-filter: blur(16px); cursor: none;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+  position: relative; overflow: hidden;
 }
-.exp-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+.exp-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.exp-card:hover { border-color: rgba(37,99,235,0.5); transform: translateY(-6px); box-shadow: 0 16px 40px rgba(37,99,235,0.12); }
+.exp-card:hover::before { opacity: 1; }
 .exp-icon {
-  width: 42px; height: 42px; background: var(--accent-dim);
-  border-radius: 10px; display: flex; align-items: center; justify-content: center;
-  color: var(--accent); margin-bottom: 1.2rem;
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.15), rgba(6,182,212,0.1));
+  border: 1px solid rgba(37,99,235,0.2);
+  border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  color: var(--accent-2); margin-bottom: 1.3rem;
+  transition: transform .3s;
 }
-.exp-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
-.exp-card h3 { font-size: 0.94rem; font-weight: 600; margin-bottom: 0.5rem; }
-.exp-card p { font-size: 0.815rem; color: var(--muted); line-height: 1.65; }
+.exp-card:hover .exp-icon { transform: scale(1.1) rotate(3deg); }
+.exp-icon svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+.exp-card h3 { font-size: 0.96rem; font-weight: 700; margin-bottom: 0.55rem; color: var(--text); }
+.exp-card p { font-size: 0.825rem; color: var(--muted); line-height: 1.7; }
 
-/* ── Experiencia ── */
-#experiencia { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-.timeline { margin-top: 3rem; position: relative; padding-left: 1.5rem; }
+/* ══════════════════════════════════════════
+   EXPERIENCIA / TIMELINE
+══════════════════════════════════════════ */
+#experiencia { padding: 7rem 0; border-bottom: 1px solid var(--border); }
+.timeline { margin-top: 3rem; position: relative; padding-left: 2rem; }
 .timeline::before {
-  content: ''; position: absolute;
-  left: 0; top: 8px; bottom: 0;
+  content: ''; position: absolute; left: 0; top: 10px; bottom: 0;
   width: 1px; background: var(--border);
 }
-.tl-item { position: relative; padding-bottom: 3rem; }
+.timeline::after {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-2), transparent);
+  height: 0; transition: height 1.4s cubic-bezier(.22,1,.36,1);
+}
+.timeline.tl-animated::after { height: calc(100% - 10px); }
+.tl-item { position: relative; padding-bottom: 3.25rem; }
 .tl-item:last-child { padding-bottom: 0; }
 .tl-dot {
-  position: absolute; left: -1.94rem; top: 6px;
-  width: 11px; height: 11px; border-radius: 50%;
-  background: var(--accent); border: 2px solid var(--bg);
-  box-shadow: 0 0 0 3px var(--accent-dim);
+  position: absolute; left: -2.37rem; top: 8px;
+  width: 13px; height: 13px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.2), 0 0 12px rgba(37,99,235,0.3);
 }
-.tl-header { margin-bottom: 0.9rem; }
-.tl-meta h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
-.tl-role { font-size: 0.84rem; color: var(--accent); font-weight: 500; margin-bottom: 0.15rem; }
-.tl-period { font-size: 0.77rem; color: var(--muted); }
-.tl-body { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.4rem; }
-.tl-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-.tl-body li { font-size: 0.85rem; color: var(--muted); padding-left: 1rem; position: relative; line-height: 1.6; }
-.tl-body li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; top: 0.15rem; }
+.tl-company-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.tl-initials {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(6,182,212,0.1));
+  border: 1px solid rgba(37,99,235,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-d); font-size: 0.7rem; font-weight: 800;
+  color: var(--accent-2); flex-shrink: 0;
+}
+.tl-company { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+.tl-role { font-size: 0.84rem; color: var(--accent-2); font-weight: 600; margin-bottom: 0.2rem; letter-spacing: 0.01em; }
+.tl-period { font-size: 0.75rem; color: var(--muted); margin-bottom: 1rem; }
+.tl-body {
+  background: var(--surface-glass); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.2rem 1.5rem;
+  backdrop-filter: blur(12px);
+  transition: border-color .25s;
+}
+.tl-body:hover { border-color: var(--border-light); }
+.tl-body ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+.tl-body li {
+  font-size: 0.86rem; color: var(--text-2); padding-left: 1.1rem;
+  position: relative; line-height: 1.65;
+}
+.tl-body li::before {
+  content: ''; position: absolute; left: 0; top: 0.6em;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent-2);
+}
 
-/* ── Herramientas ── */
-#herramientas { padding: 6rem 0; background: var(--surface); border-bottom: 1px solid var(--border); }
-.tools-wrap { margin-top: 3rem; display: flex; flex-direction: column; gap: 2rem; }
-.tool-group-label { font-family: var(--f-d); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.65rem; }
-.tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+/* ══════════════════════════════════════════
+   HERRAMIENTAS
+══════════════════════════════════════════ */
+#herramientas {
+  padding: 7rem 0;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 30%, var(--surface) 70%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+}
+.tools-wrap { margin-top: 3rem; display: flex; flex-direction: column; gap: 2.25rem; }
+.tool-group-label {
+  font-family: var(--f-d); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tag {
-  display: inline-block; padding: 0.3rem 0.8rem;
-  background: var(--bg); border: 1px solid var(--border);
-  border-radius: 100px; font-size: 0.8rem; color: var(--text);
-  transition: border-color .2s, color .2s, transform .2s;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  background: var(--surface-glass); border: 1px solid var(--border);
+  border-radius: 100px; font-size: 0.8rem; color: var(--text-2);
+  backdrop-filter: blur(8px); cursor: none;
+  transition: border-color .2s, color .2s, transform .2s, box-shadow .2s;
 }
-.tag:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.tag:hover {
+  border-color: var(--accent-2); color: var(--accent-2);
+  transform: translateY(-2px); box-shadow: 0 4px 14px rgba(6,182,212,0.12);
+}
 
-/* ── Educación & Certs ── */
-#educacion { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-.edu-certs-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 4.5rem; margin-top: 3rem; }
-.block-title { font-family: var(--f-d); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
-.edu-item { padding-bottom: 1.4rem; margin-bottom: 1.4rem; border-bottom: 1px solid var(--border); }
+/* ══════════════════════════════════════════
+   EDUCACIÓN & CERTS
+══════════════════════════════════════════ */
+#educacion { padding: 7rem 0; border-bottom: 1px solid var(--border); }
+.edu-certs-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; margin-top: 3rem; }
+.block-title {
+  font-family: var(--f-d); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+.edu-item { padding-bottom: 1.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
 .edu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.edu-item h3 { font-size: 0.94rem; font-weight: 600; margin-bottom: 0.2rem; }
+.edu-item h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--text); }
 .edu-item .inst { font-size: 0.83rem; color: var(--muted); }
-.edu-item .yr { font-size: 0.74rem; color: var(--accent); margin-top: 0.25rem; font-weight: 500; font-family: var(--f-d); }
-.cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.1rem; margin-bottom: 0.65rem; transition: border-color .2s; }
+.edu-item .yr { font-size: 0.73rem; color: var(--accent-2); margin-top: 0.3rem; font-weight: 600; font-family: var(--f-d); }
+.cert-card {
+  background: var(--surface-glass); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.7rem;
+  backdrop-filter: blur(12px); cursor: none;
+  transition: border-color .2s, transform .2s;
+  position: relative; overflow: hidden;
+}
+.cert-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--accent), var(--accent-2));
+  border-radius: 2px 0 0 2px; opacity: 0; transition: opacity .2s;
+}
 .cert-card:last-child { margin-bottom: 0; }
-.cert-card:hover { border-color: var(--accent); }
-.cert-card h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.4; }
-.cert-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 0.2rem; }
+.cert-card:hover { border-color: rgba(37,99,235,0.4); transform: translateX(4px); }
+.cert-card:hover::before { opacity: 1; }
+.cert-card h3 { font-size: 0.87rem; font-weight: 700; margin-bottom: 0.35rem; line-height: 1.4; color: var(--text); }
+.cert-foot { display: flex; align-items: center; justify-content: space-between; }
 .cert-issuer { font-size: 0.75rem; color: var(--muted); }
-.cert-date { font-size: 0.72rem; color: var(--accent); font-weight: 500; font-family: var(--f-d); }
-.cert-id { font-size: 0.67rem; color: var(--border); font-family: monospace; margin-top: 0.25rem; letter-spacing: 0.04em; }
+.cert-date { font-size: 0.72rem; color: var(--accent-2); font-weight: 600; font-family: var(--f-d); }
+.cert-id { font-size: 0.64rem; color: var(--muted); opacity: 0.45; font-family: monospace; margin-top: 0.25rem; letter-spacing: 0.04em; }
 
-/* ── CTA ── */
-#cta { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
-.cta-glow {
+
+/* ══════════════════════════════════════════
+   CTA
+══════════════════════════════════════════ */
+#cta { padding: 9rem 0; text-align: center; position: relative; overflow: hidden; }
+.cta-aurora {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 700px; height: 350px;
-  background: radial-gradient(ellipse, rgba(45,108,240,0.07) 0%, transparent 70%);
-  pointer-events: none;
+  width: 900px; height: 450px; pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    rgba(37,99,235,0.1) 0%,
+    rgba(6,182,212,0.06) 40%,
+    transparent 70%);
+  animation: cta-pulse 6s ease-in-out infinite;
+}
+@keyframes cta-pulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%,-50%) scale(1.08); opacity: 1; }
 }
 .cta-inner { position: relative; z-index: 1; }
-.cta-kicker { font-family: var(--f-d); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
-.cta-title { font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 700; letter-spacing: -0.03em; max-width: 680px; margin: 0 auto 1.25rem; line-height: 1.1; }
-.cta-sub { color: var(--muted); max-width: 440px; margin: 0 auto 3rem; font-size: 0.93rem; line-height: 1.8; }
-.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.cta-kicker {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--f-d); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-2);
+  margin-bottom: 1.5rem; padding: 0.35rem 0.9rem;
+  border: 1px solid rgba(6,182,212,0.3); border-radius: 100px;
+  background: rgba(6,182,212,0.07);
+}
+.cta-title {
+  font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800;
+  letter-spacing: -0.035em; max-width: 740px; margin: 0 auto 1.5rem;
+  line-height: 1.05;
+}
+.cta-sub { color: var(--muted); max-width: 460px; margin: 0 auto 3.5rem; font-size: 0.95rem; line-height: 1.85; }
+.cta-btns { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
 
-/* ── Footer ── */
-footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer { padding: 2rem 0; border-top: 1px solid var(--border); }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-.footer-copy { font-size: 0.77rem; color: var(--muted); }
-.footer-links { display: flex; gap: 1.5rem; }
-.footer-links a { font-size: 0.77rem; color: var(--muted); transition: color .2s; }
-.footer-links a:hover { color: var(--text); }
+.footer-copy { font-size: 0.76rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.75rem; }
+.footer-links a { font-size: 0.76rem; color: var(--muted); transition: color .2s; }
+.footer-links a:hover { color: var(--accent-2); }
 
-/* ── Responsive ── */
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .hero-inner { gap: 3rem; }
-  .photo-frame { width: 270px; height: 330px; }
+  .hero-inner { gap: 3.5rem; }
+  .photo-wrap { width: 280px; height: 345px; }
   .exp-grid { grid-template-columns: repeat(2, 1fr); }
-  .sobre-grid { gap: 3rem; }
+  .sobre-grid { gap: 3.5rem; }
 }
 
 @media (max-width: 768px) {
-  /* Nav */
   .nav-links, .nav-cta, .lang-sw { display: none; }
   .hamburger { display: flex; }
-
-  /* Hero */
-  #hero { padding: 5.5rem 0 3.5rem; }
-  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-  .hero-kicker { justify-content: center; }
+  #hero { padding: 5.5rem 0 4rem; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 2.5rem; }
+  .hero-badge { margin: 0 auto 1.5rem; }
   .hero-desc { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
   .hero-location { justify-content: center; }
   .hero-photo-col { order: -1; display: flex; justify-content: center; }
-  .photo-frame { width: 200px; height: 245px; }
-  .photo-deco { display: none; }
-
-  /* Section padding */
-  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 4rem 0; }
-  #cta { padding: 5rem 0; }
-
-  /* Grid margin-top */
-  .sobre-grid, .exp-grid, .timeline, .tools-wrap, .edu-certs-grid { margin-top: 2rem; }
-
-  /* Grids */
+  .photo-wrap { width: 220px; height: 270px; }
+  .photo-badge { display: none; }
+  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 4.5rem 0; }
+  #cta { padding: 5.5rem 0; }
+  .sobre-grid, .exp-grid, .timeline, .tools-wrap, .edu-certs-grid { margin-top: 2.25rem; }
   .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .edu-certs-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .exp-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-
-  /* Sec titles */
-  .sec-title { margin-bottom: 0.75rem; }
+  .testimonial { padding: 2rem 1.75rem; }
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 1rem; }
-  #hero { padding: 5rem 0 3rem; }
-  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 3rem 0; }
-  #cta { padding: 4rem 0; }
-  .photo-frame { width: 170px; height: 208px; }
+  .container { padding: 0 1.1rem; }
+  #hero { padding: 5rem 0 3.5rem; }
+  #sobre-mi, #expertise, #experiencia, #herramientas, #educacion { padding: 3.5rem 0; }
+  #cta { padding: 4.5rem 0; }
+  .photo-wrap { width: 185px; height: 228px; }
   .exp-grid { grid-template-columns: 1fr; }
-  .tl-body { padding: 0.9rem 1rem; }
-  .hero-name { font-size: 2.5rem; }
+  .tl-body { padding: 1rem 1.1rem; }
+  .hero-name { font-size: 2.6rem; }
+  body { cursor: auto; }
+  #cursor-dot, #cursor-ring { display: none; }
+  a, button { cursor: auto; }
 }
 
   </style>
 </head>
 <body>
 
-<!-- Mobile overlay -->
+<!-- Full-page particles -->
+<canvas id="particles-canvas" aria-hidden="true"></canvas>
+
+<!-- Custom Cursor -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Scroll Progress -->
+<div id="scroll-progress" role="progressbar" aria-hidden="true"></div>
+
+<!-- Mobile nav -->
 <div class="mob-nav" id="mobNav" role="dialog" aria-label="Menú">
   <button class="mob-close" id="mobClose" aria-label="Cerrar">×</button>
   <a href="#sobre-mi" data-i18n="mob.about">Sobre mí</a>
@@ -465,7 +720,7 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
 <nav id="mainNav">
   <div class="container">
     <div class="nav-inner">
-      <a class="nav-logo" href="#hero">M<span>.</span>Briggiler</a>
+      <a class="nav-logo" href="#hero">M.Briggiler</a>
       <ul class="nav-links" role="list">
         <li><a href="#sobre-mi" data-i18n="nav.about">Sobre mí</a></li>
         <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
@@ -487,21 +742,22 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </nav>
 
-<!-- ── Hero ── -->
+<!-- ── HERO ── -->
 <section id="hero">
+  <div class="aurora-blob aurora-1" aria-hidden="true"></div>
+  <div class="aurora-blob aurora-2" aria-hidden="true"></div>
+  <div class="aurora-blob aurora-3" aria-hidden="true"></div>
   <div class="hero-grid-bg" aria-hidden="true"></div>
-  <div class="hero-glow" aria-hidden="true"></div>
   <div class="container">
     <div class="hero-inner">
-
       <div class="hero-content reveal">
-        <div class="hero-kicker">
-          <span class="hero-kicker-line" aria-hidden="true"></span>
+        <div class="hero-badge">
+          <span class="hero-badge-dot" aria-hidden="true"></span>
           <span data-i18n="hero.kicker">SAP Analytics Cloud Developer</span>
         </div>
         <h1 class="hero-name">
-          Maximiliano<br>
-          <span class="accent">Briggiler</span>
+          <span class="hero-name-line1">Maximiliano</span>
+          <span class="hero-name-line2" id="typewriter-target">Briggiler<span id="typewriter-cursor" aria-hidden="true"></span></span>
         </h1>
         <p class="hero-role" data-i18n-html="hero.role">
           <strong>15+ años</strong> en Reporting, Controlling y análisis financiero.<br>
@@ -511,11 +767,14 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
           Diseño dashboards en SAP Analytics Cloud, implemento soluciones SAP S/4HANA y automatizo procesos con Make, N8N y Claude. De los datos a las decisiones.
         </p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            <span data-i18n="hero.btn1">Ver perfil en LinkedIn</span>
-          </a>
-          <a class="btn btn-outline" href="mailto:mcbriggiler@gmail.com">
+          <div class="btn-magnetic">
+            <a class="btn btn-primary sound-btn" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener" data-sound="click">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              <span data-i18n="hero.btn1">Ver perfil en LinkedIn</span>
+            </a>
+          </div>
+          <a class="btn btn-outline sound-btn" href="mailto:mcbriggiler@gmail.com" data-sound="click">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             <span data-i18n="hero.btn2">Contactame</span>
           </a>
         </div>
@@ -525,35 +784,40 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
         </div>
       </div>
 
-      <div class="hero-photo-col reveal" style="transition-delay:.15s">
-        <div class="photo-frame">
-          <img src="./Foto.jpeg" alt="Maximiliano Briggiler" loading="eager" width="315" height="385" />
-          <div class="photo-deco" aria-hidden="true"></div>
+      <div class="hero-photo-col reveal-right" style="transition-delay:.15s">
+        <div class="photo-wrap">
+          <div class="photo-glow" aria-hidden="true"></div>
+          <div class="photo-frame">
+            <img src="./Foto.jpeg" alt="Maximiliano Briggiler — SAP Analytics Cloud Developer" loading="eager" width="320" height="390" />
+          </div>
+          <div class="photo-badge" aria-hidden="true">
+            <div class="photo-badge-n">15+</div>
+            <div class="photo-badge-l">años de<br>experiencia</div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── Sobre mí ── -->
+<!-- ── SOBRE MÍ ── -->
 <section id="sobre-mi">
   <div class="container">
     <div class="sec-label reveal" data-i18n="about.label">Sobre mí</div>
-    <h2 class="sec-title reveal" data-i18n="about.title">Datos → Decisiones estratégicas</h2>
+    <h2 class="sec-title reveal">Datos <span class="gr">→</span> Decisiones estratégicas</h2>
     <div class="sobre-grid">
-      <div class="sobre-text reveal" style="transition-delay:.05s">
+      <div class="sobre-text reveal-left" style="transition-delay:.05s">
         <p data-i18n="about.p1">Con más de 15 años de experiencia, consolidé una sólida trayectoria en el diseño, implementación y optimización de soluciones de reporting y análisis de datos en sectores como Retail, Metalúrgico y Lácteo.</p>
         <p data-i18n="about.p2">Mi expertise abarca el manejo de SAP (GL, AA, CO-PA) y el desarrollo de dashboards personalizados en SAP Analytics Cloud, Excel y Data Studio. Como Key User SAP S/4HANA, lideré la configuración y adaptaciones necesarias para alinear el sistema con los objetivos de negocio.</p>
         <p data-i18n="about.p3">Hoy exploro las posibilidades que ofrece la IA para revolucionar la automatización de procesos y la toma de decisiones estratégicas, usando Make, N8N, ChatGPT y Claude.</p>
       </div>
       <div class="stats">
         <div class="stat reveal" style="transition-delay:.1s">
-          <div class="stat-n" data-i18n="stat1.n">15+</div>
+          <div class="stat-n" data-count="15" data-suffix="+">0</div>
           <div class="stat-l" data-i18n="stat1.l">Años en Reporting y Controlling</div>
         </div>
         <div class="stat reveal" style="transition-delay:.15s">
-          <div class="stat-n" data-i18n="stat2.n">3</div>
+          <div class="stat-n" data-count="3">0</div>
           <div class="stat-l" data-i18n="stat2.l">Sectores: Retail, Metalúrgico y Lácteo</div>
         </div>
         <div class="stat reveal" style="transition-delay:.2s">
@@ -569,11 +833,11 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- ── Expertise ── -->
+<!-- ── EXPERTISE ── -->
 <section id="expertise">
   <div class="container">
     <div class="sec-label reveal" data-i18n="exp.label">Qué hago</div>
-    <h2 class="sec-title reveal" data-i18n="exp.title">Áreas de especialización</h2>
+    <h2 class="sec-title reveal">Áreas de <span class="gr">especialización</span></h2>
     <div class="exp-grid">
       <article class="exp-card reveal" style="transition-delay:.05s">
         <div class="exp-icon" aria-hidden="true">
@@ -607,22 +871,20 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- ── Experiencia ── -->
+<!-- ── EXPERIENCIA ── -->
 <section id="experiencia">
   <div class="container">
     <div class="sec-label reveal" data-i18n="traj.label">Trayectoria</div>
-    <h2 class="sec-title reveal" data-i18n="traj.title">Experiencia profesional</h2>
+    <h2 class="sec-title reveal">Experiencia <span class="gr">profesional</span></h2>
     <div class="timeline">
 
       <div class="tl-item reveal">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-header">
-          <div class="tl-meta">
-            <h3>Sucesores de Alfredo Williner S.A. (ilolay)</h3>
-            <div class="tl-role" data-i18n="job1.role">Key User SAP · Analista de Contabilidad y Controlling</div>
-            <div class="tl-period" data-i18n="job1.period">Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido</div>
-          </div>
+        <div class="tl-company-badge">
+          <span class="tl-company">Sucesores de Alfredo Williner S.A. (ilolay)</span>
         </div>
+        <div class="tl-role" data-i18n="job1.role">Key User SAP · Analista de Contabilidad y Controlling</div>
+        <div class="tl-period" data-i18n="job1.period">Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido</div>
         <div class="tl-body">
           <ul>
             <li data-i18n="job1.li1">Implementación SAP GL-AA (feb. 2019 – nov. 2019). Participación en todos los módulos vinculados con GL.</li>
@@ -636,13 +898,11 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
 
       <div class="tl-item reveal" style="transition-delay:.1s">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-header">
-          <div class="tl-meta">
-            <h3>MAHLE</h3>
-            <div class="tl-role" data-i18n="job2.role">Controlling Analyst</div>
-            <div class="tl-period" data-i18n="job2.period">Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe</div>
-          </div>
+        <div class="tl-company-badge">
+          <span class="tl-company">MAHLE</span>
         </div>
+        <div class="tl-role" data-i18n="job2.role">Controlling Analyst</div>
+        <div class="tl-period" data-i18n="job2.period">Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe</div>
         <div class="tl-body">
           <ul>
             <li data-i18n="job2.li1">Cálculo de tasas estándar por centro de costo para cotización y valuación de piezas en SAP.</li>
@@ -656,13 +916,11 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
 
       <div class="tl-item reveal" style="transition-delay:.2s">
         <div class="tl-dot" aria-hidden="true"></div>
-        <div class="tl-header">
-          <div class="tl-meta">
-            <h3>Megatone — Bazar Avenida S.A.</h3>
-            <div class="tl-role" data-i18n="job3.role">Accounting Analyst</div>
-            <div class="tl-period" data-i18n="job3.period">Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe</div>
-          </div>
+        <div class="tl-company-badge">
+          <span class="tl-company">Megatone — Bazar Avenida S.A.</span>
         </div>
+        <div class="tl-role" data-i18n="job3.role">Accounting Analyst</div>
+        <div class="tl-period" data-i18n="job3.period">Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe</div>
         <div class="tl-body">
           <ul>
             <li data-i18n="job3.li1">Contabilidad de dos empresas del grupo: Tinsa S.A. (Cobro Express) y Avenida A.C.E.</li>
@@ -676,21 +934,18 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- ── Herramientas ── -->
+<!-- ── HERRAMIENTAS ── -->
 <section id="herramientas">
   <div class="container">
     <div class="sec-label reveal" data-i18n="tools.label">Stack</div>
-    <h2 class="sec-title reveal" data-i18n="tools.title">Herramientas &amp; Tecnologías</h2>
+    <h2 class="sec-title reveal">Herramientas <span class="gr">&amp; Tecnologías</span></h2>
     <div class="tools-wrap reveal" style="transition-delay:.1s">
       <div class="tool-group">
         <div class="tool-group-label" data-i18n="tools.g1">SAP / ERP</div>
         <div class="tags">
-          <span class="tag">SAP S/4HANA</span>
-          <span class="tag">SAP GL</span>
-          <span class="tag">SAP AA</span>
-          <span class="tag">SAP CO-PA</span>
-          <span class="tag">SAP MM</span>
-          <span class="tag">SAP SD</span>
+          <span class="tag">SAP S/4HANA</span><span class="tag">SAP GL</span>
+          <span class="tag">SAP AA</span><span class="tag">SAP CO-PA</span>
+          <span class="tag">SAP MM</span><span class="tag">SAP SD</span>
         </div>
       </div>
       <div class="tool-group">
@@ -704,10 +959,8 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
       <div class="tool-group">
         <div class="tool-group-label" data-i18n="tools.g3">Automatización e IA</div>
         <div class="tags">
-          <span class="tag">Make (Integromat)</span>
-          <span class="tag">N8N</span>
-          <span class="tag">ChatGPT</span>
-          <span class="tag">Claude (Anthropic)</span>
+          <span class="tag">Make (Integromat)</span><span class="tag">N8N</span>
+          <span class="tag">ChatGPT</span><span class="tag">Claude (Anthropic)</span>
         </div>
       </div>
       <div class="tool-group">
@@ -721,11 +974,11 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- ── Educación & Certificaciones ── -->
+<!-- ── EDUCACIÓN & CERTIFICACIONES ── -->
 <section id="educacion">
   <div class="container">
     <div class="sec-label reveal" data-i18n="edu.label">Formación</div>
-    <h2 class="sec-title reveal" data-i18n="edu.title">Educación &amp; Certificaciones</h2>
+    <h2 class="sec-title reveal">Educación <span class="gr">&amp; Certificaciones</span></h2>
     <div class="edu-certs-grid">
       <div>
         <div class="block-title reveal" data-i18n="edu.block1">Educación</div>
@@ -744,34 +997,22 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
         <div class="block-title reveal" data-i18n="edu.block2">Certificaciones Anthropic</div>
         <div class="cert-card reveal" style="transition-delay:.05s">
           <h3>Claude 101</h3>
-          <div class="cert-foot">
-            <span class="cert-issuer">Anthropic</span>
-            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
-          </div>
+          <div class="cert-foot"><span class="cert-issuer">Anthropic</span><span class="cert-date" data-i18n="cert.date">Mayo 2026</span></div>
           <div class="cert-id">ID: 9vn44b28ipy7</div>
         </div>
         <div class="cert-card reveal" style="transition-delay:.1s">
           <h3>Introduction to Subagents</h3>
-          <div class="cert-foot">
-            <span class="cert-issuer">Anthropic</span>
-            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
-          </div>
+          <div class="cert-foot"><span class="cert-issuer">Anthropic</span><span class="cert-date" data-i18n="cert.date">Mayo 2026</span></div>
           <div class="cert-id">ID: axanesehgvmj</div>
         </div>
         <div class="cert-card reveal" style="transition-delay:.15s">
           <h3>Introduction to Agent Skills</h3>
-          <div class="cert-foot">
-            <span class="cert-issuer">Anthropic</span>
-            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
-          </div>
+          <div class="cert-foot"><span class="cert-issuer">Anthropic</span><span class="cert-date" data-i18n="cert.date">Mayo 2026</span></div>
           <div class="cert-id">ID: p39cbwosk4h9</div>
         </div>
         <div class="cert-card reveal" style="transition-delay:.2s">
           <h3>Introduction to Claude Cowork</h3>
-          <div class="cert-foot">
-            <span class="cert-issuer">Anthropic</span>
-            <span class="cert-date" data-i18n="cert.date">Mayo 2026</span>
-          </div>
+          <div class="cert-foot"><span class="cert-issuer">Anthropic</span><span class="cert-date" data-i18n="cert.date">Mayo 2026</span></div>
           <div class="cert-id">ID: tivmauuokr4m</div>
         </div>
       </div>
@@ -781,18 +1022,21 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
 
 <!-- ── CTA ── -->
 <section id="cta">
-  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-aurora" aria-hidden="true"></div>
   <div class="container">
     <div class="cta-inner">
       <div class="cta-kicker reveal" data-i18n="cta.kicker">Conectemos</div>
-      <h2 class="cta-title reveal" data-i18n="cta.title">¿Tenés un proyecto donde estos skills hacen diferencia?</h2>
+      <h2 class="cta-title reveal">¿Tenés un proyecto donde estos <span class="gr">skills hacen diferencia</span>?</h2>
       <p class="cta-sub reveal" style="transition-delay:.1s" data-i18n="cta.sub">Reporting, SAP Analytics Cloud, automatización o IA aplicada a finanzas y controlling. Hablemos.</p>
       <div class="cta-btns reveal" style="transition-delay:.15s">
-        <a class="btn btn-primary" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          <span data-i18n="cta.btn1">Ver LinkedIn</span>
-        </a>
-        <a class="btn btn-outline" href="mailto:mcbriggiler@gmail.com">
+        <div class="btn-magnetic">
+          <a class="btn btn-primary sound-btn" href="https://www.linkedin.com/in/maximiliano-briggiler" target="_blank" rel="noopener" data-sound="click">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <span data-i18n="cta.btn1">Ver LinkedIn</span>
+          </a>
+        </div>
+        <a class="btn btn-outline sound-btn" href="mailto:mcbriggiler@gmail.com" data-sound="click">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           <span data-i18n="cta.btn2">mcbriggiler@gmail.com</span>
         </a>
       </div>
@@ -800,7 +1044,7 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
   </div>
 </section>
 
-<!-- ── Footer ── -->
+<!-- ── FOOTER ── -->
 <footer>
   <div class="container">
     <div class="footer-inner">
@@ -814,243 +1058,437 @@ footer { padding: 1.75rem 0; border-top: 1px solid var(--border); }
 </footer>
 
 <script>
-/* ── Translations ── */
+/* ══════════════════════════════════════════
+   TRANSLATIONS
+══════════════════════════════════════════ */
 var T = {
   es: {
-    'nav.about': 'Sobre mí', 'nav.expertise': 'Expertise', 'nav.experience': 'Experiencia',
-    'nav.tools': 'Herramientas', 'nav.cta': 'LinkedIn →',
-    'mob.about': 'Sobre mí', 'mob.expertise': 'Expertise', 'mob.experience': 'Experiencia',
-    'mob.tools': 'Herramientas', 'mob.contact': 'Contacto',
-    'hero.kicker': 'SAP Analytics Cloud Developer',
-    'hero.role': '<strong>15+ años</strong> en Reporting, Controlling y análisis financiero.<br>Hoy, potenciando ese expertise con <strong>IA y automatización</strong>.',
-    'hero.desc': 'Diseño dashboards en SAP Analytics Cloud, implemento soluciones SAP S/4HANA y automatizo procesos con Make, N8N y Claude. De los datos a las decisiones.',
-    'hero.btn1': 'Ver perfil en LinkedIn', 'hero.btn2': 'Contactame',
-    'about.label': 'Sobre mí', 'about.title': 'Datos → Decisiones estratégicas',
-    'about.p1': 'Con más de 15 años de experiencia, consolidé una sólida trayectoria en el diseño, implementación y optimización de soluciones de reporting y análisis de datos en sectores como Retail, Metalúrgico y Lácteo.',
-    'about.p2': 'Mi expertise abarca el manejo de SAP (GL, AA, CO-PA) y el desarrollo de dashboards personalizados en SAP Analytics Cloud, Excel y Data Studio. Como Key User SAP S/4HANA, lideré la configuración y adaptaciones necesarias para alinear el sistema con los objetivos de negocio.',
-    'about.p3': 'Hoy exploro las posibilidades que ofrece la IA para revolucionar la automatización de procesos y la toma de decisiones estratégicas, usando Make, N8N, ChatGPT y Claude.',
-    'stat1.n': '15+', 'stat1.l': 'Años en Reporting y Controlling',
-    'stat2.n': '3',   'stat2.l': 'Sectores: Retail, Metalúrgico y Lácteo',
-    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
-    'stat4.n': 'IA',  'stat4.l': 'Automatización con Make, N8N y Claude',
-    'exp.label': 'Qué hago', 'exp.title': 'Áreas de especialización',
-    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': 'Dashboards interactivos, modelado de datos, integración de fuentes, KPIs y reportes para toma de decisiones estratégicas.',
-    'exp.c2.title': 'Controlling & Finanzas', 'exp.c2.desc': 'P&L por segmento, cierre GL-CO-AA, análisis de desvíos vs. Budget, KPIs financieros mensuales y reportes a gerencia.',
-    'exp.c3.title': 'Automatización e IA', 'exp.c3.desc': 'Automatización de procesos con Make y N8N. Integración de IA (ChatGPT, Claude) para análisis inteligente y decisiones asistidas.',
-    'exp.c4.title': 'Reporting Estratégico', 'exp.c4.desc': 'Diseño e implementación end-to-end de soluciones de reporting en sectores retail, metalúrgico y lácteo.',
-    'traj.label': 'Trayectoria', 'traj.title': 'Experiencia profesional',
-    'job1.role': 'Key User SAP · Analista de Contabilidad y Controlling',
-    'job1.period': 'Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido',
-    'job1.li1': 'Implementación SAP GL-AA (feb. 2019 – nov. 2019). Participación en todos los módulos vinculados con GL.',
-    'job1.li2': 'Desarrollo e implementación end-to-end de dashboards en SAP Analytics Cloud: modelado, integración de fuentes, KPIs y tableros interactivos.',
-    'job1.li3': 'Procesos de cierre GL-CO-AA. P&L Total empresa, CeBe, Clientes, Vendedores y Oficina de venta.',
-    'job1.li4': 'Cálculo de KPIs mensuales: plazo de pago/cobro, Aging de clientes, rotación de inventario.',
-    'job1.li5': 'Parametrización de datos maestros: MM-SD, cuentas GL, OBYC, activos fijos, pruebas en QA.',
-    'job2.role': 'Controlling Analyst',
-    'job2.period': 'Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe',
-    'job2.li1': 'Cálculo de tasas estándar por centro de costo para cotización y valuación de piezas en SAP.',
-    'job2.li2': 'Cotizaciones mercado original y reposición. Break down de costos, comparativa entre países.',
-    'job2.li3': 'Book Gerencial mensual con principales KPIs económicos y financieros.',
-    'job2.li4': 'Reportes de Ventas y Resultados por mercado/segmento a Controlling Regional. Implementación CO-PA.',
-    'job2.li5': 'Control de Capex vs. Forecast/Budget. Análisis Intercompany. Índice de inflación interna.',
-    'job3.role': 'Accounting Analyst',
-    'job3.period': 'Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe',
-    'job3.li1': 'Contabilidad de dos empresas del grupo: Tinsa S.A. (Cobro Express) y Avenida A.C.E.',
-    'job3.li2': 'Seguimiento de cuenta corriente de proveedores. Conciliación de deuda bancaria.',
-    'job3.li3': 'Conciliaciones bancarias y cierre contable mensual.',
-    'tools.label': 'Stack', 'tools.title': 'Herramientas & Tecnologías',
-    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'Automatización e IA', 'tools.g4': 'Idiomas',
-    'tools.lang1': 'Español (Nativo)', 'tools.lang2': 'Inglés (Competencia profesional)',
-    'edu.label': 'Formación', 'edu.title': 'Educación & Certificaciones',
-    'edu.block1': 'Educación', 'edu.block2': 'Certificaciones Anthropic',
-    'edu.deg1': 'Contador Público', 'edu.deg2': 'Especialización en Costos y Gestión Empresarial',
-    'cert.date': 'Mayo 2026',
-    'cta.kicker': 'Conectemos',
-    'cta.title': '¿Tenés un proyecto donde estos skills hacen diferencia?',
-    'cta.sub': 'Reporting, SAP Analytics Cloud, automatización o IA aplicada a finanzas y controlling. Hablemos.',
-    'cta.btn1': 'Ver LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
-    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentina'
+    'nav.about':'Sobre mí','nav.expertise':'Expertise','nav.experience':'Experiencia','nav.tools':'Herramientas','nav.cta':'LinkedIn →',
+    'mob.about':'Sobre mí','mob.expertise':'Expertise','mob.experience':'Experiencia','mob.tools':'Herramientas','mob.contact':'Contacto',
+    'hero.kicker':'SAP Analytics Cloud Developer',
+    'hero.role':'<strong>15+ años</strong> en Reporting, Controlling y análisis financiero.<br>Hoy, potenciando ese expertise con <strong>IA y automatización</strong>.',
+    'hero.desc':'Diseño dashboards en SAP Analytics Cloud, implemento soluciones SAP S/4HANA y automatizo procesos con Make, N8N y Claude. De los datos a las decisiones.',
+    'hero.btn1':'Ver perfil en LinkedIn','hero.btn2':'Contactame',
+    'about.label':'Sobre mí',
+    'about.p1':'Con más de 15 años de experiencia, consolidé una sólida trayectoria en el diseño, implementación y optimización de soluciones de reporting y análisis de datos en sectores como Retail, Metalúrgico y Lácteo.',
+    'about.p2':'Mi expertise abarca el manejo de SAP (GL, AA, CO-PA) y el desarrollo de dashboards personalizados en SAP Analytics Cloud, Excel y Data Studio. Como Key User SAP S/4HANA, lideré la configuración y adaptaciones necesarias para alinear el sistema con los objetivos de negocio.',
+    'about.p3':'Hoy exploro las posibilidades que ofrece la IA para revolucionar la automatización de procesos y la toma de decisiones estratégicas, usando Make, N8N, ChatGPT y Claude.',
+    'stat1.l':'Años en Reporting y Controlling','stat2.l':'Sectores: Retail, Metalúrgico y Lácteo',
+    'stat3.n':'SAP','stat3.l':'Key User S/4HANA — GL, AA, CO-PA','stat4.n':'IA','stat4.l':'Automatización con Make, N8N y Claude',
+    'exp.label':'Qué hago','exp.c1.title':'SAP Analytics Cloud','exp.c1.desc':'Dashboards interactivos, modelado de datos, integración de fuentes, KPIs y reportes para toma de decisiones estratégicas.',
+    'exp.c2.title':'Controlling & Finanzas','exp.c2.desc':'P&L por segmento, cierre GL-CO-AA, análisis de desvíos vs. Budget, KPIs financieros mensuales y reportes a gerencia.',
+    'exp.c3.title':'Automatización e IA','exp.c3.desc':'Automatización de procesos con Make y N8N. Integración de IA (ChatGPT, Claude) para análisis inteligente y decisiones asistidas.',
+    'exp.c4.title':'Reporting Estratégico','exp.c4.desc':'Diseño e implementación end-to-end de soluciones de reporting en sectores retail, metalúrgico y lácteo.',
+    'traj.label':'Trayectoria','job1.role':'Key User SAP · Analista de Contabilidad y Controlling',
+    'job1.period':'Julio 2017 – Actualidad · 8 años 11 meses · Rafaela, Santa Fe · Híbrido',
+    'job1.li1':'Implementación SAP GL-AA (feb. 2019 – nov. 2019). Participación en todos los módulos vinculados con GL.',
+    'job1.li2':'Desarrollo e implementación end-to-end de dashboards en SAP Analytics Cloud: modelado, integración de fuentes, KPIs y tableros interactivos.',
+    'job1.li3':'Procesos de cierre GL-CO-AA. P&L Total empresa, CeBe, Clientes, Vendedores y Oficina de venta.',
+    'job1.li4':'Cálculo de KPIs mensuales: plazo de pago/cobro, Aging de clientes, rotación de inventario.',
+    'job1.li5':'Parametrización de datos maestros: MM-SD, cuentas GL, OBYC, activos fijos, pruebas en QA.',
+    'job2.role':'Controlling Analyst','job2.period':'Agosto 2009 – Julio 2017 · 8 años · Rafaela, Santa Fe',
+    'job2.li1':'Cálculo de tasas estándar por centro de costo para cotización y valuación de piezas en SAP.',
+    'job2.li2':'Cotizaciones mercado original y reposición. Break down de costos, comparativa entre países.',
+    'job2.li3':'Book Gerencial mensual con principales KPIs económicos y financieros.',
+    'job2.li4':'Reportes de Ventas y Resultados por mercado/segmento a Controlling Regional. Implementación CO-PA.',
+    'job2.li5':'Control de Capex vs. Forecast/Budget. Análisis Intercompany. Índice de inflación interna.',
+    'job3.role':'Accounting Analyst','job3.period':'Noviembre 2003 – Diciembre 2008 · 5 años 2 meses · Rafaela, Santa Fe',
+    'job3.li1':'Contabilidad de dos empresas del grupo: Tinsa S.A. (Cobro Express) y Avenida A.C.E.',
+    'job3.li2':'Seguimiento de cuenta corriente de proveedores. Conciliación de deuda bancaria.',
+    'job3.li3':'Conciliaciones bancarias y cierre contable mensual.',
+    'tools.label':'Stack','tools.g1':'SAP / ERP','tools.g2':'BI / Analytics','tools.g3':'Automatización e IA','tools.g4':'Idiomas',
+    'tools.lang1':'Español (Nativo)','tools.lang2':'Inglés (Competencia profesional)',
+    'edu.label':'Formación','edu.block1':'Educación','edu.block2':'Certificaciones Anthropic',
+    'edu.deg1':'Contador Público','edu.deg2':'Especialización en Costos y Gestión Empresarial','cert.date':'Mayo 2026',
+    'rec.label':'Recomendación','rec.quote':'"Maximiliano es un compañero responsable y eficiente. Realmente comprometido con su trabajo, al que le asigna su mayor dedicación."',
+    'rec.author':'Natalia Bustos','rec.role':'Colega de equipo · Octubre 2012',
+    'cta.kicker':'Conectemos','cta.sub':'Reporting, SAP Analytics Cloud, automatización o IA aplicada a finanzas y controlling. Hablemos.',
+    'cta.btn1':'Ver LinkedIn','cta.btn2':'mcbriggiler@gmail.com','footer.copy':'© 2026 Maximiliano Briggiler · Rafaela, Argentina'
   },
-
   en: {
-    'nav.about': 'About', 'nav.expertise': 'Expertise', 'nav.experience': 'Experience',
-    'nav.tools': 'Tools', 'nav.cta': 'LinkedIn →',
-    'mob.about': 'About', 'mob.expertise': 'Expertise', 'mob.experience': 'Experience',
-    'mob.tools': 'Tools', 'mob.contact': 'Contact',
-    'hero.kicker': 'SAP Analytics Cloud Developer',
-    'hero.role': '<strong>15+ years</strong> in Reporting, Controlling and financial analysis.<br>Now, enhancing that expertise with <strong>AI and automation</strong>.',
-    'hero.desc': 'I design dashboards in SAP Analytics Cloud, implement SAP S/4HANA solutions and automate processes with Make, N8N and Claude. From data to decisions.',
-    'hero.btn1': 'View LinkedIn profile', 'hero.btn2': 'Contact me',
-    'about.label': 'About me', 'about.title': 'Data → Strategic Decisions',
-    'about.p1': 'With over 15 years of experience, I have built a solid career designing, implementing and optimizing reporting and data analysis solutions across Retail, Metallurgical and Dairy sectors.',
-    'about.p2': 'My expertise covers SAP (GL, AA, CO-PA) and the development of custom dashboards in SAP Analytics Cloud, Excel and Data Studio. As SAP S/4HANA Key User, I led the configuration and adaptations needed to align the system with business objectives.',
-    'about.p3': 'Today I explore the possibilities offered by AI to revolutionize process automation and strategic decision-making, using Make, N8N, ChatGPT and Claude.',
-    'stat1.n': '15+', 'stat1.l': 'Years in Reporting and Controlling',
-    'stat2.n': '3',   'stat2.l': 'Sectors: Retail, Metallurgical and Dairy',
-    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
-    'stat4.n': 'AI',  'stat4.l': 'Automation with Make, N8N and Claude',
-    'exp.label': 'What I do', 'exp.title': 'Areas of expertise',
-    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': 'Interactive dashboards, data modeling, source integration, KPIs and reports for strategic decision-making.',
-    'exp.c2.title': 'Controlling & Finance', 'exp.c2.desc': 'P&L by segment, GL-CO-AA closing, variance analysis vs. Budget, monthly financial KPIs and management reports.',
-    'exp.c3.title': 'AI & Automation', 'exp.c3.desc': 'Process automation with Make and N8N. AI integration (ChatGPT, Claude) for intelligent analysis and assisted decisions.',
-    'exp.c4.title': 'Strategic Reporting', 'exp.c4.desc': 'End-to-end design and implementation of reporting solutions in retail, metallurgical and dairy sectors.',
-    'traj.label': 'Career', 'traj.title': 'Professional experience',
-    'job1.role': 'Key User SAP · Accounting & Controlling Analyst',
-    'job1.period': 'July 2017 – Present · 8 years 11 months · Rafaela, Santa Fe · Hybrid',
-    'job1.li1': 'SAP GL-AA implementation (Feb. 2019 – Nov. 2019). Participation in all modules linked to GL.',
-    'job1.li2': 'End-to-end development and implementation of SAP Analytics Cloud dashboards: data modeling, source integration, KPIs and interactive reports.',
-    'job1.li3': 'GL-CO-AA closing processes. P&L for the company, cost centers, customers, sales reps and sales office.',
-    'job1.li4': 'Monthly KPI calculation: payment/collection terms, customer aging, inventory turnover.',
-    'job1.li5': 'Master data configuration: MM-SD, GL accounts, OBYC, fixed assets, QA testing.',
-    'job2.role': 'Controlling Analyst',
-    'job2.period': 'August 2009 – July 2017 · 8 years · Rafaela, Santa Fe',
-    'job2.li1': 'Standard cost rate calculation by cost center for SAP pricing and part valuation.',
-    'job2.li2': 'OEM and aftermarket quotations. Cost breakdown, cross-country comparison.',
-    'job2.li3': 'Monthly management report with key economic and financial KPIs.',
-    'job2.li4': 'Sales and results reports by market/segment to Regional Controlling. CO-PA implementation.',
-    'job2.li5': 'Capex control vs. Forecast/Budget. Intercompany analysis. Internal inflation index.',
-    'job3.role': 'Accounting Analyst',
-    'job3.period': 'November 2003 – December 2008 · 5 years 2 months · Rafaela, Santa Fe',
-    'job3.li1': 'Accounting for two group companies: Tinsa S.A. (Cobro Express) and Avenida A.C.E.',
-    'job3.li2': 'Supplier accounts payable monitoring. Bank debt reconciliation.',
-    'job3.li3': 'Bank reconciliations and monthly accounting close.',
-    'tools.label': 'Stack', 'tools.title': 'Tools & Technologies',
-    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'AI & Automation', 'tools.g4': 'Languages',
-    'tools.lang1': 'Spanish (Native)', 'tools.lang2': 'English (Professional proficiency)',
-    'edu.label': 'Education', 'edu.title': 'Education & Certifications',
-    'edu.block1': 'Education', 'edu.block2': 'Anthropic Certifications',
-    'edu.deg1': 'Certified Public Accountant', 'edu.deg2': 'Specialization in Cost Management & Business Administration',
-    'cert.date': 'May 2026',
-    'cta.kicker': "Let's connect",
-    'cta.title': 'Got a project where these skills make a difference?',
-    'cta.sub': 'Reporting, SAP Analytics Cloud, automation or AI applied to finance and controlling. Let\'s talk.',
-    'cta.btn1': 'View LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
-    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentina'
+    'nav.about':'About','nav.expertise':'Expertise','nav.experience':'Experience','nav.tools':'Tools','nav.cta':'LinkedIn →',
+    'mob.about':'About','mob.expertise':'Expertise','mob.experience':'Experience','mob.tools':'Tools','mob.contact':'Contact',
+    'hero.kicker':'SAP Analytics Cloud Developer',
+    'hero.role':'<strong>15+ years</strong> in Reporting, Controlling and financial analysis.<br>Now, enhancing that expertise with <strong>AI and automation</strong>.',
+    'hero.desc':'I design dashboards in SAP Analytics Cloud, implement SAP S/4HANA solutions and automate processes with Make, N8N and Claude. From data to decisions.',
+    'hero.btn1':'View LinkedIn profile','hero.btn2':'Contact me',
+    'about.label':'About me',
+    'about.p1':'With over 15 years of experience, I have built a solid career designing, implementing and optimizing reporting and data analysis solutions across Retail, Metallurgical and Dairy sectors.',
+    'about.p2':'My expertise covers SAP (GL, AA, CO-PA) and custom dashboards in SAP Analytics Cloud, Excel and Data Studio. As SAP S/4HANA Key User, I led the configuration and adaptations to align the system with business objectives.',
+    'about.p3':'Today I explore AI possibilities to revolutionize process automation and strategic decision-making, using Make, N8N, ChatGPT and Claude.',
+    'stat1.l':'Years in Reporting and Controlling','stat2.l':'Sectors: Retail, Metallurgical and Dairy',
+    'stat3.n':'SAP','stat3.l':'Key User S/4HANA — GL, AA, CO-PA','stat4.n':'AI','stat4.l':'Automation with Make, N8N and Claude',
+    'exp.label':'What I do','exp.c1.title':'SAP Analytics Cloud','exp.c1.desc':'Interactive dashboards, data modeling, source integration, KPIs and reports for strategic decision-making.',
+    'exp.c2.title':'Controlling & Finance','exp.c2.desc':'P&L by segment, GL-CO-AA closing, variance analysis vs. Budget, monthly KPIs and management reports.',
+    'exp.c3.title':'AI & Automation','exp.c3.desc':'Process automation with Make and N8N. AI integration (ChatGPT, Claude) for intelligent analysis and assisted decisions.',
+    'exp.c4.title':'Strategic Reporting','exp.c4.desc':'End-to-end design and implementation of reporting solutions in retail, metallurgical and dairy sectors.',
+    'traj.label':'Career','job1.role':'Key User SAP · Accounting & Controlling Analyst',
+    'job1.period':'July 2017 – Present · 8 years 11 months · Rafaela, Santa Fe · Hybrid',
+    'job1.li1':'SAP GL-AA implementation (Feb. 2019 – Nov. 2019). Participation in all modules linked to GL.',
+    'job1.li2':'End-to-end SAP Analytics Cloud dashboard development: data modeling, source integration, KPIs and interactive reports.',
+    'job1.li3':'GL-CO-AA closing processes. P&L for company, cost centers, customers, sales reps and sales office.',
+    'job1.li4':'Monthly KPI calculation: payment/collection terms, customer aging, inventory turnover.',
+    'job1.li5':'Master data configuration: MM-SD, GL accounts, OBYC, fixed assets, QA testing.',
+    'job2.role':'Controlling Analyst','job2.period':'August 2009 – July 2017 · 8 years · Rafaela, Santa Fe',
+    'job2.li1':'Standard cost rate calculation by cost center for SAP pricing and part valuation.',
+    'job2.li2':'OEM and aftermarket quotations. Cost breakdown, cross-country comparison.',
+    'job2.li3':'Monthly management report with key economic and financial KPIs.',
+    'job2.li4':'Sales and results reports by market/segment to Regional Controlling. CO-PA implementation.',
+    'job2.li5':'Capex control vs. Forecast/Budget. Intercompany analysis. Internal inflation index.',
+    'job3.role':'Accounting Analyst','job3.period':'November 2003 – December 2008 · 5 years 2 months · Rafaela, Santa Fe',
+    'job3.li1':'Accounting for two group companies: Tinsa S.A. (Cobro Express) and Avenida A.C.E.',
+    'job3.li2':'Supplier accounts payable monitoring. Bank debt reconciliation.',
+    'job3.li3':'Bank reconciliations and monthly accounting close.',
+    'tools.label':'Stack','tools.g1':'SAP / ERP','tools.g2':'BI / Analytics','tools.g3':'AI & Automation','tools.g4':'Languages',
+    'tools.lang1':'Spanish (Native)','tools.lang2':'English (Professional proficiency)',
+    'edu.label':'Education','edu.block1':'Education','edu.block2':'Anthropic Certifications',
+    'edu.deg1':'Certified Public Accountant','edu.deg2':'Specialization in Cost Management & Business Administration','cert.date':'May 2026',
+    'rec.label':'Recommendation','rec.quote':'"Maximiliano is a responsible and efficient colleague. Truly committed to his work, to which he dedicates his full effort."',
+    'rec.author':'Natalia Bustos','rec.role':'Team colleague · October 2012',
+    'cta.kicker':"Let's connect",'cta.sub':'Reporting, SAP Analytics Cloud, automation or AI applied to finance and controlling. Let\'s talk.',
+    'cta.btn1':'View LinkedIn','cta.btn2':'mcbriggiler@gmail.com','footer.copy':'© 2026 Maximiliano Briggiler · Rafaela, Argentina'
   },
-
   fr: {
-    'nav.about': 'À propos', 'nav.expertise': 'Expertise', 'nav.experience': 'Expérience',
-    'nav.tools': 'Outils', 'nav.cta': 'LinkedIn →',
-    'mob.about': 'À propos', 'mob.expertise': 'Expertise', 'mob.experience': 'Expérience',
-    'mob.tools': 'Outils', 'mob.contact': 'Contact',
-    'hero.kicker': 'Développeur SAP Analytics Cloud',
-    'hero.role': '<strong>15+ ans</strong> en Reporting, Contrôle de gestion et analyse financière.<br>Aujourd\'hui, valorisant cette expertise avec <strong>l\'IA et l\'automatisation</strong>.',
-    'hero.desc': 'Je conçois des tableaux de bord dans SAP Analytics Cloud, implémente des solutions SAP S/4HANA et automatise les processus avec Make, N8N et Claude. Des données aux décisions.',
-    'hero.btn1': 'Voir le profil LinkedIn', 'hero.btn2': 'Me contacter',
-    'about.label': 'À propos', 'about.title': 'Données → Décisions stratégiques',
-    'about.p1': "Fort de plus de 15 ans d'expérience, j'ai bâti un solide parcours dans la conception, l'implémentation et l'optimisation de solutions de reporting et d'analyse de données dans les secteurs du Retail, de la Métallurgie et des Produits laitiers.",
-    'about.p2': "Mon expertise couvre SAP (GL, AA, CO-PA) et le développement de tableaux de bord personnalisés dans SAP Analytics Cloud, Excel et Data Studio. En tant que Key User SAP S/4HANA, j'ai piloté la configuration et les adaptations nécessaires pour aligner le système avec les objectifs métier.",
-    'about.p3': "Aujourd'hui, j'explore les possibilités offertes par l'IA pour révolutionner l'automatisation des processus et la prise de décision stratégique, en utilisant Make, N8N, ChatGPT et Claude.",
-    'stat1.n': '15+', 'stat1.l': 'Ans en Reporting et Contrôle de gestion',
-    'stat2.n': '3',   'stat2.l': 'Secteurs : Retail, Métallurgie et Produits laitiers',
-    'stat3.n': 'SAP', 'stat3.l': 'Key User S/4HANA — GL, AA, CO-PA',
-    'stat4.n': 'IA',  'stat4.l': "Automatisation avec Make, N8N et Claude",
-    'exp.label': 'Ce que je fais', 'exp.title': 'Domaines de spécialisation',
-    'exp.c1.title': 'SAP Analytics Cloud', 'exp.c1.desc': "Tableaux de bord interactifs, modélisation des données, intégration de sources, KPIs et rapports pour la prise de décision stratégique.",
-    'exp.c2.title': 'Contrôle de gestion & Finance', 'exp.c2.desc': "P&L par segment, clôture GL-CO-AA, analyse des écarts vs. Budget, KPIs financiers mensuels et rapports à la direction.",
-    'exp.c3.title': 'IA & Automatisation', 'exp.c3.desc': "Automatisation des processus avec Make et N8N. Intégration de l'IA (ChatGPT, Claude) pour l'analyse intelligente et les décisions assistées.",
-    'exp.c4.title': 'Reporting stratégique', 'exp.c4.desc': "Conception et implémentation end-to-end de solutions de reporting dans les secteurs retail, métallurgique et laitier.",
-    'traj.label': 'Parcours', 'traj.title': 'Expérience professionnelle',
-    'job1.role': 'Key User SAP · Analyste Comptabilité et Contrôle de gestion',
-    'job1.period': 'Juillet 2017 – Présent · 8 ans 11 mois · Rafaela, Santa Fe · Hybride',
-    'job1.li1': 'Implémentation SAP GL-AA (fév. 2019 – nov. 2019). Participation à tous les modules liés au GL.',
-    'job1.li2': "Développement et implémentation end-to-end de tableaux de bord SAP Analytics Cloud : modélisation, intégration de sources, KPIs et rapports interactifs.",
-    'job1.li3': "Processus de clôture GL-CO-AA. P&L entreprise, centres de coûts, clients, commerciaux et bureau de vente.",
-    'job1.li4': "Calcul mensuel des KPIs : délais de paiement/encaissement, aging clients, rotation des stocks.",
-    'job1.li5': "Paramétrage des données de base : MM-SD, comptes GL, OBYC, immobilisations, tests QA.",
-    'job2.role': 'Analyste Contrôle de gestion',
-    'job2.period': 'Août 2009 – Juillet 2017 · 8 ans · Rafaela, Santa Fe',
-    'job2.li1': "Calcul des taux standard par centre de coûts pour la cotation et l'évaluation des pièces dans SAP.",
-    'job2.li2': "Cotations marché OEM et rechange. Décomposition des coûts, comparatif entre pays.",
-    'job2.li3': "Rapport de gestion mensuel avec les principaux KPIs économiques et financiers.",
-    'job2.li4': "Rapports de ventes et résultats par marché/segment au Controlling Régional. Implémentation CO-PA.",
-    'job2.li5': "Contrôle du Capex vs. Prévisions/Budget. Analyse Intercompany. Indice d'inflation interne.",
-    'job3.role': 'Analyste Comptable',
-    'job3.period': 'Novembre 2003 – Décembre 2008 · 5 ans 2 mois · Rafaela, Santa Fe',
-    'job3.li1': 'Comptabilité de deux sociétés du groupe : Tinsa S.A. (Cobro Express) et Avenida A.C.E.',
-    'job3.li2': 'Suivi des comptes fournisseurs. Rapprochement de la dette bancaire.',
-    'job3.li3': 'Rapprochements bancaires et clôture comptable mensuelle.',
-    'tools.label': 'Stack', 'tools.title': 'Outils & Technologies',
-    'tools.g1': 'SAP / ERP', 'tools.g2': 'BI / Analytics', 'tools.g3': 'IA & Automatisation', 'tools.g4': 'Langues',
-    'tools.lang1': 'Espagnol (Natif)', 'tools.lang2': 'Anglais (Maîtrise professionnelle)',
-    'edu.label': 'Formation', 'edu.title': 'Formation & Certifications',
-    'edu.block1': 'Formation', 'edu.block2': 'Certifications Anthropic',
-    'edu.deg1': 'Expert-Comptable', 'edu.deg2': "Spécialisation en Gestion des Coûts et Administration des Entreprises",
-    'cert.date': 'Mai 2026',
-    'cta.kicker': 'Connectons-nous',
-    'cta.title': 'Vous avez un projet où ces compétences font la différence ?',
-    'cta.sub': "Reporting, SAP Analytics Cloud, automatisation ou IA appliquée aux finances et au contrôle de gestion. Parlons-en.",
-    'cta.btn1': 'Voir LinkedIn', 'cta.btn2': 'mcbriggiler@gmail.com',
-    'footer.copy': '© 2026 Maximiliano Briggiler · Rafaela, Argentine'
+    'nav.about':'À propos','nav.expertise':'Expertise','nav.experience':'Expérience','nav.tools':'Outils','nav.cta':'LinkedIn →',
+    'mob.about':'À propos','mob.expertise':'Expertise','mob.experience':'Expérience','mob.tools':'Outils','mob.contact':'Contact',
+    'hero.kicker':'Développeur SAP Analytics Cloud',
+    'hero.role':'<strong>15+ ans</strong> en Reporting, Contrôle de gestion et analyse financière.<br>Aujourd\'hui, valorisant cette expertise avec <strong>l\'IA et l\'automatisation</strong>.',
+    'hero.desc':'Je conçois des tableaux de bord dans SAP Analytics Cloud, implémente des solutions SAP S/4HANA et automatise les processus avec Make, N8N et Claude.',
+    'hero.btn1':'Voir le profil LinkedIn','hero.btn2':'Me contacter',
+    'about.label':'À propos',
+    'about.p1':"Fort de plus de 15 ans d'expérience, j'ai bâti un solide parcours dans la conception, l'implémentation et l'optimisation de solutions de reporting et d'analyse de données.",
+    'about.p2':"Mon expertise couvre SAP (GL, AA, CO-PA) et le développement de tableaux de bord dans SAP Analytics Cloud, Excel et Data Studio. En tant que Key User SAP S/4HANA, j'ai piloté la configuration.",
+    'about.p3':"Aujourd'hui, j'explore les possibilités offertes par l'IA pour révolutionner l'automatisation des processus, en utilisant Make, N8N, ChatGPT et Claude.",
+    'stat1.l':'Ans en Reporting et Contrôle de gestion','stat2.l':'Secteurs : Retail, Métallurgie et Produits laitiers',
+    'stat3.n':'SAP','stat3.l':'Key User S/4HANA — GL, AA, CO-PA','stat4.n':'IA','stat4.l':'Automatisation avec Make, N8N et Claude',
+    'exp.label':'Ce que je fais','exp.c1.title':'SAP Analytics Cloud','exp.c1.desc':"Tableaux de bord interactifs, modélisation des données, intégration de sources, KPIs et rapports pour la prise de décision.",
+    'exp.c2.title':'Contrôle de gestion & Finance','exp.c2.desc':"P&L par segment, clôture GL-CO-AA, analyse des écarts vs. Budget, KPIs financiers mensuels.",
+    'exp.c3.title':'IA & Automatisation','exp.c3.desc':"Automatisation des processus avec Make et N8N. Intégration de l'IA (ChatGPT, Claude).",
+    'exp.c4.title':'Reporting stratégique','exp.c4.desc':"Conception et implémentation end-to-end de solutions de reporting dans les secteurs retail, métallurgique et laitier.",
+    'traj.label':'Parcours','job1.role':'Key User SAP · Analyste Comptabilité et Contrôle de gestion',
+    'job1.period':'Juillet 2017 – Présent · 8 ans 11 mois · Rafaela, Santa Fe · Hybride',
+    'job1.li1':'Implémentation SAP GL-AA (fév. 2019 – nov. 2019). Participation à tous les modules liés au GL.',
+    'job1.li2':"Développement end-to-end de tableaux de bord SAP Analytics Cloud : modélisation, KPIs et rapports.",
+    'job1.li3':"Processus de clôture GL-CO-AA. P&L entreprise, centres de coûts, clients et bureau de vente.",
+    'job1.li4':"Calcul mensuel des KPIs : délais de paiement/encaissement, aging clients, rotation des stocks.",
+    'job1.li5':"Paramétrage des données de base : MM-SD, comptes GL, OBYC, immobilisations, tests QA.",
+    'job2.role':'Analyste Contrôle de gestion','job2.period':'Août 2009 – Juillet 2017 · 8 ans · Rafaela, Santa Fe',
+    'job2.li1':"Calcul des taux standard par centre de coûts pour la cotation et l'évaluation des pièces dans SAP.",
+    'job2.li2':"Cotations marché OEM et rechange. Décomposition des coûts, comparatif entre pays.",
+    'job2.li3':"Rapport de gestion mensuel avec les principaux KPIs économiques et financiers.",
+    'job2.li4':"Rapports de ventes et résultats par marché/segment au Controlling Régional. Implémentation CO-PA.",
+    'job2.li5':"Contrôle du Capex vs. Prévisions/Budget. Analyse Intercompany.",
+    'job3.role':'Analyste Comptable','job3.period':'Novembre 2003 – Décembre 2008 · 5 ans 2 mois · Rafaela, Santa Fe',
+    'job3.li1':'Comptabilité de deux sociétés du groupe : Tinsa S.A. (Cobro Express) et Avenida A.C.E.',
+    'job3.li2':'Suivi des comptes fournisseurs. Rapprochement de la dette bancaire.',
+    'job3.li3':'Rapprochements bancaires et clôture comptable mensuelle.',
+    'tools.label':'Stack','tools.g1':'SAP / ERP','tools.g2':'BI / Analytics','tools.g3':'IA & Automatisation','tools.g4':'Langues',
+    'tools.lang1':'Espagnol (Natif)','tools.lang2':'Anglais (Maîtrise professionnelle)',
+    'edu.label':'Formation','edu.block1':'Formation','edu.block2':'Certifications Anthropic',
+    'edu.deg1':'Expert-Comptable','edu.deg2':"Spécialisation en Gestion des Coûts et Administration des Entreprises",'cert.date':'Mai 2026',
+    'rec.label':'Recommandation','rec.quote':'"Maximiliano est un collègue responsable et efficace. Vraiment engagé dans son travail, auquel il consacre toute sa dévotion."',
+    'rec.author':'Natalia Bustos','rec.role':"Collègue d'équipe · Octobre 2012",
+    'cta.kicker':'Connectons-nous','cta.sub':"Reporting, SAP Analytics Cloud, automatisation ou IA appliquée aux finances. Parlons-en.",
+    'cta.btn1':'Voir LinkedIn','cta.btn2':'mcbriggiler@gmail.com','footer.copy':'© 2026 Maximiliano Briggiler · Rafaela, Argentine'
   }
 };
 
-/* ── i18n engine ── */
+/* ══════════════════════════════════════════
+   I18N ENGINE
+══════════════════════════════════════════ */
 var currentLang = localStorage.getItem('lang') || 'es';
-
 function applyLang(lang) {
-  var dict = T[lang];
-  if (!dict) return;
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
+  var dict = T[lang]; if (!dict) return;
+  currentLang = lang; localStorage.setItem('lang', lang);
   document.documentElement.lang = lang;
-
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
-    var key = el.getAttribute('data-i18n');
-    if (dict[key] !== undefined) el.textContent = dict[key];
+    var k = el.getAttribute('data-i18n');
+    if (dict[k] !== undefined) el.textContent = dict[k];
   });
-
   document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
-    var key = el.getAttribute('data-i18n-html');
-    if (dict[key] !== undefined) el.innerHTML = dict[key];
+    var k = el.getAttribute('data-i18n-html');
+    if (dict[k] !== undefined) el.innerHTML = dict[k];
   });
-
-  document.querySelectorAll('.lang-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
+  document.querySelectorAll('.lang-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.lang === lang);
   });
 }
-
-/* Delegate all lang-btn clicks (nav + mobile) */
 document.addEventListener('click', function(e) {
-  var btn = e.target.closest('.lang-btn');
-  if (btn && btn.dataset.lang) applyLang(btn.dataset.lang);
+  var b = e.target.closest('.lang-btn');
+  if (b && b.dataset.lang) applyLang(b.dataset.lang);
 });
-
-/* Init on load */
 applyLang(currentLang);
 
-/* ── Nav scroll ── */
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════ */
+(function() {
+  var dot = document.getElementById('cursor-dot');
+  var ring = document.getElementById('cursor-ring');
+  var mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', function(e) {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+  });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+  var hoverTargets = 'a, button, .stat, .exp-card, .cert-card, .tag, .testimonial, .tl-body';
+  document.querySelectorAll(hoverTargets).forEach(function(el) {
+    el.addEventListener('mouseenter', function() { document.body.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', function() { document.body.classList.remove('cursor-hover'); });
+  });
+})();
+
+/* ══════════════════════════════════════════
+   SCROLL PROGRESS
+══════════════════════════════════════════ */
+var progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', function() {
+  var h = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════════
+   NAV SCROLL + SPY
+══════════════════════════════════════════ */
 var nav = document.getElementById('mainNav');
 window.addEventListener('scroll', function() {
   nav.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
-/* ── Mobile nav ── */
+var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+var spySections = ['sobre-mi','expertise','experiencia','herramientas','educacion','cta'];
+var spyObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      navLinks.forEach(function(a) {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+spySections.forEach(function(id) { var s = document.getElementById(id); if (s) spyObs.observe(s); });
+
+/* ══════════════════════════════════════════
+   MOBILE NAV
+══════════════════════════════════════════ */
 var hamburger = document.getElementById('hamburger');
 var mobNav    = document.getElementById('mobNav');
 var mobClose  = document.getElementById('mobClose');
-
 hamburger.addEventListener('click', function() {
   mobNav.classList.add('open');
-  hamburger.setAttribute('aria-expanded', 'true');
+  hamburger.setAttribute('aria-expanded','true');
   document.body.style.overflow = 'hidden';
 });
 function closeMob() {
   mobNav.classList.remove('open');
-  hamburger.setAttribute('aria-expanded', 'false');
+  hamburger.setAttribute('aria-expanded','false');
   document.body.style.overflow = '';
 }
 mobClose.addEventListener('click', closeMob);
 mobNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMob); });
 
-/* ── Scroll reveal ── */
-var obs = new IntersectionObserver(function(entries) {
+/* ══════════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════════ */
+var revObs = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+}, { threshold: 0.07, rootMargin: '0px 0px -28px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) { revObs.observe(el); });
 
-document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
+/* ══════════════════════════════════════════
+   TIMELINE LINE ANIMATION
+══════════════════════════════════════════ */
+var tlObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('tl-animated'); tlObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+var tl = document.querySelector('.timeline');
+if (tl) tlObs.observe(tl);
+
+/* ══════════════════════════════════════════
+   COUNT-UP ANIMATION
+══════════════════════════════════════════ */
+function countUp(el, target, suffix) {
+  var start = 0, dur = 1400, startTime = null;
+  suffix = suffix || '';
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    var p = Math.min((ts - startTime) / dur, 1);
+    var ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
+var countObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      var el = e.target;
+      var target = parseInt(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      countUp(el, target, suffix);
+      countObs.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(function(el) { countObs.observe(el); });
+
+/* ══════════════════════════════════════════
+   TYPEWRITER EFFECT
+══════════════════════════════════════════ */
+(function() {
+  var target = document.getElementById('typewriter-target');
+  if (!target) return;
+  var cursor = document.getElementById('typewriter-cursor');
+  var text = 'Briggiler';
+  var i = 0;
+  target.innerHTML = '<span id="typewriter-cursor" aria-hidden="true"></span>';
+  var cur = document.getElementById('typewriter-cursor');
+  function type() {
+    if (i < text.length) {
+      cur.insertAdjacentText('beforebegin', text[i]);
+      i++;
+      setTimeout(type, 90 + Math.random() * 50);
+    }
+  }
+  setTimeout(type, 800);
+})();
+
+/* ══════════════════════════════════════════
+   MAGNETIC BUTTONS
+══════════════════════════════════════════ */
+document.querySelectorAll('.btn-magnetic').forEach(function(wrap) {
+  var btn = wrap.querySelector('.btn');
+  if (!btn) return;
+  wrap.addEventListener('mousemove', function(e) {
+    var r = btn.getBoundingClientRect();
+    var x = e.clientX - r.left - r.width / 2;
+    var y = e.clientY - r.top - r.height / 2;
+    btn.style.transform = 'translate(' + x * 0.18 + 'px,' + y * 0.18 + 'px) translateY(-3px)';
+  });
+  wrap.addEventListener('mouseleave', function() {
+    btn.style.transform = '';
+  });
+});
+
+/* ══════════════════════════════════════════
+   SOUND EFFECTS (Web Audio API — pre-rendered buffers)
+══════════════════════════════════════════ */
+var audioCtx = null, sndHover = null, sndClick = null;
+
+function buildBuf(fn, dur) {
+  var sr = audioCtx.sampleRate;
+  var len = Math.ceil(sr * dur);
+  var buf = audioCtx.createBuffer(1, len, sr);
+  var d = buf.getChannelData(0);
+  for (var i = 0; i < len; i++) d[i] = fn(i / sr);
+  return buf;
+}
+
+function initAudio() {
+  if (audioCtx) return;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx.resume();
+    sndHover = buildBuf(function(t) {
+      return Math.sin(2 * Math.PI * 660 * t) * Math.exp(-t * 45) * 0.04;
+    }, 0.09);
+    sndClick = buildBuf(function(t) {
+      var f = 880 * Math.pow(0.5, t * 8);
+      return Math.sin(2 * Math.PI * f * t) * Math.exp(-t * 22) * 0.07;
+    }, 0.18);
+  } catch(e) {}
+}
+
+function playBuf(buf) {
+  if (!audioCtx || !buf || audioCtx.state !== 'running') return;
+  try {
+    var s = audioCtx.createBufferSource();
+    s.buffer = buf; s.connect(audioCtx.destination); s.start(0);
+  } catch(e) {}
+}
+
+document.addEventListener('pointerdown', initAudio, { once: true });
+
+function playClick() { playBuf(sndClick); }
+function playHover()  { playBuf(sndHover); }
+var soundTargets = '.sound-btn, .nav-links a, .nav-cta, .nav-logo, .lang-btn, .hamburger, .mob-nav a, .footer-links a';
+document.querySelectorAll(soundTargets).forEach(function(btn) {
+  btn.addEventListener('click', function() { playClick(); });
+  btn.addEventListener('mouseenter', function() { playHover(); });
+});
+
+/* ══════════════════════════════════════════
+   PARTICLES CANVAS
+══════════════════════════════════════════ */
+(function() {
+  var canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H, particles = [], mouse = { x: -999, y: -999 };
+  var N = Math.min(80, Math.floor(window.innerWidth / 16));
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  for (var i = 0; i < N; i++) {
+    particles.push({
+      x: rand(0, W), y: rand(0, H),
+      vx: rand(-0.15, 0.15), vy: rand(-0.15, 0.15),
+      r: rand(1, 2.5), o: rand(0.1, 0.35),
+      c: Math.random() > 0.5 ? '37,99,235' : '6,182,212'
+    });
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(function(p) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+      var dx = p.x - mouse.x, dy = p.y - mouse.y;
+      var dist = Math.sqrt(dx*dx + dy*dy);
+      var alpha = p.o;
+      if (dist < 100) { alpha = Math.min(0.7, p.o + (1 - dist/100) * 0.4); }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(' + p.c + ',' + alpha + ')';
+      ctx.fill();
+    });
+    particles.forEach(function(p, i) {
+      for (var j = i+1; j < particles.length; j++) {
+        var q = particles[j];
+        var dx = p.x-q.x, dy = p.y-q.y, d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 90) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = 'rgba(37,99,235,' + (0.06*(1-d/90)) + ')';
+          ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 
 </body>
